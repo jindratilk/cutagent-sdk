@@ -53,6 +53,7 @@
     "sdk/compatibility.json",
     "sdk/compatibility.schema.json",
     "THIRD_PARTY_NOTICES/",
+    "skills/cutagent/",
     "README.md",
     "RELEASE_STATUS.md",
     "PROVENANCE.md",

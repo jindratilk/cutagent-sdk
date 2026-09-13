@@ -509,12 +509,12 @@ export function createFusionCompositions(
       }
       const revision = RevisionSchema.parse(options.precondition);
       const idempotencyKey = IdempotencyKeySchema.parse(options.idempotencyKey);
-      const items = insertions.map((item) => ({
+      const items = insertions.map(({ imageArtifactId, ...item }) => ({
         ...item,
         settingArtifactId: ArtifactIdSchema.parse(item.settingArtifactId),
-        imageArtifactId: item.imageArtifactId === undefined
-          ? undefined
-          : ArtifactIdSchema.parse(item.imageArtifactId),
+        ...(imageArtifactId === undefined
+          ? {}
+          : { imageArtifactId: ArtifactIdSchema.parse(imageArtifactId) }),
         recordPosition: lowerTimelineRecordPosition(item.recordPosition),
         clipDuration: lowerDuration(item.clipDuration),
       }));

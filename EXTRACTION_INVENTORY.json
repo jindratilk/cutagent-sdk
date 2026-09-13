@@ -312,8 +312,8 @@
     {
       "source": "sdk/src/fusion/runtime.ts",
       "destination": "sdk/src/fusion/runtime.ts",
-      "sourceSha256": "d96d57a0c897e8ad771e8aedd68f149e62f54cfca254caa23ffa80591af318d0",
-      "sha256": "d96d57a0c897e8ad771e8aedd68f149e62f54cfca254caa23ffa80591af318d0",
+      "sourceSha256": "139614e8f2c5bc8e77f6de6af472b565192905598e91f8dd874f7ee92fcc68ff",
+      "sha256": "139614e8f2c5bc8e77f6de6af472b565192905598e91f8dd874f7ee92fcc68ff",
       "transformed": false
     },
     {

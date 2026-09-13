@@ -85,15 +85,15 @@ You'll need macOS, DaVinci Resolve, Node.js 22.12+ or 24.x, and Python 3.12. Ins
 Install the SDK from source:
 
 ```sh
-git clone https://github.com/jindratilk/davinci-resolve-sdk.git
-cd davinci-resolve-sdk
+git clone https://github.com/jindratilk/cutagent-sdk.git
+cd cutagent-sdk
 npm ci --ignore-scripts
 npm run build
 npm pack
 mkdir ../my-video-project
 cd ../my-video-project
 npm init -y
-npm install ../davinci-resolve-sdk/cutagent-3.0.0.tgz
+npm install ../cutagent-sdk/cutagent-3.0.0.tgz
 ```
 
 **Using DaVinci Resolve Free?**
@@ -118,6 +118,10 @@ cutagent runtime start --transport studio_external
 Keep that terminal running. It prints the connection-file path; set `CUTAGENT_SDK_DISCOVERY_FILE` to that path in the terminal where your agent or script runs.
 
 [Full setup guide →](docs/GETTING_STARTED.md)
+
+## Teach your agent how to edit
+
+Give your agent the [CutAgent skill](skills/cutagent/SKILL.md). It loads the relevant guidance for each task: building timelines, shaping speed ramps, animating Fusion text, mixing audio, and checking the result. The references include practical SDK examples and work with the local Free or Studio connection.
 
 ## Your first connection
 
@@ -147,7 +151,7 @@ The app includes editing skills that teach the agent how to carry out complete w
 
 ## Help make it better
 
-Found a bug? [Open an issue](https://github.com/jindratilk/davinci-resolve-sdk/issues) with your operating system, DaVinci Resolve version and edition, and a small script that reproduces it. Leave out credentials and private footage.
+Found a bug? [Open an issue](https://github.com/jindratilk/cutagent-sdk/issues) with your operating system, DaVinci Resolve version and edition, and a small script that reproduces it. Leave out credentials and private footage.
 
 Pull requests are welcome. Run the build, tests, and source checks before submitting a change. If this project is useful to you, a star helps other editors and builders find it. ⭐
 
