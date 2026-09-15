@@ -411,7 +411,8 @@ def _canonical_fusion_value(value: Any) -> Any:
 def _comp_state(comp: Any) -> dict[str, Any]:
     attrs = comp.GetAttrs() or {}
     active_tool_name = _active_tool_name(comp, attrs.get("COMPH_ActiveTool"))
-    digest_attrs = dict(attrs)
+    # Editing legitimately dirties a saved composition; this is not authored state.
+    digest_attrs = {key: value for key, value in attrs.items() if key != "COMPB_Modified"}
     if "COMPH_ActiveTool" in digest_attrs:
         digest_attrs["COMPH_ActiveTool"] = active_tool_name
     graph = sdk_live_inspection._fusion_graph_evidence(comp, None)
