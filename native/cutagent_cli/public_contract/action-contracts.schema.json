@@ -182635,7 +182635,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 256,
                   "type": "array"
                 },
                 "outcome": {
@@ -182679,7 +182678,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -182965,7 +182963,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -183010,7 +183007,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -183298,7 +183294,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -183343,7 +183338,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -183635,7 +183629,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -183680,7 +183673,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -183976,7 +183968,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -184021,7 +184012,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -184360,7 +184350,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -184405,7 +184394,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -184696,7 +184684,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -184741,7 +184728,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -185163,7 +185149,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -185455,7 +185440,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -185500,7 +185484,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -185791,7 +185774,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -185836,7 +185818,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -186128,7 +186109,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -186173,7 +186153,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -186469,7 +186448,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 },
                 "truncated": {
@@ -186519,7 +186497,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -187028,7 +187005,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -187537,7 +187513,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -187866,7 +187841,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 },
                 "outcome": {
@@ -188096,7 +188070,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -188378,7 +188351,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -188423,7 +188395,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -188711,7 +188682,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -188756,7 +188726,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -189038,7 +189007,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -189083,7 +189051,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -189412,7 +189379,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 },
                 "outcome": {
@@ -189642,7 +189608,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -189920,7 +189885,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -189965,7 +189929,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -190430,7 +190393,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 },
                 "outcome": {
@@ -190478,7 +190440,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -190859,7 +190820,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 512,
                   "type": "array"
                 }
               },
@@ -190900,7 +190860,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -191229,7 +191188,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 },
                 "outcome": {
@@ -191459,7 +191417,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -191744,7 +191701,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -191789,7 +191745,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -192157,7 +192112,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "type": "array"
                 },
                 "outcome": {
@@ -192201,7 +192155,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -192494,7 +192447,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -192539,7 +192491,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -192843,7 +192794,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -192888,7 +192838,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -193182,7 +193131,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -193227,7 +193175,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -193612,7 +193559,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 },
                 "outcome": {
@@ -193656,7 +193602,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -193942,7 +193887,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -193987,7 +193931,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -194367,7 +194310,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -194651,7 +194593,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -194696,7 +194637,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -195270,7 +195210,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 512,
                   "type": "array"
                 },
                 "outcome": {
@@ -195319,7 +195258,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -195649,7 +195587,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -195694,7 +195631,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -196210,7 +196146,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 512,
                   "type": "array"
                 },
                 "outcome": {
@@ -196259,7 +196194,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -196610,7 +196544,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -196655,7 +196588,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -196931,7 +196863,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -196976,7 +196907,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -197268,7 +197198,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -197313,7 +197242,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -197605,7 +197533,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -197650,7 +197577,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -197942,7 +197868,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -197987,7 +197912,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -198279,7 +198203,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -198324,7 +198247,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -198668,7 +198590,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 },
                 "outcome": {
@@ -198898,7 +198819,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -199217,7 +199137,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 },
                 "outcome": {
@@ -199447,7 +199366,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -199725,7 +199643,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -199770,7 +199687,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -200062,7 +199978,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -200107,7 +200022,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -200411,7 +200325,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -200456,7 +200369,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -200839,7 +200751,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 512,
                   "type": "array"
                 },
                 "outcome": {
@@ -200883,7 +200794,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -201389,7 +201299,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 512,
                   "type": "array"
                 },
                 "outcome": {
@@ -201438,7 +201347,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -201818,7 +201726,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -202106,7 +202013,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -202151,7 +202057,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -202456,7 +202361,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -202501,7 +202405,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -202791,7 +202694,6 @@
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -202836,7 +202738,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },

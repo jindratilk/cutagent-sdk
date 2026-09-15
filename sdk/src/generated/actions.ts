@@ -8,13 +8,13 @@ export const CUTAGENT_ACTION_INVENTORY_DIGEST = "36261c8dbeea1c0f8615744638ea4ad
 /** @beta */
 export const CUTAGENT_ACTION_INPUT_SCHEMA_DIGEST = "5a1f282a3b2eb2b22c47770d2706136460d7c3ba67f421fc841d02fe9b1e75d5" as const;
 /** @beta */
-export const CUTAGENT_ACTION_RESULT_SCHEMA_DIGEST = "b3f6568b57641c030bdaba80ee5b7d461bd58b985e61805f504ae21d2157a189" as const;
+export const CUTAGENT_ACTION_RESULT_SCHEMA_DIGEST = "b1efa5eddfd21d9fabd7961a679fcdab54fdb96b018d649634f7088505ee86e8" as const;
 /** @beta */
 export const CUTAGENT_ACTION_APPLICABILITY_DIGEST = "30c88d7ce80600e8bb542c46f99cf89e4a6776a97860417c431c14793744811a" as const;
 /** @beta */
 export const CUTAGENT_ACTION_ERROR_REGISTRY_DIGEST = "b2f82cf493aaa9ed3ba11c824e77ea4aa871d4e18991f46fba35b7cffb593be6" as const;
 /** @beta */
-export const CUTAGENT_ACTION_PROTOCOL_BINDING_DIGEST = "18f8cc644d669b86aed694e67cc97c83c44b9dfc87908e416270d4624bebdde0" as const;
+export const CUTAGENT_ACTION_PROTOCOL_BINDING_DIGEST = "4662d0dd4614ec2c6acf8c51f1631530f21b0fc84062f3dedf57632f15930f65" as const;
 /** @beta */
 export const ACTION_IDS = [
   "cutagent.action.audio.beat_detect",
@@ -189517,7 +189517,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 256,
                   "type": "array"
                 },
                 "outcome": {
@@ -189561,7 +189560,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -189879,7 +189877,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -189924,7 +189921,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -190244,7 +190240,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -190289,7 +190284,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -190613,7 +190607,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -190658,7 +190651,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -190986,7 +190978,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -191031,7 +191022,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -191402,7 +191392,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -191447,7 +191436,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -191770,7 +191758,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -191815,7 +191802,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -192269,7 +192255,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -192593,7 +192578,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -192638,7 +192622,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -192961,7 +192944,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -193006,7 +192988,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -193330,7 +193311,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -193375,7 +193355,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -193703,7 +193682,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 },
                 "truncated": {
@@ -193753,7 +193731,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -194294,7 +194271,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -194835,7 +194811,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -195196,7 +195171,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 },
                 "outcome": {
@@ -195426,7 +195400,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -195740,7 +195713,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -195785,7 +195757,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -196105,7 +196076,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -196150,7 +196120,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -196464,7 +196433,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -196509,7 +196477,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -196870,7 +196837,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 },
                 "outcome": {
@@ -197100,7 +197066,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -197410,7 +197375,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -197455,7 +197419,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -198025,7 +197988,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 512,
                   "type": "array"
                 }
               },
@@ -198066,7 +198028,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -198427,7 +198388,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 },
                 "outcome": {
@@ -198657,7 +198617,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -198974,7 +198933,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -199019,7 +198977,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -199419,7 +199376,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "type": "array"
                 },
                 "outcome": {
@@ -199463,7 +199419,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -199788,7 +199743,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -199833,7 +199787,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -200169,7 +200122,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -200214,7 +200166,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -200540,7 +200491,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -200585,7 +200535,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -201002,7 +200951,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 },
                 "outcome": {
@@ -201046,7 +200994,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -201364,7 +201311,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -201409,7 +201355,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -201821,7 +201766,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -202417,7 +202361,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 512,
                   "type": "array"
                 },
                 "outcome": {
@@ -202466,7 +202409,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -202792,7 +202734,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -202837,7 +202778,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -203199,7 +203139,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -203244,7 +203183,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -203792,7 +203730,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 512,
                   "type": "array"
                 },
                 "outcome": {
@@ -203841,7 +203778,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -204208,7 +204144,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -204253,7 +204188,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -204577,7 +204511,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -204622,7 +204555,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -204946,7 +204878,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -204991,7 +204922,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -205315,7 +205245,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -205360,7 +205289,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -205684,7 +205612,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -205729,7 +205656,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -206053,7 +205979,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -206098,7 +206023,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -206474,7 +206398,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 },
                 "outcome": {
@@ -206704,7 +206627,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -207055,7 +206977,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 },
                 "outcome": {
@@ -207285,7 +207206,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -207595,7 +207515,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -207640,7 +207559,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -207964,7 +207882,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -208009,7 +207926,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -208345,7 +208261,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -208390,7 +208305,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -208803,7 +208717,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 512,
                   "type": "array"
                 },
                 "outcome": {
@@ -208847,7 +208760,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -209385,7 +209297,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 512,
                   "type": "array"
                 },
                 "outcome": {
@@ -209434,7 +209345,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -209846,7 +209756,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -210166,7 +210075,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -210211,7 +210119,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -210548,7 +210455,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -210593,7 +210499,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -210913,7 +210818,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^(?=\\S)(?!.*\\s$)(?!/|~(?:/|$)|[A-Za-z]:[\\\\/]|\\\\\\\\|file:)(?!.*(?:^|[\\\\/])\\.\\.?(?:[\\\\/]|$))[^/\\\\]+$",
                     "type": "string"
                   },
-                  "maxItems": 1024,
                   "type": "array"
                 }
               },
@@ -210958,7 +210862,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     ],
                     "type": "object"
                   },
-                  "maxItems": 32,
                   "minItems": 1,
                   "type": "array"
                 },

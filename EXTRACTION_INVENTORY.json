@@ -326,8 +326,8 @@
     {
       "source": "sdk/src/generated/actions.ts",
       "destination": "sdk/src/generated/actions.ts",
-      "sourceSha256": "d2f085d5750ec774a1059a1866395cacbfe283cd641dd166e00ea6c11eec5b2f",
-      "sha256": "d2f085d5750ec774a1059a1866395cacbfe283cd641dd166e00ea6c11eec5b2f",
+      "sourceSha256": "e10fe2b2dc98098276205d134c12a50a56d1d3abde7aa8a4c6aecfc8c346fc30",
+      "sha256": "e10fe2b2dc98098276205d134c12a50a56d1d3abde7aa8a4c6aecfc8c346fc30",
       "transformed": false
     },
     {
@@ -417,15 +417,15 @@
     {
       "source": "sdk/src/generated/sdk-operation-actions.d.ts",
       "destination": "sdk/src/generated/sdk-operation-actions.d.ts",
-      "sourceSha256": "b9d35f7650192a181ebcd08da94d259482836434aca91abf9cc1b097a58701de",
-      "sha256": "b9d35f7650192a181ebcd08da94d259482836434aca91abf9cc1b097a58701de",
+      "sourceSha256": "6715c43aeec8ace7af65c54397dba65ee7322cc755710269a80d655706ebdd4e",
+      "sha256": "6715c43aeec8ace7af65c54397dba65ee7322cc755710269a80d655706ebdd4e",
       "transformed": false
     },
     {
       "source": "sdk/src/generated/sdk-operation-actions.js",
       "destination": "sdk/src/generated/sdk-operation-actions.js",
-      "sourceSha256": "3a32e49e66410b0817df808ea9255233025e46e883c2167348c226ca9be2b9f4",
-      "sha256": "3a32e49e66410b0817df808ea9255233025e46e883c2167348c226ca9be2b9f4",
+      "sourceSha256": "05cb68283d83827fae4dfd629ded432a5afd35a8a8bad34b0fd52e51cfc5048f",
+      "sha256": "05cb68283d83827fae4dfd629ded432a5afd35a8a8bad34b0fd52e51cfc5048f",
       "transformed": false
     },
     {
@@ -438,29 +438,29 @@
     {
       "source": "sdk/src/generated/sdk-operations.js",
       "destination": "sdk/src/generated/sdk-operations.js",
-      "sourceSha256": "8877126eb128a54a7f414c6306a99422644c0d0b56641ac81c8c1a29491047bc",
-      "sha256": "8877126eb128a54a7f414c6306a99422644c0d0b56641ac81c8c1a29491047bc",
+      "sourceSha256": "ef6b9e59f580c02683277d7b213911715db1a3efcda2f19aaf193c35c81cfa90",
+      "sha256": "ef6b9e59f580c02683277d7b213911715db1a3efcda2f19aaf193c35c81cfa90",
       "transformed": false
     },
     {
       "source": "sdk/src/generated/sdk-plugin-runtime-protocol.d.ts",
       "destination": "sdk/src/generated/sdk-plugin-runtime-protocol.d.ts",
-      "sourceSha256": "a3525a662112362f1c4588d373f85ebf956e3e85b1b050e9ed25f676dfb769c4",
-      "sha256": "a3525a662112362f1c4588d373f85ebf956e3e85b1b050e9ed25f676dfb769c4",
+      "sourceSha256": "ce72b780f8bb460d02e8f38905831d0954cbc8ef4e1ee342aea56b7bcb7bf3a9",
+      "sha256": "ce72b780f8bb460d02e8f38905831d0954cbc8ef4e1ee342aea56b7bcb7bf3a9",
       "transformed": false
     },
     {
       "source": "sdk/src/generated/sdk-plugin-runtime-protocol.js",
       "destination": "sdk/src/generated/sdk-plugin-runtime-protocol.js",
-      "sourceSha256": "d1178a9c6beb631a03fd8f00f8dca9bf093b354798874fe6b2ba6b925a440ff9",
-      "sha256": "d1178a9c6beb631a03fd8f00f8dca9bf093b354798874fe6b2ba6b925a440ff9",
+      "sourceSha256": "0a19937145cdf4c328ec85c88b4e223266dcdba277ec26c04c1da77864712589",
+      "sha256": "0a19937145cdf4c328ec85c88b4e223266dcdba277ec26c04c1da77864712589",
       "transformed": false
     },
     {
       "source": "sdk/src/generated/sdk-plugin-runtime.d.ts",
       "destination": "sdk/src/generated/sdk-plugin-runtime.d.ts",
-      "sourceSha256": "289ca68a315b8a0b2e1c62f39ad5d0706ff10b7ef9291ef7d0f57390ad335dd5",
-      "sha256": "122aaf85dcbc8f4c8c3257ac2bfe2452e16a5d004e55c14cd7c8b19f53fc4f0b",
+      "sourceSha256": "09e5c71f95713bb3f8d90c387c6d2aa53ba5e9846c5db24c5ce9e8201eb42a6b",
+      "sha256": "a515ad2cc24c19b494ce3b297940fb33357c48a5750d00fbc21e9662d3dd1a72",
       "transformed": true
     },
     {
@@ -473,15 +473,15 @@
     {
       "source": "sdk/src/generated/sdk-prepared-action.d.ts",
       "destination": "sdk/src/generated/sdk-prepared-action.d.ts",
-      "sourceSha256": "eb179ee40dfd758b39916d5912a54f2808833d795c4eff7816fdf22af167c13c",
-      "sha256": "eb179ee40dfd758b39916d5912a54f2808833d795c4eff7816fdf22af167c13c",
+      "sourceSha256": "3b13cb6076fe9948453cf6cffe4a7e1497ef7fb562937f93287ed2242b84723b",
+      "sha256": "3b13cb6076fe9948453cf6cffe4a7e1497ef7fb562937f93287ed2242b84723b",
       "transformed": false
     },
     {
       "source": "sdk/src/generated/sdk-prepared-action.js",
       "destination": "sdk/src/generated/sdk-prepared-action.js",
-      "sourceSha256": "eeeb1c8e4318f39042aa3cc16884f46ea19904f846680ff336c8354d238f7631",
-      "sha256": "eeeb1c8e4318f39042aa3cc16884f46ea19904f846680ff336c8354d238f7631",
+      "sourceSha256": "73ac2318407e95850001d6e1dba5b13c4a16d41e1d6fee42d2cd5ef7f94e0182",
+      "sha256": "73ac2318407e95850001d6e1dba5b13c4a16d41e1d6fee42d2cd5ef7f94e0182",
       "transformed": false
     },
     {
@@ -494,8 +494,8 @@
     {
       "source": "sdk/src/generated/sdk-project-media.js",
       "destination": "sdk/src/generated/sdk-project-media.js",
-      "sourceSha256": "6ef30f684d73183f2164d8d829781e813e6f70bb2159f1d1c5ee63463b80cab3",
-      "sha256": "6ef30f684d73183f2164d8d829781e813e6f70bb2159f1d1c5ee63463b80cab3",
+      "sourceSha256": "4d54fc16950b2c5bd5469ee6ef24d775a25006a31c4ff2b7540101c9dd49733c",
+      "sha256": "4d54fc16950b2c5bd5469ee6ef24d775a25006a31c4ff2b7540101c9dd49733c",
       "transformed": false
     },
     {
@@ -515,22 +515,22 @@
     {
       "source": "sdk/src/generated/sdk-runtime-protocol.d.ts",
       "destination": "sdk/src/generated/sdk-runtime-protocol.d.ts",
-      "sourceSha256": "44dd329d1a1d0eb50ef80ad6f13f23bc0eb21ae13225dc3e059b4bb1212955ce",
-      "sha256": "44dd329d1a1d0eb50ef80ad6f13f23bc0eb21ae13225dc3e059b4bb1212955ce",
+      "sourceSha256": "cca73d5fd265e2b45b6e7b3f8594ed84698c0f9550369442608bfc1c69feec1b",
+      "sha256": "cca73d5fd265e2b45b6e7b3f8594ed84698c0f9550369442608bfc1c69feec1b",
       "transformed": false
     },
     {
       "source": "sdk/src/generated/sdk-runtime-protocol.js",
       "destination": "sdk/src/generated/sdk-runtime-protocol.js",
-      "sourceSha256": "e37c5c7fc6ac0ec9d9374064680c892b672233e82ab9a54d0874fae8212961a7",
-      "sha256": "e37c5c7fc6ac0ec9d9374064680c892b672233e82ab9a54d0874fae8212961a7",
+      "sourceSha256": "2f6770fc685b36c98d4378e4c0e2a78671b1aa0318a2930571cd2f6fd97e2c43",
+      "sha256": "2f6770fc685b36c98d4378e4c0e2a78671b1aa0318a2930571cd2f6fd97e2c43",
       "transformed": false
     },
     {
       "source": "sdk/src/generated/sdk-runtime.d.ts",
       "destination": "sdk/src/generated/sdk-runtime.d.ts",
-      "sourceSha256": "8a056fb9166a57bec64578227f5df9559f7045068f8c2c24afd986b2b70676ab",
-      "sha256": "4228f6f6b0f571c4f9c154b23cc3a06a9ae3fc29dd7f62e1f81fea132e104865",
+      "sourceSha256": "0de2431a9a85bdb0c0bd431dc1a2074086b9bfc69bbb409051cd4b691dd0a3b9",
+      "sha256": "bb8c908848b71d993a77be0ce484e0c9d99ae086ff48fbbd568044434419afad",
       "transformed": true
     },
     {

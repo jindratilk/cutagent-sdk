@@ -1,1 +1,1 @@
-export declare const CUTAGENT_SDK_PROTOCOL_DIGEST: "sha256:8deb37666dba569c3fbcd842f7daeffb59a17fac79c57e6aa79e70ad2489e3ee";
+export declare const CUTAGENT_SDK_PROTOCOL_DIGEST: "sha256:529c96832b4ad1cd6f07df7dee4011ff53df31a6e6cac5dec16906cefe9003e7";
