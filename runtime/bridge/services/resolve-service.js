@@ -311,7 +311,9 @@ async function parseResolveJson(
     const childPromise = execFileAsync(cutAgentCliCommand || resolveCutAgentCliCommand(), jsonArgs, {
       encoding: "utf8",
       timeout: effectiveTimeoutMs,
-      maxBuffer: 10 * 1024 * 1024,
+      maxBuffer: args[0] === "timeline" && args[1] === "sdk-live-inspect"
+        ? Infinity
+        : 10 * 1024 * 1024,
       shell: false,
       ...(cwd ? { cwd } : {}),
       ...(signal && !recoverableAbort ? { signal } : {}),
@@ -1760,7 +1762,7 @@ export function createResolveService({
     try {
       const inspectionPayload = await parseJson(
         args,
-        getTimeoutMs(),
+        Math.max(1, deadlineAtMs - Date.now()),
         inspectionOptions,
       );
       const inspectionError = bridgeCliErrorFromPayload(inspectionPayload, {

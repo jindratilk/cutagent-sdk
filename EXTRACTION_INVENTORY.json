@@ -1313,8 +1313,8 @@
     {
       "source": "bridge/services/resolve-service.js",
       "destination": "runtime/bridge/services/resolve-service.js",
-      "sourceSha256": "83fa98f24e47784a95801a7d98b64abd97b1c0a0c6cda6cb059c174279cde228",
-      "sha256": "d143237d05dbe612a240cb5a6a426092ec960a736ab85db9ae3e918b1762731e",
+      "sourceSha256": "72fd89a16a353dcc12bed05aebe26618079e5a55a6189a7c765e1d65f1718e94",
+      "sha256": "c64764adc2fac0f969b4868a68c6314eb2c875fe17b332a675c32b6532267038",
       "transformed": true
     },
     {
