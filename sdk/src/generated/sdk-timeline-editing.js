@@ -72,8 +72,8 @@ const itemTarget = z.object({
 }).strict();
 const linkTransition = z.object({
     itemId: sdkTimelineItemIdSchema,
-    beforeLinkedItemIds: z.array(sdkTimelineItemIdSchema).max(4096),
-    afterLinkedItemIds: z.array(sdkTimelineItemIdSchema).max(4096),
+    beforeLinkedItemIds: z.array(sdkTimelineItemIdSchema),
+    afterLinkedItemIds: z.array(sdkTimelineItemIdSchema),
 }).strict();
 const expectedItem = z.object({
     role: z.enum(["replacement", "preserved_edge", "trimmed", "unlinked"]),
@@ -84,8 +84,8 @@ const expectedItem = z.object({
     sourceEndToleranceFrames: z.number().int().min(0).max(4096),
     mediaPoolItemId: sdkMediaPoolItemIdSchema,
     name: z.string().min(1).max(4096),
-    linkedExpectedItemIndexes: z.array(z.number().int().nonnegative()).max(256),
-    linkedExistingItemIds: z.array(sdkTimelineItemIdSchema).max(256),
+    linkedExpectedItemIndexes: z.array(z.number().int().nonnegative()),
+    linkedExistingItemIds: z.array(sdkTimelineItemIdSchema),
 }).strict();
 export const sdkTimelineEditImpactSchema = z.object({
     impactId: z.string().regex(/^impact_[A-Za-z0-9_-]{16,128}$/),
@@ -95,11 +95,11 @@ export const sdkTimelineEditImpactSchema = z.object({
     timelineRevision: sdkRevisionSchema,
     intent: sdkTimelineEditIntentSchema,
     recordRange: sdkTimelineRecordRangeSchema,
-    affectedTracks: z.array(trackTarget).min(1).max(16),
-    affectedItems: z.array(itemTarget).max(4096),
-    protectedItems: z.array(itemTarget).max(4096),
-    expectedItems: z.array(expectedItem).max(4096),
-    expectedLinkTransitions: z.array(linkTransition).max(4096).default([]),
+    affectedTracks: z.array(trackTarget).min(1),
+    affectedItems: z.array(itemTarget),
+    protectedItems: z.array(itemTarget),
+    expectedItems: z.array(expectedItem),
+    expectedLinkTransitions: z.array(linkTransition).default([]),
     linkedAudio: z.object({ behavior: z.enum(["include", "exclude", "preserve"]), topologyProven: z.boolean() }).strict(),
     capabilityId: z.enum(["edit.insert_overwrite", "edit.trim_workaround", "timeline.items_delete"]),
     summary: z.string().min(1).max(1000),

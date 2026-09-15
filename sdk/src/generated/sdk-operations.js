@@ -1900,12 +1900,12 @@ export const sdkTimelineRemoveMutationInputSchema = z.object({
     projectId: sdkProjectIdSchema,
     timelineId: sdkTimelineIdSchema,
     timelineRevision: sdkRevisionSchema,
-    affectedTracks: z.array(z.object({ type: z.enum(["video", "audio", "subtitle"]), index: z.number().int().min(1).max(4096) }).strict()).max(12_288),
-    affectedItemIds: z.array(sdkTimelineItemIdSchema).min(1).max(4096),
-    protectedItemIds: z.array(sdkTimelineItemIdSchema).max(4096),
+    affectedTracks: z.array(z.object({ type: z.enum(["video", "audio", "subtitle"]), index: z.number().int().min(1).max(4096) }).strict()),
+    affectedItemIds: z.array(sdkTimelineItemIdSchema).min(1),
+    protectedItemIds: z.array(sdkTimelineItemIdSchema),
     clipId: sdkTimelineItemIdSchema,
     track: z.object({ type: z.enum(["video", "audio", "subtitle"]), index: z.number().int().min(1).max(4096) }).strict(),
-    expectedLinkTransitions: z.array(z.object({ itemId: sdkTimelineItemIdSchema, beforeLinkedItemIds: z.array(sdkTimelineItemIdSchema).max(4096), afterLinkedItemIds: z.array(sdkTimelineItemIdSchema).max(4096) }).strict()).max(4096).default([]),
+    expectedLinkTransitions: z.array(z.object({ itemId: sdkTimelineItemIdSchema, beforeLinkedItemIds: z.array(sdkTimelineItemIdSchema), afterLinkedItemIds: z.array(sdkTimelineItemIdSchema) }).strict()).default([]),
     range: z.object({ start: z.number().int().safe(), endExclusive: z.number().int().safe() }).strict().refine((value) => value.endExclusive > value.start),
     name: z.string().min(1).max(4096),
 }).strict();
@@ -1932,10 +1932,10 @@ export const sdkTimelineRemoveMutationRequestSchema = z.union([
 export const sdkTimelineRemoveMutationResultSchema = z.object({
     operation: z.literal("clip_remove"),
     timelineRevision: sdkRevisionSchema,
-    affectedTracks: z.array(z.object({ type: z.enum(["video", "audio", "subtitle"]), index: z.number().int().min(1).max(4096) }).strict()).max(12_288),
-    affectedItemIds: z.array(sdkTimelineItemIdSchema).max(4096),
-    protectedItemIds: z.array(sdkTimelineItemIdSchema).max(4096),
-    outputItemIds: z.array(sdkTimelineItemIdSchema).max(4096),
+    affectedTracks: z.array(z.object({ type: z.enum(["video", "audio", "subtitle"]), index: z.number().int().min(1).max(4096) }).strict()),
+    affectedItemIds: z.array(sdkTimelineItemIdSchema),
+    protectedItemIds: z.array(sdkTimelineItemIdSchema),
+    outputItemIds: z.array(sdkTimelineItemIdSchema),
     protectedStatePreserved: z.literal(true),
 }).strict();
 export const sdkTimelineRemoveBatchMutationResultSchema = z.object({
