@@ -179058,7 +179058,6 @@
             "minLength": 1,
             "type": "string"
           },
-          "maxItems": 64,
           "minItems": 0,
           "type": "array"
         },
@@ -179118,7 +179117,6 @@
             "minLength": 1,
             "type": "string"
           },
-          "maxItems": 64,
           "minItems": 0,
           "type": "array"
         },
@@ -179145,7 +179143,6 @@
             "minLength": 1,
             "type": "string"
           },
-          "maxItems": 64,
           "minItems": 0,
           "type": "array"
         },
@@ -181227,7 +181224,6 @@
           "type": "string"
         },
         "limit": {
-          "maximum": 2048,
           "minimum": 1,
           "type": "integer"
         },
@@ -181278,7 +181274,6 @@
                 ],
                 "type": "object"
               },
-              "maxItems": 2048,
               "minItems": 0,
               "type": "array"
             },

@@ -140,11 +140,11 @@ class FusionAPI:
         *,
         query: str | None = None,
         category: str | None = None,
-        limit: int = 1024,
+        limit: int | None = None,
     ) -> Dict[str, Any]:
-        """List bounded, public-safe creation identifiers from the live Fusion registry."""
-        if isinstance(limit, bool) or not isinstance(limit, int) or not 1 <= limit <= 2048:
-            raise ValidationError("Fusion registry limit must be between 1 and 2048.")
+        """List public-safe creation identifiers; optionally limit the returned rows."""
+        if limit is not None and (isinstance(limit, bool) or not isinstance(limit, int) or limit < 1):
+            raise ValidationError("Fusion registry limit must be a positive integer.")
         normalized_query = str(query or "").strip().casefold()
         normalized_category = str(category or "").strip().casefold()
         if len(normalized_query) > 256 or len(normalized_category) > 256:
@@ -160,12 +160,6 @@ class FusionAPI:
             entries = iter_api_items(getter(2) or {})
         except Exception as exc:
             raise APICallFailed("Failed to read the Fusion tool registry.") from exc
-        if len(entries) > 2048:
-            raise APICallFailed(
-                "Fusion tool registry exceeded the supported result bound.",
-                details={"maximum_tools": 2048},
-            )
-
         rows: list[dict[str, str]] = []
         identifiers: set[str] = set()
         for key, registration in entries:

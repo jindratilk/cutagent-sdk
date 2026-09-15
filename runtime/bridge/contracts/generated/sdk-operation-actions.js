@@ -1,7 +1,7 @@
 // Generated from the public-safe CutAgent CLI inventory and reviewed shared semantic actions. Do not edit.
 export const CUTAGENT_SDK_ACTION_CONTRACT_VERSION = 1;
 export const CUTAGENT_SDK_ACTION_INVENTORY_DIGEST = "e43a7733ea5f1e6a439eacb91ce4a2c97060c04deca7c3da879861a5d0b2ad75";
-export const CUTAGENT_SDK_ACTION_SCHEMA_DIGEST = "1eaadc2fb2d22e505d978ca0fc88903f72937c79a6fc945e16362c20afa27b36";
+export const CUTAGENT_SDK_ACTION_SCHEMA_DIGEST = "eae25cb01dc4548c30ef32e4a933f4324b10fd794fbb79ed643ca7665bd3816f";
 export const CUTAGENT_SDK_PUBLIC_ACTION_IDS = [
     "cutagent.action.audio.beat_detect",
     "cutagent.action.audio.duck",

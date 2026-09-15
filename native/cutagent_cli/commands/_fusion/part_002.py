@@ -848,7 +848,7 @@ def tool_list(
 def tool_registry(
     query: Optional[str] = typer.Option(None, "--query", "-q", help="Filter by creation ID, name, or category"),
     category: Optional[str] = typer.Option(None, "--category", help="Filter by registry category"),
-    limit: int = typer.Option(1024, "--limit", min=1, max=2048, help="Maximum tools to return"),
+    limit: Optional[int] = typer.Option(None, "--limit", min=1, help="Maximum tools to return; omit to return all"),
 ):
     """List available Fusion tool creation IDs from the live registry."""
     conn = get_connection(require_timeline=False)

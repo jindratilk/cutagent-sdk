@@ -1648,7 +1648,7 @@ class FusionPreparedActionRuntime:
     def _read_tool_registry(value: Mapping[str, Any]) -> dict[str, Any]:
         conn = get_connection(require_timeline=False)
         return fusion_api.get_fusion_api(conn).list_registered_tools(
-            query=value.get("query"), category=value.get("category"), limit=value.get("limit", 1024)
+            query=value.get("query"), category=value.get("category"), limit=value.get("limit")
         )
 
     def _list_luts(self, context: Mapping[str, Any], value: Mapping[str, Any]) -> list[dict[str, str]]:

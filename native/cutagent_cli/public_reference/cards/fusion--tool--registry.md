@@ -25,7 +25,7 @@ This command does not change the composition.
 
 - `--query/-q` (optional) — Filter by creation ID, name, or category
 - `--category` (optional) — Filter by registry category
-- `--limit` (optional, default: `1024`) — Maximum tools to return
+- `--limit` (optional) — Maximum tools to return; omit to return all
 
 ## Examples
 

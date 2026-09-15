@@ -6,15 +6,15 @@ export type ActionPositiveInteger = number & { readonly __cutagentActionPositive
 /** @beta */
 export const CUTAGENT_ACTION_INVENTORY_DIGEST = "36261c8dbeea1c0f8615744638ea4ad8d42e69922ce64b82977d0825347ea43f" as const;
 /** @beta */
-export const CUTAGENT_ACTION_INPUT_SCHEMA_DIGEST = "a90fb6978a529d755f9679291f66e322c5abe6086befdbbc61e85b319ed5871b" as const;
+export const CUTAGENT_ACTION_INPUT_SCHEMA_DIGEST = "5a1f282a3b2eb2b22c47770d2706136460d7c3ba67f421fc841d02fe9b1e75d5" as const;
 /** @beta */
-export const CUTAGENT_ACTION_RESULT_SCHEMA_DIGEST = "3922e87d53e81a5e239f30dc6288b4097d7948fea32910c9e6bee50c6b6f4879" as const;
+export const CUTAGENT_ACTION_RESULT_SCHEMA_DIGEST = "b3f6568b57641c030bdaba80ee5b7d461bd58b985e61805f504ae21d2157a189" as const;
 /** @beta */
 export const CUTAGENT_ACTION_APPLICABILITY_DIGEST = "30c88d7ce80600e8bb542c46f99cf89e4a6776a97860417c431c14793744811a" as const;
 /** @beta */
 export const CUTAGENT_ACTION_ERROR_REGISTRY_DIGEST = "b2f82cf493aaa9ed3ba11c824e77ea4aa871d4e18991f46fba35b7cffb593be6" as const;
 /** @beta */
-export const CUTAGENT_ACTION_PROTOCOL_BINDING_DIGEST = "1f388a4b893ca199cf81d3cba04946b90506862d486a10af48d349ddb623b8c0" as const;
+export const CUTAGENT_ACTION_PROTOCOL_BINDING_DIGEST = "18f8cc644d669b86aed694e67cc97c83c44b9dfc87908e416270d4624bebdde0" as const;
 /** @beta */
 export const ACTION_IDS = [
   "cutagent.action.audio.beat_detect",
@@ -185549,7 +185549,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
             "minLength": 1,
             "type": "string"
           },
-          "maxItems": 64,
           "minItems": 0,
           "type": "array"
         },
@@ -185609,7 +185608,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
             "minLength": 1,
             "type": "string"
           },
-          "maxItems": 64,
           "minItems": 0,
           "type": "array"
         },
@@ -185636,7 +185634,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
             "minLength": 1,
             "type": "string"
           },
-          "maxItems": 64,
           "minItems": 0,
           "type": "array"
         },
@@ -187761,7 +187758,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
           "type": "string"
         },
         "limit": {
-          "maximum": 2048,
           "minimum": 1,
           "type": "integer"
         },
@@ -187812,7 +187808,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                 ],
                 "type": "object"
               },
-              "maxItems": 2048,
               "minItems": 0,
               "type": "array"
             },
