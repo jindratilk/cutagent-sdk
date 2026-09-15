@@ -153,13 +153,6 @@
       "candidateModified": true
     },
     {
-      "source": "cutagent-cli/cutagent_cli/__init__.py",
-      "destination": "native/cutagent_cli/__init__.py",
-      "sourceSha256": "ea41e18a66aa6b657a7ffef5a437efb65aac372696d585a4ca94126fc7b0b726",
-      "sha256": "ea41e18a66aa6b657a7ffef5a437efb65aac372696d585a4ca94126fc7b0b726",
-      "transformed": false
-    },
-    {
       "source": "cutagent-cli/cutagent_cli/_mutation_impact_registry.py",
       "destination": "native/cutagent_cli/_mutation_impact_registry.py",
       "sourceSha256": "759abfe86d69414c43ce11291f1bac52c609e0c552a8619d6cf69e351dbe5bb6",
@@ -9295,20 +9288,6 @@
       "transformed": false
     },
     {
-      "source": "cutagent-cli/cutagent_cli/public_reference/index.json",
-      "destination": "native/cutagent_cli/public_reference/index.json",
-      "sourceSha256": "d8c361fac4d0725cf60ddfad2e8f7d3b4a0c0d1af1c529bd288714a1aa38b85d",
-      "sha256": "d8c361fac4d0725cf60ddfad2e8f7d3b4a0c0d1af1c529bd288714a1aa38b85d",
-      "transformed": false
-    },
-    {
-      "source": "cutagent-cli/cutagent_cli/public_reference/manifest.json",
-      "destination": "native/cutagent_cli/public_reference/manifest.json",
-      "sourceSha256": "faa23d054ed3ebe96f76d9442e926aceadb6f32c0c68ce865fb02beb75116399",
-      "sha256": "faa23d054ed3ebe96f76d9442e926aceadb6f32c0c68ce865fb02beb75116399",
-      "transformed": false
-    },
-    {
       "source": "cutagent-cli/cutagent_cli/runtime_health.py",
       "destination": "native/cutagent_cli/runtime_health.py",
       "sourceSha256": "9179119408fdf812bc62876906341b69a60a74d2d3e7772d21768118c062a6c5",
@@ -9446,6 +9425,27 @@
       "destination": "native/cutagent_cli/windows_file_security.py",
       "sourceSha256": "b26190acfef17584614b7ca64579c2a7fd3f6795ced889f7914a1402fa279f03",
       "sha256": "b26190acfef17584614b7ca64579c2a7fd3f6795ced889f7914a1402fa279f03",
+      "transformed": false
+    },
+    {
+      "source": "cutagent-cli/cutagent_cli/__init__.py",
+      "destination": "native/cutagent_cli/__init__.py",
+      "sourceSha256": "6c3d7d0ab9463a5012f0fcd6874a4df42adaccefb82ebb0c89a77eb834534204",
+      "sha256": "6c3d7d0ab9463a5012f0fcd6874a4df42adaccefb82ebb0c89a77eb834534204",
+      "transformed": false
+    },
+    {
+      "source": "cutagent-cli/cutagent_cli/public_reference/index.json",
+      "destination": "native/cutagent_cli/public_reference/index.json",
+      "sourceSha256": "c4dd952046633135e93b7edc99dc29156b8504a05024bfe32f0b90c769a7a8b1",
+      "sha256": "c4dd952046633135e93b7edc99dc29156b8504a05024bfe32f0b90c769a7a8b1",
+      "transformed": false
+    },
+    {
+      "source": "cutagent-cli/cutagent_cli/public_reference/manifest.json",
+      "destination": "native/cutagent_cli/public_reference/manifest.json",
+      "sourceSha256": "f127203072c80cd9625992b1694acac91543942bd5a54eb47cac89f9486f974a",
+      "sha256": "f127203072c80cd9625992b1694acac91543942bd5a54eb47cac89f9486f974a",
       "transformed": false
     }
   ]

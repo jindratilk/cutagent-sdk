@@ -12362,6 +12362,6 @@
     }
   ],
   "corpus": "cutagent-cli-public-reference",
-  "product_version": "3.0.0-beta.10",
+  "product_version": "3.0.0",
   "schema_version": 1
 }
