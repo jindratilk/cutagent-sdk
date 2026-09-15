@@ -7106,7 +7106,6 @@
                 },
                 "affectedTracks": {
                   "minItems": 1,
-                  "maxItems": 16,
                   "type": "array",
                   "items": {
                     "type": "object",
@@ -7139,7 +7138,6 @@
                   }
                 },
                 "affectedItems": {
-                  "maxItems": 4096,
                   "type": "array",
                   "items": {
                     "type": "object",
@@ -7230,7 +7228,6 @@
                   }
                 },
                 "protectedItems": {
-                  "maxItems": 4096,
                   "type": "array",
                   "items": {
                     "type": "object",
@@ -7321,7 +7318,6 @@
                   }
                 },
                 "expectedItems": {
-                  "maxItems": 4096,
                   "type": "array",
                   "items": {
                     "type": "object",
@@ -7452,7 +7448,6 @@
                         "maxLength": 4096
                       },
                       "linkedExpectedItemIndexes": {
-                        "maxItems": 256,
                         "type": "array",
                         "items": {
                           "type": "integer",
@@ -7461,7 +7456,6 @@
                         }
                       },
                       "linkedExistingItemIds": {
-                        "maxItems": 256,
                         "type": "array",
                         "items": {
                           "type": "string",
@@ -7487,7 +7481,6 @@
                 },
                 "expectedLinkTransitions": {
                   "default": [],
-                  "maxItems": 4096,
                   "type": "array",
                   "items": {
                     "type": "object",
@@ -7498,7 +7491,6 @@
                         "pattern": "^timeline_item_[A-Za-z0-9][A-Za-z0-9._~-]*$"
                       },
                       "beforeLinkedItemIds": {
-                        "maxItems": 4096,
                         "type": "array",
                         "items": {
                           "type": "string",
@@ -7507,7 +7499,6 @@
                         }
                       },
                       "afterLinkedItemIds": {
-                        "maxItems": 4096,
                         "type": "array",
                         "items": {
                           "type": "string",
@@ -7889,7 +7880,6 @@
                   },
                   "affectedTracks": {
                     "minItems": 1,
-                    "maxItems": 16,
                     "type": "array",
                     "items": {
                       "type": "object",
@@ -7922,7 +7912,6 @@
                     }
                   },
                   "affectedItems": {
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "object",
@@ -8013,7 +8002,6 @@
                     }
                   },
                   "protectedItems": {
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "object",
@@ -8104,7 +8092,6 @@
                     }
                   },
                   "expectedItems": {
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "object",
@@ -8235,7 +8222,6 @@
                           "maxLength": 4096
                         },
                         "linkedExpectedItemIndexes": {
-                          "maxItems": 256,
                           "type": "array",
                           "items": {
                             "type": "integer",
@@ -8244,7 +8230,6 @@
                           }
                         },
                         "linkedExistingItemIds": {
-                          "maxItems": 256,
                           "type": "array",
                           "items": {
                             "type": "string",
@@ -8270,7 +8255,6 @@
                   },
                   "expectedLinkTransitions": {
                     "default": [],
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "object",
@@ -8281,7 +8265,6 @@
                           "pattern": "^timeline_item_[A-Za-z0-9][A-Za-z0-9._~-]*$"
                         },
                         "beforeLinkedItemIds": {
-                          "maxItems": 4096,
                           "type": "array",
                           "items": {
                             "type": "string",
@@ -8290,7 +8273,6 @@
                           }
                         },
                         "afterLinkedItemIds": {
-                          "maxItems": 4096,
                           "type": "array",
                           "items": {
                             "type": "string",
@@ -8945,7 +8927,6 @@
                 },
                 "affectedTracks": {
                   "minItems": 1,
-                  "maxItems": 16,
                   "type": "array",
                   "items": {
                     "type": "object",
@@ -8978,7 +8959,6 @@
                   }
                 },
                 "affectedItems": {
-                  "maxItems": 4096,
                   "type": "array",
                   "items": {
                     "type": "object",
@@ -9069,7 +9049,6 @@
                   }
                 },
                 "protectedItems": {
-                  "maxItems": 4096,
                   "type": "array",
                   "items": {
                     "type": "object",
@@ -9160,7 +9139,6 @@
                   }
                 },
                 "expectedItems": {
-                  "maxItems": 4096,
                   "type": "array",
                   "items": {
                     "type": "object",
@@ -9291,7 +9269,6 @@
                         "maxLength": 4096
                       },
                       "linkedExpectedItemIndexes": {
-                        "maxItems": 256,
                         "type": "array",
                         "items": {
                           "type": "integer",
@@ -9300,7 +9277,6 @@
                         }
                       },
                       "linkedExistingItemIds": {
-                        "maxItems": 256,
                         "type": "array",
                         "items": {
                           "type": "string",
@@ -9326,7 +9302,6 @@
                 },
                 "expectedLinkTransitions": {
                   "default": [],
-                  "maxItems": 4096,
                   "type": "array",
                   "items": {
                     "type": "object",
@@ -9337,7 +9312,6 @@
                         "pattern": "^timeline_item_[A-Za-z0-9][A-Za-z0-9._~-]*$"
                       },
                       "beforeLinkedItemIds": {
-                        "maxItems": 4096,
                         "type": "array",
                         "items": {
                           "type": "string",
@@ -9346,7 +9320,6 @@
                         }
                       },
                       "afterLinkedItemIds": {
-                        "maxItems": 4096,
                         "type": "array",
                         "items": {
                           "type": "string",
@@ -9696,7 +9669,6 @@
                   },
                   "affectedTracks": {
                     "minItems": 1,
-                    "maxItems": 16,
                     "type": "array",
                     "items": {
                       "type": "object",
@@ -9729,7 +9701,6 @@
                     }
                   },
                   "affectedItems": {
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "object",
@@ -9820,7 +9791,6 @@
                     }
                   },
                   "protectedItems": {
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "object",
@@ -9911,7 +9881,6 @@
                     }
                   },
                   "expectedItems": {
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "object",
@@ -10042,7 +10011,6 @@
                           "maxLength": 4096
                         },
                         "linkedExpectedItemIndexes": {
-                          "maxItems": 256,
                           "type": "array",
                           "items": {
                             "type": "integer",
@@ -10051,7 +10019,6 @@
                           }
                         },
                         "linkedExistingItemIds": {
-                          "maxItems": 256,
                           "type": "array",
                           "items": {
                             "type": "string",
@@ -10077,7 +10044,6 @@
                   },
                   "expectedLinkTransitions": {
                     "default": [],
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "object",
@@ -10088,7 +10054,6 @@
                           "pattern": "^timeline_item_[A-Za-z0-9][A-Za-z0-9._~-]*$"
                         },
                         "beforeLinkedItemIds": {
-                          "maxItems": 4096,
                           "type": "array",
                           "items": {
                             "type": "string",
@@ -10097,7 +10062,6 @@
                           }
                         },
                         "afterLinkedItemIds": {
-                          "maxItems": 4096,
                           "type": "array",
                           "items": {
                             "type": "string",
@@ -10923,7 +10887,6 @@
               "pattern": "^revision_[A-Za-z0-9][A-Za-z0-9._~-]*$"
             },
             "affectedTracks": {
-              "maxItems": 12288,
               "type": "array",
               "items": {
                 "type": "object",
@@ -10951,7 +10914,6 @@
             },
             "affectedItemIds": {
               "minItems": 1,
-              "maxItems": 4096,
               "type": "array",
               "items": {
                 "type": "string",
@@ -10960,7 +10922,6 @@
               }
             },
             "protectedItemIds": {
-              "maxItems": 4096,
               "type": "array",
               "items": {
                 "type": "string",
@@ -10998,7 +10959,6 @@
             },
             "expectedLinkTransitions": {
               "default": [],
-              "maxItems": 4096,
               "type": "array",
               "items": {
                 "type": "object",
@@ -11009,7 +10969,6 @@
                     "pattern": "^timeline_item_[A-Za-z0-9][A-Za-z0-9._~-]*$"
                   },
                   "beforeLinkedItemIds": {
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -11018,7 +10977,6 @@
                     }
                   },
                   "afterLinkedItemIds": {
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -11109,7 +11067,6 @@
                     "pattern": "^revision_[A-Za-z0-9][A-Za-z0-9._~-]*$"
                   },
                   "affectedTracks": {
-                    "maxItems": 12288,
                     "type": "array",
                     "items": {
                       "type": "object",
@@ -11137,7 +11094,6 @@
                   },
                   "affectedItemIds": {
                     "minItems": 1,
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -11146,7 +11102,6 @@
                     }
                   },
                   "protectedItemIds": {
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -11184,7 +11139,6 @@
                   },
                   "expectedLinkTransitions": {
                     "default": [],
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "object",
@@ -11195,7 +11149,6 @@
                           "pattern": "^timeline_item_[A-Za-z0-9][A-Za-z0-9._~-]*$"
                         },
                         "beforeLinkedItemIds": {
-                          "maxItems": 4096,
                           "type": "array",
                           "items": {
                             "type": "string",
@@ -11204,7 +11157,6 @@
                           }
                         },
                         "afterLinkedItemIds": {
-                          "maxItems": 4096,
                           "type": "array",
                           "items": {
                             "type": "string",
@@ -11287,7 +11239,6 @@
               "pattern": "^revision_[A-Za-z0-9][A-Za-z0-9._~-]*$"
             },
             "affectedTracks": {
-              "maxItems": 12288,
               "type": "array",
               "items": {
                 "type": "object",
@@ -11314,7 +11265,6 @@
               }
             },
             "affectedItemIds": {
-              "maxItems": 4096,
               "type": "array",
               "items": {
                 "type": "string",
@@ -11323,7 +11273,6 @@
               }
             },
             "protectedItemIds": {
-              "maxItems": 4096,
               "type": "array",
               "items": {
                 "type": "string",
@@ -11332,7 +11281,6 @@
               }
             },
             "outputItemIds": {
-              "maxItems": 4096,
               "type": "array",
               "items": {
                 "type": "string",
@@ -11379,7 +11327,6 @@
                     "pattern": "^revision_[A-Za-z0-9][A-Za-z0-9._~-]*$"
                   },
                   "affectedTracks": {
-                    "maxItems": 12288,
                     "type": "array",
                     "items": {
                       "type": "object",
@@ -11406,7 +11353,6 @@
                     }
                   },
                   "affectedItemIds": {
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -11415,7 +11361,6 @@
                     }
                   },
                   "protectedItemIds": {
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -11424,7 +11369,6 @@
                     }
                   },
                   "outputItemIds": {
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "string",

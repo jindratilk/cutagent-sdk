@@ -6,15 +6,15 @@ export type ActionPositiveInteger = number & { readonly __cutagentActionPositive
 /** @beta */
 export const CUTAGENT_ACTION_INVENTORY_DIGEST = "36261c8dbeea1c0f8615744638ea4ad8d42e69922ce64b82977d0825347ea43f" as const;
 /** @beta */
-export const CUTAGENT_ACTION_INPUT_SCHEMA_DIGEST = "5a1f282a3b2eb2b22c47770d2706136460d7c3ba67f421fc841d02fe9b1e75d5" as const;
+export const CUTAGENT_ACTION_INPUT_SCHEMA_DIGEST = "e22b5771bc777a380ec79f7847f70dcebcc6aaf4375cdb39b3849fb295b9038d" as const;
 /** @beta */
-export const CUTAGENT_ACTION_RESULT_SCHEMA_DIGEST = "b1efa5eddfd21d9fabd7961a679fcdab54fdb96b018d649634f7088505ee86e8" as const;
+export const CUTAGENT_ACTION_RESULT_SCHEMA_DIGEST = "7cf428a74920c71aeb462fa1aead4f449d1ee40f9c97309a22d4326accb59568" as const;
 /** @beta */
 export const CUTAGENT_ACTION_APPLICABILITY_DIGEST = "30c88d7ce80600e8bb542c46f99cf89e4a6776a97860417c431c14793744811a" as const;
 /** @beta */
 export const CUTAGENT_ACTION_ERROR_REGISTRY_DIGEST = "b2f82cf493aaa9ed3ba11c824e77ea4aa871d4e18991f46fba35b7cffb593be6" as const;
 /** @beta */
-export const CUTAGENT_ACTION_PROTOCOL_BINDING_DIGEST = "4662d0dd4614ec2c6acf8c51f1631530f21b0fc84062f3dedf57632f15930f65" as const;
+export const CUTAGENT_ACTION_PROTOCOL_BINDING_DIGEST = "085e46ba195f084f6bcddb987ec799d97662080171375b8326de4bd937637947" as const;
 /** @beta */
 export const ACTION_IDS = [
   "cutagent.action.audio.beat_detect",
@@ -101459,7 +101459,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                 },
                 "affectedTracks": {
                   "minItems": 1,
-                  "maxItems": 16,
                   "type": "array",
                   "items": {
                     "type": "object",
@@ -101492,7 +101491,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                   }
                 },
                 "affectedItems": {
-                  "maxItems": 4096,
                   "type": "array",
                   "items": {
                     "type": "object",
@@ -101583,7 +101581,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                   }
                 },
                 "protectedItems": {
-                  "maxItems": 4096,
                   "type": "array",
                   "items": {
                     "type": "object",
@@ -101674,7 +101671,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                   }
                 },
                 "expectedItems": {
-                  "maxItems": 4096,
                   "type": "array",
                   "items": {
                     "type": "object",
@@ -101805,7 +101801,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                         "maxLength": 4096
                       },
                       "linkedExpectedItemIndexes": {
-                        "maxItems": 256,
                         "type": "array",
                         "items": {
                           "type": "integer",
@@ -101814,7 +101809,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                         }
                       },
                       "linkedExistingItemIds": {
-                        "maxItems": 256,
                         "type": "array",
                         "items": {
                           "type": "string",
@@ -101840,7 +101834,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                 },
                 "expectedLinkTransitions": {
                   "default": [],
-                  "maxItems": 4096,
                   "type": "array",
                   "items": {
                     "type": "object",
@@ -101851,7 +101844,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                         "pattern": "^timeline_item_[A-Za-z0-9][A-Za-z0-9._~-]*$"
                       },
                       "beforeLinkedItemIds": {
-                        "maxItems": 4096,
                         "type": "array",
                         "items": {
                           "type": "string",
@@ -101860,7 +101852,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                         }
                       },
                       "afterLinkedItemIds": {
-                        "maxItems": 4096,
                         "type": "array",
                         "items": {
                           "type": "string",
@@ -102242,7 +102233,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                   },
                   "affectedTracks": {
                     "minItems": 1,
-                    "maxItems": 16,
                     "type": "array",
                     "items": {
                       "type": "object",
@@ -102275,7 +102265,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     }
                   },
                   "affectedItems": {
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "object",
@@ -102366,7 +102355,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     }
                   },
                   "protectedItems": {
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "object",
@@ -102457,7 +102445,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     }
                   },
                   "expectedItems": {
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "object",
@@ -102588,7 +102575,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                           "maxLength": 4096
                         },
                         "linkedExpectedItemIndexes": {
-                          "maxItems": 256,
                           "type": "array",
                           "items": {
                             "type": "integer",
@@ -102597,7 +102583,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                           }
                         },
                         "linkedExistingItemIds": {
-                          "maxItems": 256,
                           "type": "array",
                           "items": {
                             "type": "string",
@@ -102623,7 +102608,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                   },
                   "expectedLinkTransitions": {
                     "default": [],
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "object",
@@ -102634,7 +102618,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                           "pattern": "^timeline_item_[A-Za-z0-9][A-Za-z0-9._~-]*$"
                         },
                         "beforeLinkedItemIds": {
-                          "maxItems": 4096,
                           "type": "array",
                           "items": {
                             "type": "string",
@@ -102643,7 +102626,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                           }
                         },
                         "afterLinkedItemIds": {
-                          "maxItems": 4096,
                           "type": "array",
                           "items": {
                             "type": "string",
@@ -103330,7 +103312,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                 },
                 "affectedTracks": {
                   "minItems": 1,
-                  "maxItems": 16,
                   "type": "array",
                   "items": {
                     "type": "object",
@@ -103363,7 +103344,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                   }
                 },
                 "affectedItems": {
-                  "maxItems": 4096,
                   "type": "array",
                   "items": {
                     "type": "object",
@@ -103454,7 +103434,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                   }
                 },
                 "protectedItems": {
-                  "maxItems": 4096,
                   "type": "array",
                   "items": {
                     "type": "object",
@@ -103545,7 +103524,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                   }
                 },
                 "expectedItems": {
-                  "maxItems": 4096,
                   "type": "array",
                   "items": {
                     "type": "object",
@@ -103676,7 +103654,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                         "maxLength": 4096
                       },
                       "linkedExpectedItemIndexes": {
-                        "maxItems": 256,
                         "type": "array",
                         "items": {
                           "type": "integer",
@@ -103685,7 +103662,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                         }
                       },
                       "linkedExistingItemIds": {
-                        "maxItems": 256,
                         "type": "array",
                         "items": {
                           "type": "string",
@@ -103711,7 +103687,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                 },
                 "expectedLinkTransitions": {
                   "default": [],
-                  "maxItems": 4096,
                   "type": "array",
                   "items": {
                     "type": "object",
@@ -103722,7 +103697,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                         "pattern": "^timeline_item_[A-Za-z0-9][A-Za-z0-9._~-]*$"
                       },
                       "beforeLinkedItemIds": {
-                        "maxItems": 4096,
                         "type": "array",
                         "items": {
                           "type": "string",
@@ -103731,7 +103705,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                         }
                       },
                       "afterLinkedItemIds": {
-                        "maxItems": 4096,
                         "type": "array",
                         "items": {
                           "type": "string",
@@ -104081,7 +104054,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                   },
                   "affectedTracks": {
                     "minItems": 1,
-                    "maxItems": 16,
                     "type": "array",
                     "items": {
                       "type": "object",
@@ -104114,7 +104086,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     }
                   },
                   "affectedItems": {
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "object",
@@ -104205,7 +104176,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     }
                   },
                   "protectedItems": {
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "object",
@@ -104296,7 +104266,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     }
                   },
                   "expectedItems": {
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "object",
@@ -104427,7 +104396,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                           "maxLength": 4096
                         },
                         "linkedExpectedItemIndexes": {
-                          "maxItems": 256,
                           "type": "array",
                           "items": {
                             "type": "integer",
@@ -104436,7 +104404,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                           }
                         },
                         "linkedExistingItemIds": {
-                          "maxItems": 256,
                           "type": "array",
                           "items": {
                             "type": "string",
@@ -104462,7 +104429,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                   },
                   "expectedLinkTransitions": {
                     "default": [],
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "object",
@@ -104473,7 +104439,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                           "pattern": "^timeline_item_[A-Za-z0-9][A-Za-z0-9._~-]*$"
                         },
                         "beforeLinkedItemIds": {
-                          "maxItems": 4096,
                           "type": "array",
                           "items": {
                             "type": "string",
@@ -104482,7 +104447,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                           }
                         },
                         "afterLinkedItemIds": {
-                          "maxItems": 4096,
                           "type": "array",
                           "items": {
                             "type": "string",
@@ -234632,7 +234596,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
               "pattern": "^revision_[A-Za-z0-9][A-Za-z0-9._~-]*$"
             },
             "affectedTracks": {
-              "maxItems": 12288,
               "type": "array",
               "items": {
                 "type": "object",
@@ -234660,7 +234623,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
             },
             "affectedItemIds": {
               "minItems": 1,
-              "maxItems": 4096,
               "type": "array",
               "items": {
                 "type": "string",
@@ -234669,7 +234631,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
               }
             },
             "protectedItemIds": {
-              "maxItems": 4096,
               "type": "array",
               "items": {
                 "type": "string",
@@ -234707,7 +234668,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
             },
             "expectedLinkTransitions": {
               "default": [],
-              "maxItems": 4096,
               "type": "array",
               "items": {
                 "type": "object",
@@ -234718,7 +234678,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^timeline_item_[A-Za-z0-9][A-Za-z0-9._~-]*$"
                   },
                   "beforeLinkedItemIds": {
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -234727,7 +234686,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     }
                   },
                   "afterLinkedItemIds": {
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -234818,7 +234776,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^revision_[A-Za-z0-9][A-Za-z0-9._~-]*$"
                   },
                   "affectedTracks": {
-                    "maxItems": 12288,
                     "type": "array",
                     "items": {
                       "type": "object",
@@ -234846,7 +234803,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                   },
                   "affectedItemIds": {
                     "minItems": 1,
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -234855,7 +234811,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     }
                   },
                   "protectedItemIds": {
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -234893,7 +234848,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                   },
                   "expectedLinkTransitions": {
                     "default": [],
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "object",
@@ -234904,7 +234858,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                           "pattern": "^timeline_item_[A-Za-z0-9][A-Za-z0-9._~-]*$"
                         },
                         "beforeLinkedItemIds": {
-                          "maxItems": 4096,
                           "type": "array",
                           "items": {
                             "type": "string",
@@ -234913,7 +234866,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                           }
                         },
                         "afterLinkedItemIds": {
-                          "maxItems": 4096,
                           "type": "array",
                           "items": {
                             "type": "string",
@@ -234996,7 +234948,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
               "pattern": "^revision_[A-Za-z0-9][A-Za-z0-9._~-]*$"
             },
             "affectedTracks": {
-              "maxItems": 12288,
               "type": "array",
               "items": {
                 "type": "object",
@@ -235023,7 +234974,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
               }
             },
             "affectedItemIds": {
-              "maxItems": 4096,
               "type": "array",
               "items": {
                 "type": "string",
@@ -235032,7 +234982,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
               }
             },
             "protectedItemIds": {
-              "maxItems": 4096,
               "type": "array",
               "items": {
                 "type": "string",
@@ -235041,7 +234990,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
               }
             },
             "outputItemIds": {
-              "maxItems": 4096,
               "type": "array",
               "items": {
                 "type": "string",
@@ -235088,7 +235036,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "pattern": "^revision_[A-Za-z0-9][A-Za-z0-9._~-]*$"
                   },
                   "affectedTracks": {
-                    "maxItems": 12288,
                     "type": "array",
                     "items": {
                       "type": "object",
@@ -235115,7 +235062,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     }
                   },
                   "affectedItemIds": {
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -235124,7 +235070,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     }
                   },
                   "protectedItemIds": {
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "string",
@@ -235133,7 +235078,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     }
                   },
                   "outputItemIds": {
-                    "maxItems": 4096,
                     "type": "array",
                     "items": {
                       "type": "string",

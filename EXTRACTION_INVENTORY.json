@@ -319,15 +319,15 @@
     {
       "source": "sdk/src/generated/action-contract-overrides.schema.json",
       "destination": "sdk/src/generated/action-contract-overrides.schema.json",
-      "sourceSha256": "d553683b0717a6e922607d23463505f83481c78d886e7b05f5db069310dc3710",
-      "sha256": "d553683b0717a6e922607d23463505f83481c78d886e7b05f5db069310dc3710",
+      "sourceSha256": "d885ecced2c40cddfa7b8e1f3636ae0b23a976e92327f6af3a399616c888a4db",
+      "sha256": "d885ecced2c40cddfa7b8e1f3636ae0b23a976e92327f6af3a399616c888a4db",
       "transformed": false
     },
     {
       "source": "sdk/src/generated/actions.ts",
       "destination": "sdk/src/generated/actions.ts",
-      "sourceSha256": "e10fe2b2dc98098276205d134c12a50a56d1d3abde7aa8a4c6aecfc8c346fc30",
-      "sha256": "e10fe2b2dc98098276205d134c12a50a56d1d3abde7aa8a4c6aecfc8c346fc30",
+      "sourceSha256": "3b02f5f1b31f7fdb7c44032e52696a88fc4e9c42657bb6836850b3c4cabc3931",
+      "sha256": "3b02f5f1b31f7fdb7c44032e52696a88fc4e9c42657bb6836850b3c4cabc3931",
       "transformed": false
     },
     {
