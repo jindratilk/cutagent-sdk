@@ -173332,7 +173332,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 512,
           "minItems": 1,
           "type": "array"
         },
@@ -173515,7 +173514,6 @@
               }
             ]
           },
-          "maxItems": 512,
           "minItems": 1,
           "type": "array"
         },
@@ -176487,7 +176485,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 256,
           "minItems": 1,
           "type": "array"
         }
@@ -176510,7 +176507,6 @@
           "type": "boolean"
         },
         "failureCount": {
-          "maximum": 256,
           "minimum": 0,
           "type": "integer"
         },
@@ -176536,7 +176532,6 @@
                     "type": "boolean"
                   },
                   "index": {
-                    "maximum": 255,
                     "minimum": 0,
                     "type": "integer"
                   },
@@ -176582,7 +176577,6 @@
                     "type": "string"
                   },
                   "index": {
-                    "maximum": 255,
                     "minimum": 0,
                     "type": "integer"
                   },
@@ -176612,7 +176606,6 @@
               }
             ]
           },
-          "maxItems": 256,
           "minItems": 1,
           "type": "array"
         },
@@ -176629,7 +176622,6 @@
           "type": "string"
         },
         "successCount": {
-          "maximum": 256,
           "minimum": 0,
           "type": "integer"
         },
@@ -177766,7 +177758,6 @@
                 "minLength": 1,
                 "type": "string"
               },
-              "maxItems": 256,
               "minItems": 0,
               "type": "array"
             }
@@ -177968,7 +177959,6 @@
                 "minLength": 1,
                 "type": "string"
               },
-              "maxItems": 256,
               "minItems": 0,
               "type": "array"
             },
@@ -177984,7 +177974,6 @@
                 "minLength": 1,
                 "type": "string"
               },
-              "maxItems": 256,
               "minItems": 0,
               "type": "array"
             }
@@ -178845,7 +178834,6 @@
                 "minLength": 1,
                 "type": "string"
               },
-              "maxItems": 256,
               "minItems": 0,
               "type": "array"
             },
@@ -178858,7 +178846,6 @@
                 "minLength": 1,
                 "type": "string"
               },
-              "maxItems": 256,
               "minItems": 0,
               "type": "array"
             }
@@ -178945,7 +178932,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 256,
           "minItems": 1,
           "type": "array"
         }
@@ -179036,7 +179022,6 @@
                 ],
                 "type": "object"
               },
-              "maxItems": 256,
               "minItems": 1,
               "type": "array"
             }
@@ -180071,7 +180056,6 @@
             "minLength": 1,
             "type": "string"
           },
-          "maxItems": 256,
           "minItems": 1,
           "type": "array"
         },
@@ -180135,7 +180119,6 @@
                 "minLength": 1,
                 "type": "string"
               },
-              "maxItems": 256,
               "minItems": 1,
               "type": "array"
             }
@@ -183765,7 +183748,6 @@
           "items": {
             "type": "string"
           },
-          "maxItems": 1000,
           "minItems": 1,
           "type": "array"
         },
@@ -184123,7 +184105,6 @@
                 "minLength": 1,
                 "type": "string"
               },
-              "maxItems": 1000,
               "minItems": 1,
               "type": "array",
               "uniqueItems": true
@@ -184142,7 +184123,6 @@
                 "minLength": 1,
                 "type": "string"
               },
-              "maxItems": 1000,
               "minItems": 1,
               "type": "array",
               "uniqueItems": true
@@ -193737,7 +193717,6 @@
           "items": {
             "type": "string"
           },
-          "maxItems": 999,
           "minItems": 1,
           "type": "array"
         }
@@ -194446,7 +194425,6 @@
           "items": {
             "type": "string"
           },
-          "maxItems": 999,
           "type": "array"
         },
         "file": {
@@ -200200,7 +200178,6 @@
           "items": {
             "type": "string"
           },
-          "maxItems": 1000,
           "minItems": 1,
           "type": "array"
         },

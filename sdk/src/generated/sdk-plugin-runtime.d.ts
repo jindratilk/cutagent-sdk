@@ -53,7 +53,7 @@ export declare const sdkPluginStartupRequestSchema: z.ZodObject<{
     protocolVersion: z.ZodLiteral<1>;
     requestId: z.core.$ZodBranded<z.ZodString, "RequestId", "out">;
     method: z.ZodLiteral<"connect">;
-    carrierProtocolDigest: z.ZodLiteral<"sha256:821d6c6a4efeb7a433a5401fbc4a843a360b9040fa4106a3d9592527e8157fac">;
+    carrierProtocolDigest: z.ZodLiteral<"sha256:520b753262e6001f0ecf4540d1a62e62ffc03178b0e3a7351d614f777eaa2aaa">;
     payload: z.ZodObject<{
         protocolVersion: z.ZodLiteral<1>;
         handshake: z.ZodObject<{
@@ -65,7 +65,7 @@ export declare const sdkPluginStartupRequestSchema: z.ZodObject<{
                 standalone_local: "standalone_local";
                 plugin_managed: "plugin_managed";
             }>;
-            protocolDigest: z.ZodLiteral<"sha256:81f22505633d6a394e570c9f9a8b6fc7ee5eb1526d92f75df1b6749fca5ac1bd">;
+            protocolDigest: z.ZodLiteral<"sha256:59d6b434662313fa99bcc2f5f143febc96629c8efe3712a20d16a03e530d842e">;
         }, z.core.$strict>;
     }, z.core.$strict>;
 }, z.core.$strict>;
@@ -558,7 +558,7 @@ export declare const sdkPluginRequestFrameSchema: z.ZodUnion<readonly [z.ZodObje
     protocolVersion: z.ZodLiteral<1>;
     requestId: z.core.$ZodBranded<z.ZodString, "RequestId", "out">;
     method: z.ZodLiteral<"connect">;
-    carrierProtocolDigest: z.ZodLiteral<"sha256:821d6c6a4efeb7a433a5401fbc4a843a360b9040fa4106a3d9592527e8157fac">;
+    carrierProtocolDigest: z.ZodLiteral<"sha256:520b753262e6001f0ecf4540d1a62e62ffc03178b0e3a7351d614f777eaa2aaa">;
     payload: z.ZodObject<{
         protocolVersion: z.ZodLiteral<1>;
         handshake: z.ZodObject<{
@@ -570,7 +570,7 @@ export declare const sdkPluginRequestFrameSchema: z.ZodUnion<readonly [z.ZodObje
                 standalone_local: "standalone_local";
                 plugin_managed: "plugin_managed";
             }>;
-            protocolDigest: z.ZodLiteral<"sha256:81f22505633d6a394e570c9f9a8b6fc7ee5eb1526d92f75df1b6749fca5ac1bd">;
+            protocolDigest: z.ZodLiteral<"sha256:59d6b434662313fa99bcc2f5f143febc96629c8efe3712a20d16a03e530d842e">;
         }, z.core.$strict>;
     }, z.core.$strict>;
 }, z.core.$strict>, z.ZodObject<{
@@ -1060,7 +1060,7 @@ export declare const sdkPluginConnectResponseFrameSchema: z.ZodObject<{
             }>;
             distributionVersion: z.ZodString;
             cliVersion: z.ZodString;
-            protocolDigest: z.ZodLiteral<"sha256:81f22505633d6a394e570c9f9a8b6fc7ee5eb1526d92f75df1b6749fca5ac1bd">;
+            protocolDigest: z.ZodLiteral<"sha256:59d6b434662313fa99bcc2f5f143febc96629c8efe3712a20d16a03e530d842e">;
             runtimeFingerprint: z.core.$ZodBranded<z.ZodString, "SdkRuntimeFingerprint", "out">;
         }, z.core.$strict>;
         session: z.ZodObject<{
@@ -2947,7 +2947,7 @@ export declare const sdkPluginResponseFrameSchema: z.ZodUnion<readonly [z.ZodObj
             }>;
             distributionVersion: z.ZodString;
             cliVersion: z.ZodString;
-            protocolDigest: z.ZodLiteral<"sha256:81f22505633d6a394e570c9f9a8b6fc7ee5eb1526d92f75df1b6749fca5ac1bd">;
+            protocolDigest: z.ZodLiteral<"sha256:59d6b434662313fa99bcc2f5f143febc96629c8efe3712a20d16a03e530d842e">;
             runtimeFingerprint: z.core.$ZodBranded<z.ZodString, "SdkRuntimeFingerprint", "out">;
         }, z.core.$strict>;
         session: z.ZodObject<{

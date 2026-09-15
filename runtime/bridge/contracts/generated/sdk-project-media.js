@@ -105,14 +105,14 @@ export const sdkMediaPoolCreateBinInputSchema = mediaMutationBinding.extend({
 }).strict();
 export const sdkMediaPoolImportInputSchema = mediaMutationBinding.extend({
     destination: sdkMediaPoolBinTargetSchema,
-    paths: z.array(localPath).min(1).max(256),
+    paths: z.array(localPath).min(1),
 }).strict();
 export const sdkMediaPoolRelinkInputSchema = mediaMutationBinding.extend({
     assetId: sdkMediaPoolItemIdSchema,
     path: localPath,
 }).strict();
 export const sdkMediaPoolDeleteInputSchema = mediaMutationBinding.extend({
-    assetIds: z.array(sdkMediaPoolItemIdSchema).min(1).max(1000),
+    assetIds: z.array(sdkMediaPoolItemIdSchema).min(1),
 }).strict().superRefine((input, issue) => {
     if (new Set(input.assetIds).size !== input.assetIds.length) {
         issue.addIssue({ code: "custom", path: ["assetIds"], message: "Deleted asset identities must be unique." });
@@ -158,7 +158,7 @@ export const sdkMediaPoolCreateBinResultSchema = z.object({
 }).strict();
 export const sdkMediaPoolImportResultSchema = z.object({
     projectId: sdkProjectIdSchema,
-    assets: z.array(mediaIdentity).min(1).max(256),
+    assets: z.array(mediaIdentity).min(1),
     revision: sdkRevisionSchema,
 }).strict();
 export const sdkMediaPoolRelinkResultSchema = z.object({
@@ -172,7 +172,7 @@ export const sdkMediaPoolDeleteResultSchema = z.object({
     items: z.array(z.object({
         assetId: sdkMediaPoolItemIdSchema,
         status: z.literal("deleted"),
-    }).strict()).min(1).max(1000),
+    }).strict()).min(1),
     revision: sdkRevisionSchema,
 }).strict().superRefine((result, issue) => {
     if (new Set(result.items.map((item) => item.assetId)).size !== result.items.length) {

@@ -461,7 +461,7 @@ class ResidualMediaMutationDescriptor:
             asset_ids = value.get("assetIds")
             if (set(value) != required
                     or any(not isinstance(value.get(key), str) or not value[key] for key in {"projectId", "precondition"})
-                    or not isinstance(asset_ids, list) or not asset_ids or len(asset_ids) > 1000
+                    or not isinstance(asset_ids, list) or not asset_ids
                     or any(not isinstance(item, str) or not item for item in asset_ids)
                     or len(set(asset_ids)) != len(asset_ids)):
                 raise ValidationError("Prepared semantic Media deletion input is malformed.")

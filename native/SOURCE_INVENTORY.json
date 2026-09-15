@@ -538,13 +538,6 @@
       "transformed": false
     },
     {
-      "source": "cutagent-cli/cutagent_cli/commands/_media/part_001.py",
-      "destination": "native/cutagent_cli/commands/_media/part_001.py",
-      "sourceSha256": "84dc5ef1b95a79ffe4a44c9e89e0a5f57351e14aa644914516d5b779ccc20a11",
-      "sha256": "84dc5ef1b95a79ffe4a44c9e89e0a5f57351e14aa644914516d5b779ccc20a11",
-      "transformed": false
-    },
-    {
       "source": "cutagent-cli/cutagent_cli/commands/_media/part_002.py",
       "destination": "native/cutagent_cli/commands/_media/part_002.py",
       "sourceSha256": "5c697f2f41e4aa718dab0a1601fb9aadb24ee0e3c968aa7aeae7b9302653dca9",
@@ -3177,13 +3170,6 @@
       "transformed": false
     },
     {
-      "source": "cutagent-cli/cutagent_cli/private_sdk_descriptors/media_residual_prepared_action.py",
-      "destination": "native/cutagent_cli/private_sdk_descriptors/media_residual_prepared_action.py",
-      "sourceSha256": "303e9bd19dd109d4f99e4de2c53a8511bc7d0ec9b28e1a60a93c8b39f081ef41",
-      "sha256": "303e9bd19dd109d4f99e4de2c53a8511bc7d0ec9b28e1a60a93c8b39f081ef41",
-      "transformed": false
-    },
-    {
       "source": "cutagent-cli/cutagent_cli/private_sdk_descriptors/output_blanking.py",
       "destination": "native/cutagent_cli/private_sdk_descriptors/output_blanking.py",
       "sourceSha256": "89b859eaba83c9650ae6fe34f54662a5cc935b3f711ea9802b8f4b2253cbdc3d",
@@ -3223,13 +3209,6 @@
       "destination": "native/cutagent_cli/private_sdk_descriptors/project_render_storage_media.py",
       "sourceSha256": "babda3ac9eb8fba0e3c8ec898e6872b179181652b173964d3408e70207cde504",
       "sha256": "babda3ac9eb8fba0e3c8ec898e6872b179181652b173964d3408e70207cde504",
-      "transformed": false
-    },
-    {
-      "source": "cutagent-cli/cutagent_cli/private_sdk_descriptors/project_render_storage_media_prepared_action.py",
-      "destination": "native/cutagent_cli/private_sdk_descriptors/project_render_storage_media_prepared_action.py",
-      "sourceSha256": "f3bdb5a53c39840e886e89e386b21d647a8d7795ceb489343a3e35c52f806098",
-      "sha256": "f3bdb5a53c39840e886e89e386b21d647a8d7795ceb489343a3e35c52f806098",
       "transformed": false
     },
     {
@@ -9302,13 +9281,6 @@
       "transformed": false
     },
     {
-      "source": "cutagent-cli/cutagent_cli/_sdk_prepared_action_contract.py",
-      "destination": "native/cutagent_cli/_sdk_prepared_action_contract.py",
-      "sourceSha256": "79963c09c82f0b2a38b5be722f080003ad69df72263d28ae292a10b08dc625e2",
-      "sha256": "79963c09c82f0b2a38b5be722f080003ad69df72263d28ae292a10b08dc625e2",
-      "transformed": false
-    },
-    {
       "source": "cutagent-cli/cutagent_cli/core/_fairlight_ops_facade/__init__.py",
       "destination": "native/cutagent_cli/core/_fairlight_ops_facade/__init__.py",
       "sourceSha256": "4341383ca441b6d646ad56558c46692f030ea0c4f32f7aa8ed75c97782c2330f",
@@ -9435,17 +9407,45 @@
       "transformed": false
     },
     {
+      "source": "cutagent-cli/cutagent_cli/_sdk_prepared_action_contract.py",
+      "destination": "native/cutagent_cli/_sdk_prepared_action_contract.py",
+      "sourceSha256": "204f52fb6930cd239e709379013ec360f05874afc41c264a11b75ce47788db9d",
+      "sha256": "204f52fb6930cd239e709379013ec360f05874afc41c264a11b75ce47788db9d",
+      "transformed": false
+    },
+    {
+      "source": "cutagent-cli/cutagent_cli/commands/_media/part_001.py",
+      "destination": "native/cutagent_cli/commands/_media/part_001.py",
+      "sourceSha256": "96d98601bd601bd3ca0783245477a323e1ae8b24f972d559a969c8028b70e166",
+      "sha256": "96d98601bd601bd3ca0783245477a323e1ae8b24f972d559a969c8028b70e166",
+      "transformed": false
+    },
+    {
+      "source": "cutagent-cli/cutagent_cli/private_sdk_descriptors/media_residual_prepared_action.py",
+      "destination": "native/cutagent_cli/private_sdk_descriptors/media_residual_prepared_action.py",
+      "sourceSha256": "935c22076c5ff4dac275b776caa5d8c51a8ac0c495bfdf4cc2bfd646d79999d4",
+      "sha256": "935c22076c5ff4dac275b776caa5d8c51a8ac0c495bfdf4cc2bfd646d79999d4",
+      "transformed": false
+    },
+    {
+      "source": "cutagent-cli/cutagent_cli/private_sdk_descriptors/project_render_storage_media_prepared_action.py",
+      "destination": "native/cutagent_cli/private_sdk_descriptors/project_render_storage_media_prepared_action.py",
+      "sourceSha256": "fc1207d756c2afb5c628486af3722d7fe1a85bb4f705a2119ee79b75ee470b6e",
+      "sha256": "fc1207d756c2afb5c628486af3722d7fe1a85bb4f705a2119ee79b75ee470b6e",
+      "transformed": false
+    },
+    {
       "source": "cutagent-cli/cutagent_cli/public_contract/action-contracts.schema.json",
       "destination": "native/cutagent_cli/public_contract/action-contracts.schema.json",
-      "sourceSha256": "202c0711c50023027b3b1897c401e8240742d93623bba71ecff6f4f107013a0e",
-      "sha256": "202c0711c50023027b3b1897c401e8240742d93623bba71ecff6f4f107013a0e",
+      "sourceSha256": "efc2365871b5049a3b2e2cce80dacd6053686e441bb623cf00f9c37d19e3a2b6",
+      "sha256": "efc2365871b5049a3b2e2cce80dacd6053686e441bb623cf00f9c37d19e3a2b6",
       "transformed": false
     },
     {
       "source": "cutagent-cli/cutagent_cli/public_contract/sdk-inventory.json",
       "destination": "native/cutagent_cli/public_contract/sdk-inventory.json",
-      "sourceSha256": "2600bd2d97cf305d7de3efdbeb5dc8ad0130a751322ac9e253c14c520196f84b",
-      "sha256": "2600bd2d97cf305d7de3efdbeb5dc8ad0130a751322ac9e253c14c520196f84b",
+      "sourceSha256": "0422b3b352bdfeb74f1937292aef6d53121ea288125d7aa56100f659dba09040",
+      "sha256": "0422b3b352bdfeb74f1937292aef6d53121ea288125d7aa56100f659dba09040",
       "transformed": false
     }
   ]

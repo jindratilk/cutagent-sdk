@@ -66,7 +66,6 @@ export const SDK_MEDIA_PREPARED_INPUTS = [
           "items": {
             "type": "string"
           },
-          "maxItems": 1000,
           "minItems": 1,
           "type": "array"
         },
@@ -106,7 +105,6 @@ export const SDK_MEDIA_PREPARED_INPUTS = [
                 "minLength": 1,
                 "type": "string"
               },
-              "maxItems": 1000,
               "minItems": 1,
               "type": "array",
               "uniqueItems": true
@@ -125,7 +123,6 @@ export const SDK_MEDIA_PREPARED_INPUTS = [
                 "minLength": 1,
                 "type": "string"
               },
-              "maxItems": 1000,
               "minItems": 1,
               "type": "array",
               "uniqueItems": true
@@ -452,7 +449,6 @@ export const SDK_MEDIA_PREPARED_INPUTS = [
           "items": {
             "type": "string"
           },
-          "maxItems": 999,
           "minItems": 1,
           "type": "array"
         }
@@ -473,7 +469,6 @@ export const SDK_MEDIA_PREPARED_INPUTS = [
           "items": {
             "type": "string"
           },
-          "maxItems": 999,
           "type": "array"
         },
         "file": {
@@ -746,7 +741,6 @@ export const SDK_MEDIA_PREPARED_INPUTS = [
           "items": {
             "type": "string"
           },
-          "maxItems": 1000,
           "minItems": 1,
           "type": "array"
         },

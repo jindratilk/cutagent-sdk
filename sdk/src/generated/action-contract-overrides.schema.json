@@ -10530,7 +10530,6 @@
         },
         "paths": {
           "minItems": 1,
-          "maxItems": 256,
           "type": "array",
           "items": {
             "type": "string",
@@ -10557,7 +10556,6 @@
         },
         "assets": {
           "minItems": 1,
-          "maxItems": 256,
           "type": "array",
           "items": {
             "type": "object",

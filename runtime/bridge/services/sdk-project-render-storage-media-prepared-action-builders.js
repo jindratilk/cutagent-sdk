@@ -211,7 +211,7 @@ const BASE_INPUT_SCHEMAS = {
   }).strict(),
   "cutagent.action.media.create_timeline": z.object({
     timelineName: z.string().min(1).max(1024),
-    clips: z.array(z.string().min(1).max(1024)).min(1).max(1000),
+    clips: z.array(z.string().min(1).max(1024)).min(1),
   }).strict(),
   "cutagent.action.media.folders.create": z.union([
     sdkMediaPoolCreateBinInputSchema,
@@ -228,7 +228,7 @@ const BASE_INPUT_SCHEMAS = {
   ]),
   "cutagent.action.media.move": z.union([
     z.object({name: z.string().min(1), target: z.string().min(1)}).strict(),
-    z.object({moves: z.array(z.object({name: z.string().min(1), target: z.string().min(1)}).strict()).min(1).max(1000)}).strict(),
+    z.object({moves: z.array(z.object({name: z.string().min(1), target: z.string().min(1)}).strict()).min(1)}).strict(),
   ]),
   "cutagent.action.media.property_set": z.object({name: z.string().min(1), key: z.string().min(1), value: z.string()}).strict(),
   "cutagent.action.media.third_party_metadata.set": z.object({clip: z.string().min(1), key: z.string().min(1), value: z.string()}).strict(),
@@ -300,11 +300,6 @@ const INPUT_SCHEMAS = Object.freeze({
             validationErrors: structuredClone(validate.errors ?? []),
           });
         }
-        for (const field of ["clips", "paths"]) {
-          if (Array.isArray(value?.[field]) && value[field].length > 1000) {
-            throw new TypeError(`Prepared Media ${field} exceeds the bounded 1,000-entry authority.`);
-          }
-        }
         return structuredClone(value);
       },
     })];
@@ -314,7 +309,7 @@ const INPUT_SCHEMAS = Object.freeze({
     const generated = SDK_MEDIA_PREPARED_INPUTS.find((row) => row.actionId === actionId);
     const validate = ajv.compile(generated.inputSchema);
     return [actionId, z.union([schema, z.custom((value) => (
-      validate(value) && (!Array.isArray(value?.clips) || value.clips.length <= 1000)
+      validate(value)
     ))])];
   })),
 });
@@ -898,12 +893,6 @@ function genericMediaBinding(snapshot, actionId, input, context, dependencies) {
     ...timelineTargets,
     ...Object.values(artifacts).map((artifact) => ({id: artifact.stableId, kind: "artifact"}))];
   if (targets.length === 0) throw new Error("Prepared Media mutation resolved no exact target.");
-  if (actionId === "cutagent.action.media.create_timeline" && targets.length > 1001) {
-    throw new Error("Prepared Media timeline creation exceeds its bounded 1,000-source authority.");
-  }
-  if (actionId !== "cutagent.action.media.create_timeline" && targets.length > 1000) {
-    throw new Error("Prepared Media mutation exceeds the bounded 1,000-target authority.");
-  }
   return {operation: "generic", revision: snapshot.revision, targets, handlerInput, artifacts};
 }
 
@@ -1199,13 +1188,13 @@ export function createProjectPreparedActionBuilderContributions({
       return {
         identities: {
           projectLibraryId: privateIdentity.projectLibraryId,
-          projectId: targetId,
+          projectId: actionId.startsWith("cutagent.action.media.") ? value.project.id : targetId,
           timelineId: null,
           targetIds: targets.map((target) => target.stableId),
         },
         revisions: {
           projectLibrary: inspected.mutationGuard,
-          project: targetRevision,
+          project: actionId.startsWith("cutagent.action.media.") ? value.projectRevision.revision : targetRevision,
           timeline: null,
           targets: Object.fromEntries(targets.map((target) => [target.stableId, target.revision])),
         },

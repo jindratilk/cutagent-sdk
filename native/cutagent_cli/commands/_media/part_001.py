@@ -648,7 +648,7 @@ def _sdk_import_files(path: str) -> list[str]:
         entries = json.loads(manifest)
     except (OSError, TypeError, ValueError, json.JSONDecodeError):
         entries = None
-    if not isinstance(entries, list) or not entries or len(entries) > 256:
+    if not isinstance(entries, list) or not entries:
         raise CapabilityNegotiationFailed(
             "SDK Media Pool import requires a bounded exact-file manifest.",
             details={"capability_id": "media.import", "reason": "sdk_media_import_manifest_invalid"},

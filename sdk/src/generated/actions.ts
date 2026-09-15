@@ -6,15 +6,15 @@ export type ActionPositiveInteger = number & { readonly __cutagentActionPositive
 /** @beta */
 export const CUTAGENT_ACTION_INVENTORY_DIGEST = "36261c8dbeea1c0f8615744638ea4ad8d42e69922ce64b82977d0825347ea43f" as const;
 /** @beta */
-export const CUTAGENT_ACTION_INPUT_SCHEMA_DIGEST = "c34584d5bac768a139aba0639f7ea9bf2b744f9813a6a873602f0be76f4cbbd9" as const;
+export const CUTAGENT_ACTION_INPUT_SCHEMA_DIGEST = "7e0539981f54f6a5cb632255b8a2a0b669f8108895557f0918be850ddb94e5a6" as const;
 /** @beta */
-export const CUTAGENT_ACTION_RESULT_SCHEMA_DIGEST = "8e8cdac7b613f0b13fb4173db8ae037fe47609b4b42180beca7e8d455d053751" as const;
+export const CUTAGENT_ACTION_RESULT_SCHEMA_DIGEST = "d02e13504fe9333537c50499fae77a57c2c1de4a08cf4acb7c17adbda9276e06" as const;
 /** @beta */
 export const CUTAGENT_ACTION_APPLICABILITY_DIGEST = "30c88d7ce80600e8bb542c46f99cf89e4a6776a97860417c431c14793744811a" as const;
 /** @beta */
 export const CUTAGENT_ACTION_ERROR_REGISTRY_DIGEST = "b2f82cf493aaa9ed3ba11c824e77ea4aa871d4e18991f46fba35b7cffb593be6" as const;
 /** @beta */
-export const CUTAGENT_ACTION_PROTOCOL_BINDING_DIGEST = "e43386178adef02af56d119cc00e316724151cc68ff2d5b72ace91d15911e740" as const;
+export const CUTAGENT_ACTION_PROTOCOL_BINDING_DIGEST = "5090adc6b35b804fc52da738da752624033334c81a5a1f8119941144e30abadd" as const;
 /** @beta */
 export const ACTION_IDS = [
   "cutagent.action.audio.beat_detect",
@@ -178759,7 +178759,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
             ],
             "type": "object"
           },
-          "maxItems": 512,
           "minItems": 1,
           "type": "array"
         },
@@ -178942,7 +178941,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
               }
             ]
           },
-          "maxItems": 512,
           "minItems": 1,
           "type": "array"
         },
@@ -182180,7 +182178,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
             ],
             "type": "object"
           },
-          "maxItems": 256,
           "minItems": 1,
           "type": "array"
         }
@@ -182203,7 +182200,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
           "type": "boolean"
         },
         "failureCount": {
-          "maximum": 256,
           "minimum": 0,
           "type": "integer"
         },
@@ -182229,7 +182225,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "type": "boolean"
                   },
                   "index": {
-                    "maximum": 255,
                     "minimum": 0,
                     "type": "integer"
                   },
@@ -182275,7 +182270,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                     "type": "string"
                   },
                   "index": {
-                    "maximum": 255,
                     "minimum": 0,
                     "type": "integer"
                   },
@@ -182305,7 +182299,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
               }
             ]
           },
-          "maxItems": 256,
           "minItems": 1,
           "type": "array"
         },
@@ -182322,7 +182315,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
           "type": "string"
         },
         "successCount": {
-          "maximum": 256,
           "minimum": 0,
           "type": "integer"
         },
@@ -183715,7 +183707,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                 "minLength": 1,
                 "type": "string"
               },
-              "maxItems": 256,
               "minItems": 0,
               "type": "array"
             }
@@ -184013,7 +184004,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                 "minLength": 1,
                 "type": "string"
               },
-              "maxItems": 256,
               "minItems": 0,
               "type": "array"
             },
@@ -184029,7 +184019,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                 "minLength": 1,
                 "type": "string"
               },
-              "maxItems": 256,
               "minItems": 0,
               "type": "array"
             }
@@ -185272,7 +185261,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                 "minLength": 1,
                 "type": "string"
               },
-              "maxItems": 256,
               "minItems": 0,
               "type": "array"
             },
@@ -185285,7 +185273,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                 "minLength": 1,
                 "type": "string"
               },
-              "maxItems": 256,
               "minItems": 0,
               "type": "array"
             }
@@ -185404,7 +185391,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
             ],
             "type": "object"
           },
-          "maxItems": 256,
           "minItems": 1,
           "type": "array"
         }
@@ -185495,7 +185481,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                 ],
                 "type": "object"
               },
-              "maxItems": 256,
               "minItems": 1,
               "type": "array"
             }
@@ -190772,7 +190757,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
           "items": {
             "type": "string"
           },
-          "maxItems": 1000,
           "minItems": 1,
           "type": "array"
         },
@@ -191162,7 +191146,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                 "minLength": 1,
                 "type": "string"
               },
-              "maxItems": 1000,
               "minItems": 1,
               "type": "array",
               "uniqueItems": true
@@ -191181,7 +191164,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
                 "minLength": 1,
                 "type": "string"
               },
-              "maxItems": 1000,
               "minItems": 1,
               "type": "array",
               "uniqueItems": true
@@ -197616,7 +197598,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
         },
         "paths": {
           "minItems": 1,
-          "maxItems": 256,
           "type": "array",
           "items": {
             "type": "string",
@@ -197643,7 +197624,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
         },
         "assets": {
           "minItems": 1,
-          "maxItems": 256,
           "type": "array",
           "items": {
             "type": "object",
@@ -201158,7 +201138,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
           "items": {
             "type": "string"
           },
-          "maxItems": 999,
           "minItems": 1,
           "type": "array"
         }
@@ -202586,7 +202565,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
           "items": {
             "type": "string"
           },
-          "maxItems": 999,
           "type": "array"
         },
         "file": {
@@ -208133,7 +208111,6 @@ export const ACTION_RUNTIME_CONTRACTS: Readonly<Record<ActionId, { readonly oper
           "items": {
             "type": "string"
           },
-          "maxItems": 1000,
           "minItems": 1,
           "type": "array"
         },

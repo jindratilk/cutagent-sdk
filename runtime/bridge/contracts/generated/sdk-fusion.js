@@ -75,7 +75,7 @@ export const sdkFusionTextActionInputSchema = z.object({
     projectId: sdkProjectIdSchema,
     timelineId: sdkTimelineIdSchema,
     revision: sdkRevisionSchema,
-    updates: z.array(sdkFusionTextActionUpdateSchema).min(1).max(256),
+    updates: z.array(sdkFusionTextActionUpdateSchema).min(1),
 }).strict();
 const sdkFusionRevisionTransitionSchema = z.object({
     revisionBefore: sdkRevisionSchema,
@@ -92,7 +92,7 @@ export const sdkFusionTextActionResultSchema = z.object({
             inputName: z.string().min(1).max(1_024),
             text: z.string().min(1).max(1_024),
             verified: z.literal(true),
-        }).strict()).min(1).max(256),
+        }).strict()).min(1),
         revision: sdkFusionRevisionTransitionSchema,
     }).strict(),
 }).strict();
@@ -172,7 +172,7 @@ export const sdkFusionImageReplaceInputSchema = z.object({
     projectId: sdkProjectIdSchema,
     timelineId: sdkTimelineIdSchema,
     revision: sdkRevisionSchema,
-    items: z.array(sdkFusionImageReplacementItemSchema).min(1).max(512),
+    items: z.array(sdkFusionImageReplacementItemSchema).min(1),
 }).strict().superRefine((value, context) => {
     const ids = new Set();
     value.items.forEach((item, index) => {
@@ -184,7 +184,7 @@ export const sdkFusionImageReplaceInputSchema = z.object({
     });
 });
 const sdkFusionImageReplacementSuccessSchema = z.object({
-    index: z.number().int().nonnegative().max(511),
+    index: z.number().int().nonnegative(),
     ok: z.literal(true),
     timelineItemId: sdkTimelineItemIdSchema,
     compositionIndex: z.number().int().positive(),
@@ -197,7 +197,7 @@ const sdkFusionImageReplacementSuccessSchema = z.object({
     revisionAfter: sdkRevisionSchema,
 }).strict();
 const sdkFusionImageReplacementFailureSchema = z.object({
-    index: z.number().int().nonnegative().max(511),
+    index: z.number().int().nonnegative(),
     ok: z.literal(false),
     timelineItemId: sdkTimelineItemIdSchema,
     compositionIndex: z.number().int().positive(),
@@ -210,9 +210,9 @@ export const sdkFusionImageReplaceResultSchema = z.object({
     results: z.array(z.discriminatedUnion("ok", [
         sdkFusionImageReplacementSuccessSchema,
         sdkFusionImageReplacementFailureSchema,
-    ])).min(1).max(512),
-    successCount: z.number().int().nonnegative().max(512),
-    failureCount: z.number().int().nonnegative().max(512),
+    ])).min(1),
+    successCount: z.number().int().nonnegative(),
+    failureCount: z.number().int().nonnegative(),
     durationMs: z.number().finite().nonnegative(),
     protectedStatePreserved: z.literal(true),
 }).strict().superRefine((value, context) => {
@@ -242,10 +242,10 @@ export const sdkFusionNestedTextInputSchema = z.object({
     projectId: sdkProjectIdSchema,
     timelineId: sdkTimelineIdSchema,
     revision: sdkRevisionSchema,
-    updates: z.array(sdkFusionNestedTextUpdateSchema).min(1).max(256),
+    updates: z.array(sdkFusionNestedTextUpdateSchema).min(1),
 }).strict();
 const sdkFusionNestedTextSuccessSchema = z.object({
-    index: z.number().int().nonnegative().max(255),
+    index: z.number().int().nonnegative(),
     status: z.literal("succeeded"),
     timelineItemId: sdkTimelineItemIdSchema,
     headerUpdated: z.boolean(),
@@ -254,7 +254,7 @@ const sdkFusionNestedTextSuccessSchema = z.object({
     revisionAfter: sdkRevisionSchema,
 }).strict();
 const sdkFusionNestedTextFailureSchema = z.object({
-    index: z.number().int().nonnegative().max(255),
+    index: z.number().int().nonnegative(),
     status: z.literal("failed"),
     timelineItemId: sdkTimelineItemIdSchema,
     code: z.string().min(1).max(128),
@@ -267,12 +267,12 @@ export const sdkFusionNestedTextResultSchema = z.object({
     revisionBefore: sdkRevisionSchema,
     revisionAfter: sdkRevisionSchema,
     changed: z.boolean(),
-    successCount: z.number().int().nonnegative().max(256),
-    failureCount: z.number().int().nonnegative().max(256),
+    successCount: z.number().int().nonnegative(),
+    failureCount: z.number().int().nonnegative(),
     results: z.array(z.discriminatedUnion("status", [
         sdkFusionNestedTextSuccessSchema,
         sdkFusionNestedTextFailureSchema,
-    ])).min(1).max(256),
+    ])).min(1),
     protectedStatePreserved: z.literal(true),
 }).strict().superRefine((value, context) => {
     if (value.successCount + value.failureCount !== value.results.length) {

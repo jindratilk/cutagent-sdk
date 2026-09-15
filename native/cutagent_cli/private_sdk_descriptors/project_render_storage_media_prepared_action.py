@@ -141,8 +141,7 @@ def _project_setting_runtime_value(key: str, value: Any) -> str | None:
 def _project_binding(context: Mapping[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
     project = context.get("project")
     exact = context.get("exactRequestBinding")
-    mutation_base = context.get("mutationBase")
-    if isinstance(exact, Mapping) and isinstance(mutation_base, Mapping):
+    if isinstance(exact, Mapping):
         identities = exact.get("identities")
         revisions = exact.get("revisions")
         runtime_project = project if isinstance(project, Mapping) else {}
