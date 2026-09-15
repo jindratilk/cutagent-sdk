@@ -1749,10 +1749,10 @@ export function createResolveService({
         throw new TypeError("Fusion inspection requires exact public timeline and timeline-item identities.");
       }
       const grouped = options.privateFusionInspectionTargets;
-      if (grouped !== undefined && (!Array.isArray(grouped) || grouped.length < 1 || grouped.length > 512
+      if (grouped !== undefined && (!Array.isArray(grouped) || grouped.length < 1
         || new Set(grouped).size !== grouped.length || !grouped.includes(request.timelineItemId)
         || grouped.some(id => typeof id !== "string" || !/^timeline_item_f[A-Za-z0-9_-]{43}$/.test(id)))) {
-        throw new TypeError("Grouped Fusion inspection requires 1 through 512 unique exact item identities including the primary target.");
+        throw new TypeError("Grouped Fusion inspection requires unique exact item identities including the primary target.");
       }
       inspectionOptions = { ...options, extraEnv: { ...(options.extraEnv ?? {}),
         CUTAGENT_SDK_FUSION_INSPECTION_TARGET: JSON.stringify({ timelineId: request.timelineId,

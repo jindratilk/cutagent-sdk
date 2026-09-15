@@ -4786,8 +4786,8 @@ export function createSdkLiveInspectionService({
       });
     },
     async readFusionCompositionTargets(requests, options = {}) {
-      if (!Array.isArray(requests) || requests.length < 1 || requests.length > 512) {
-        throw new TypeError("Grouped Fusion target inspection requires 1 through 512 exact requests.");
+      if (!Array.isArray(requests) || requests.length < 1) {
+        throw new TypeError("Grouped Fusion target inspection requires at least one exact request.");
       }
       const first = requests[0];
       if (requests.some((request) => request?.operation !== "fusion.compositions"

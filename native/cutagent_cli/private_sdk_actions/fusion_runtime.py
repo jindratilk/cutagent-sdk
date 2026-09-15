@@ -1077,23 +1077,24 @@ class FusionPreparedActionRuntime:
             rows: list[dict[str, Any]] = []
             states: dict[str, Any] = {}
             targets: list[dict[str, str]] = []
+            locators: dict[str, dict[str, Any]] = {}
             for update in value["updates"]:
                 public_item_id = str(update["timelineItemId"])
-                item, track_index, record_frame = _find_item(conn, context, public_item_id)
                 index = int(update["compositionIndex"])
-                comp = _composition(item, index)
-                state = _comp_state(comp)
                 target_id = f"{public_item_id}:fusion:{index}"
                 if target_id not in states:
+                    item, track_index, record_frame = _find_item(conn, context, public_item_id)
+                    state = _comp_state(_composition(item, index))
                     states[target_id] = state
                     targets.append({"kind": "fusion_composition", "stableId": target_id, "revision": state["digest"]})
-                rows.append({
-                    "timelineItemId": public_item_id,
-                    "compositionIndex": index,
-                    "trackIndex": track_index,
-                    "recordFrame": record_frame,
-                    "clipName": str(item.GetName() or ""),
-                })
+                    locators[target_id] = {
+                        "timelineItemId": public_item_id,
+                        "compositionIndex": index,
+                        "trackIndex": track_index,
+                        "recordFrame": record_frame,
+                        "clipName": str(item.GetName() or ""),
+                    }
+                rows.append(dict(locators[target_id]))
             return {
                 "targets": targets,
                 "preState": {"compositions": states, "timeline": self._timeline_state(conn), "digest": _digest(states)},

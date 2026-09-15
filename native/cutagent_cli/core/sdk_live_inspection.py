@@ -1618,7 +1618,7 @@ def _fusion_inspection_target() -> dict[str, Any] | None:
             or not re.fullmatch(r"timeline_f[A-Za-z0-9_-]{43}", target["timelineId"])):
         raise ValidationError("SDK Fusion inspection requires exact public timeline and timeline-item identities.")
     ids = target.get("timelineItemIds", [target.get("timelineItemId")])
-    if (not isinstance(ids, list) or not 1 <= len(ids) <= 512
+    if (not isinstance(ids, list) or len(ids) < 1
             or any(not isinstance(identity, str) or not re.fullmatch(r"timeline_item_f[A-Za-z0-9_-]{43}", identity) for identity in ids)
             or len(set(ids)) != len(ids)):
         raise ValidationError("SDK Fusion inspection requires 1 through 512 unique exact timeline-item identities.")

@@ -1250,8 +1250,8 @@
     {
       "source": "bridge/services/sdk-live-inspection-service.js",
       "destination": "runtime/bridge/services/sdk-live-inspection-service.js",
-      "sourceSha256": "3af2216414e9493c652fcf09d39b86d2d63f409668752388fe18abd4fa9a432c",
-      "sha256": "c30618438e0ada1c27d5ad1fed16868f49221f639979dd910bef4d8f2fa0c313",
+      "sourceSha256": "a21f9954f9c5264fc5382a87881bbf09e70c6f8c24a13d5aba3073e9a8940303",
+      "sha256": "cac0111e0a71cf536b8521f4d54f8e4d0777391e767663ac9c9968e7153f4502",
       "transformed": true
     },
     {
@@ -1313,8 +1313,8 @@
     {
       "source": "bridge/services/resolve-service.js",
       "destination": "runtime/bridge/services/resolve-service.js",
-      "sourceSha256": "72fd89a16a353dcc12bed05aebe26618079e5a55a6189a7c765e1d65f1718e94",
-      "sha256": "c64764adc2fac0f969b4868a68c6314eb2c875fe17b332a675c32b6532267038",
+      "sourceSha256": "e72e73cc96c6ae99a88dad5b9f51f4f45aec8f625b4b77ecae9befd510fe90a8",
+      "sha256": "1200f80ed57ee16e1af38df4ba0cdd6796edd61ba758266f54b6db78270ac6e1",
       "transformed": true
     },
     {
