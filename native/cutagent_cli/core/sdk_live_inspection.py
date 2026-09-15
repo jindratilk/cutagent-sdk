@@ -1491,15 +1491,11 @@ def _fusion_public_value(value: Any, *, field: str = "value", depth: int = 0) ->
             raise APICallFailed(f"DaVinci Resolve returned oversized Fusion {field} evidence.")
         return value
     if isinstance(value, (list, tuple)):
-        if len(value) > 10_000:
-            raise APICallFailed(f"DaVinci Resolve returned too many Fusion {field} values.")
         return [
             _fusion_public_value(item, field=f"{field}[{index}]", depth=depth + 1)
             for index, item in enumerate(value)
         ]
     if isinstance(value, dict):
-        if len(value) > 10_000:
-            raise APICallFailed(f"DaVinci Resolve returned too many Fusion {field} entries.")
         result: dict[str, Any] = {}
         for key, item in sorted(value.items(), key=lambda pair: str(pair[0])):
             text_key = str(key)
@@ -1554,7 +1550,7 @@ def _fusion_graph_evidence(comp: Any, deadline_at_ms: int | None) -> dict[str, A
         tools = comp.GetToolList(False) or {}
     except Exception as exc:
         raise APICallFailed("DaVinci Resolve could not inspect the Fusion composition graph.") from exc
-    if not isinstance(tools, dict) or len(tools) > 1_024:
+    if not isinstance(tools, dict):
         raise APICallFailed("DaVinci Resolve returned an invalid Fusion composition graph.")
     nodes: list[dict[str, Any]] = []
     for key, tool in sorted(tools.items(), key=lambda pair: str(pair[0])):
@@ -1564,7 +1560,7 @@ def _fusion_graph_evidence(comp: Any, deadline_at_ms: int | None) -> dict[str, A
             inputs = tool.GetInputList() or {}
         except Exception as exc:
             raise APICallFailed("DaVinci Resolve could not inspect a Fusion graph node.") from exc
-        if not isinstance(attrs, dict) or not isinstance(inputs, dict) or len(inputs) > 4_096:
+        if not isinstance(attrs, dict) or not isinstance(inputs, dict):
             raise APICallFailed("DaVinci Resolve returned invalid Fusion graph node evidence.")
         input_rows = []
         for input_key, native_input in sorted(inputs.items(), key=lambda pair: str(pair[0])):
@@ -1655,7 +1651,7 @@ def inspect_fusion_compositions(conn: Any, *, deadline_at_ms: int | None,
             track_items = timeline.GetItemListInTrack("video", track_index) or []
         except Exception as exc:
             raise APICallFailed("DaVinci Resolve could not inspect timeline items for Fusion compositions.") from exc
-        if not isinstance(track_items, list) or len(track_items) > SDK_MEDIA_POOL_MAX_INVENTORY:
+        if not isinstance(track_items, list):
             raise APICallFailed("DaVinci Resolve returned an invalid timeline-item inventory.")
         for item in track_items:
             validate_deadline(deadline_at_ms)
@@ -1668,7 +1664,7 @@ def inspect_fusion_compositions(conn: Any, *, deadline_at_ms: int | None,
                 count = int(item.GetFusionCompCount() or 0)
             except Exception as exc:
                 raise APICallFailed("DaVinci Resolve could not inspect Fusion composition count.") from exc
-            if count < 0 or count > 128:
+            if count < 0:
                 raise APICallFailed("DaVinci Resolve returned an invalid Fusion composition count.")
             compositions = []
             for index in range(1, count + 1):

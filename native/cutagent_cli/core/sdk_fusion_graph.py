@@ -95,13 +95,13 @@ def _validate_graph(request: Any, registry: dict[str, Any]) -> dict[str, Any]:
     connections = graph.get("connections")
     animations = graph.get("animations")
     outputs = graph.get("outputs")
-    if not isinstance(nodes, list) or not 1 <= len(nodes) <= 1_024:
+    if not isinstance(nodes, list) or len(nodes) < 1:
         raise ValidationError("Fusion graph node count is invalid.")
-    if not isinstance(connections, list) or len(connections) > 4_096:
+    if not isinstance(connections, list):
         raise ValidationError("Fusion graph connection count is invalid.")
-    if not isinstance(animations, list) or len(animations) > 10_000:
+    if not isinstance(animations, list):
         raise ValidationError("Fusion graph animation count is invalid.")
-    if not isinstance(outputs, list) or not 1 <= len(outputs) <= 64:
+    if not isinstance(outputs, list) or len(outputs) < 1:
         raise ValidationError("Fusion graph outputs are invalid.")
     definitions = {row["id"]: row for row in registry.get("nodes", [])}
     node_ids: set[str] = set()
@@ -173,7 +173,7 @@ def _validate_graph(request: Any, registry: dict[str, Any]) -> dict[str, Any]:
             raise ValidationError("Fusion graph animation is invalid.")
         if set(animation) != {"kind", "keyframes"} or not isinstance(animation.get("keyframes"), list):
             raise ValidationError("Fusion graph keyframe animation is invalid.")
-        if not 1 <= len(animation["keyframes"]) <= 10_000:
+        if len(animation["keyframes"]) < 1:
             raise ValidationError("Fusion graph keyframe count is invalid.")
         previous_time: int | None = None
         for keyframe in animation["keyframes"]:
@@ -228,7 +228,7 @@ def _exact_target(conn: Any, target: dict[str, Any]) -> tuple[Any, Any]:
         raise SdkMutationStaleRevision("The exact Fusion timeline-item target is missing or ambiguous.")
     item = matches[0]
     index = target.get("compositionIndex")
-    if not isinstance(index, int) or isinstance(index, bool) or index < 1 or index > 128:
+    if not isinstance(index, int) or isinstance(index, bool) or index < 1:
         raise ValidationError("The exact Fusion composition index is invalid.")
     comp = item.GetFusionCompByIndex(index)
     if comp is None:
@@ -593,7 +593,7 @@ def apply_sdk_fusion_graph(conn: Any, payload: dict[str, Any]) -> dict[str, Any]
     for key in ("compositionIndex", "recordStart", "recordEndExclusive"):
         if not isinstance(target.get(key), int) or isinstance(target[key], bool):
             raise ValidationError("Private Fusion lowering target coordinate is malformed.")
-    if not 1 <= target["compositionIndex"] <= 128 or target["recordEndExclusive"] <= target["recordStart"]:
+    if target["compositionIndex"] < 1 or target["recordEndExclusive"] <= target["recordStart"]:
         raise ValidationError("Private Fusion lowering target bounds are malformed.")
     registry = _registry()
     request = _validate_graph(payload["graph"], registry)

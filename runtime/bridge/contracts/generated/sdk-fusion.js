@@ -18,7 +18,7 @@ const sdkFusionFrameSchema = z.number().int().safe();
 const sdkFusionKeyframeSchema = z.object({ time: sdkFusionFrameSchema, value: sdkFusionValueSchema }).strict();
 export const sdkFusionAnimationSchema = z.object({
     kind: z.literal("keyframes"),
-    keyframes: z.array(sdkFusionKeyframeSchema).min(1).max(10_000),
+    keyframes: z.array(sdkFusionKeyframeSchema).min(1),
 }).strict();
 const sdkFusionGraphNodeSchema = z.object({
     id: z.string().regex(/^[A-Za-z][A-Za-z0-9_]{0,127}$/),
@@ -38,8 +38,8 @@ export const sdkFusionGraphRequestSchema = z.object({
     graph: z.object({
         animations: z.array(sdkFusionGraphAnimationSchema),
         connections: z.array(sdkFusionGraphConnectionSchema),
-        nodes: z.array(sdkFusionGraphNodeSchema).min(1).max(1_024),
-        outputs: z.array(z.string()).min(1).max(64),
+        nodes: z.array(sdkFusionGraphNodeSchema).min(1),
+        outputs: z.array(z.string()).min(1),
     }).strict(),
     registryDigest: z.string().regex(/^sha256:[0-9a-f]{64}$/),
     schema: z.literal("cutagent.fusion.graph-request"),
@@ -50,7 +50,7 @@ export const sdkFusionCompositionReferenceSchema = z.object({
     projectId: sdkProjectIdSchema,
     timelineId: sdkTimelineIdSchema,
     timelineItemId: sdkTimelineItemIdSchema,
-    index: z.number().int().positive().max(128),
+    index: z.number().int().positive(),
     name: z.string().min(1).max(1_024),
     projectRevision: sdkRevisionSchema,
     timelineRevision: sdkRevisionSchema,
@@ -65,7 +65,7 @@ export const sdkFusionTextUpdateSchema = z.object({
 }).strict();
 const sdkFusionTextActionUpdateSchema = z.object({
     timelineItemId: sdkTimelineItemIdSchema,
-    compositionIndex: z.number().int().positive().max(128),
+    compositionIndex: z.number().int().positive(),
     compositionRevision: sdkRevisionSchema,
     toolName: z.string().min(1).max(1_024),
     inputName: z.string().min(1).max(1_024),
@@ -87,7 +87,7 @@ export const sdkFusionTextActionResultSchema = z.object({
     textUpdates: z.object({
         updates: z.array(z.object({
             timelineItemId: sdkTimelineItemIdSchema,
-            compositionIndex: z.number().int().positive().max(128),
+            compositionIndex: z.number().int().positive(),
             toolName: z.string().min(1).max(1_024),
             inputName: z.string().min(1).max(1_024),
             text: z.string().min(1).max(1_024),
@@ -137,9 +137,9 @@ export const sdkFusionGraphApplyResultSchema = z.object({
     appliedGraphDigest: z.string().regex(/^sha256:[0-9a-f]{64}$/),
     readback: z.object({
         graphDigest: z.string().regex(/^sha256:[0-9a-f]{64}$/),
-        nodes: z.array(sdkFusionReadbackNodeSchema).min(1).max(1_024),
-        connections: z.array(sdkFusionReadbackConnectionSchema).max(4_096),
-        animatedInputs: z.number().int().nonnegative().max(10_000),
+        nodes: z.array(sdkFusionReadbackNodeSchema).min(1),
+        connections: z.array(sdkFusionReadbackConnectionSchema),
+        animatedInputs: z.number().int().nonnegative(),
     }).strict(),
     renderedEvidence: z.array(z.object({
         frame: sdkFusionFrameSchema,
@@ -227,7 +227,7 @@ export const sdkFusionImageReplaceResultSchema = z.object({
 });
 const sdkFusionNestedTextUpdateSchema = z.object({
     timelineItemId: sdkTimelineItemIdSchema,
-    compositionIndex: z.number().int().positive().max(128),
+    compositionIndex: z.number().int().positive(),
     header: z.string().min(1).max(1_024).optional(),
     body: z.string().min(1).max(1_024).optional(),
     headerClipName: z.string().min(1).max(1_024).optional(),

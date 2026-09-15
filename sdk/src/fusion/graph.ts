@@ -109,7 +109,7 @@ const FusionKeyframeSchema = z.strictObject({ time: FusionFrameSchema, value: Fu
 /** Sanitized animation track attached to an input. @beta */
 export const FusionAnimationSchema = z.strictObject({
   kind: z.literal("keyframes"),
-  keyframes: z.array(FusionKeyframeSchema).min(1).max(10_000),
+  keyframes: z.array(FusionKeyframeSchema).min(1),
 });
 /** Sanitized Fusion animation or modifier. @beta */
 export type FusionAnimation = FusionAnimationFor<FusionInputValue>;

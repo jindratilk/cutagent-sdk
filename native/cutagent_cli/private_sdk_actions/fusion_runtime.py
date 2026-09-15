@@ -322,7 +322,7 @@ def _find_item(conn: Any, context: Mapping[str, Any], public_id: str) -> tuple[A
 
 
 def _composition(item: Any, index: int) -> Any:
-    if not isinstance(index, int) or isinstance(index, bool) or not 1 <= index <= 128:
+    if not isinstance(index, int) or isinstance(index, bool) or index < 1:
         raise InventoryValidationError("Fusion composition index is invalid")
     comp = item.GetFusionCompByIndex(index)
     if comp is None:

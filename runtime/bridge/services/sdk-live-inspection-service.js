@@ -2303,7 +2303,7 @@ function normalizeFusionCompositions(raw, before, after, request, revisionEviden
   return compositions.map((row) => {
     const index = strictInteger(row?.index);
     const name = text(row?.name);
-    if (index === null || index < 1 || index > 128 || !name || indexes.has(index)
+    if (index === null || index < 1 || !name || indexes.has(index)
       || !row.graph || typeof row.graph !== "object"
       || !/^sha256:[0-9a-f]{64}$/.test(row.graph_digest ?? "")) {
       return malformed("CutAgent CLI returned an invalid Fusion composition row.");

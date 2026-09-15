@@ -175317,7 +175317,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 4096,
           "minItems": 0,
           "type": "array"
         }
@@ -176034,7 +176033,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 4096,
           "minItems": 3,
           "type": "array"
         },
@@ -176132,7 +176130,6 @@
                 ],
                 "type": "object"
               },
-              "maxItems": 4096,
               "minItems": 3,
               "type": "array"
             },
@@ -176452,7 +176449,6 @@
                 "type": "string"
               },
               "compositionIndex": {
-                "maximum": 128,
                 "minimum": 1,
                 "type": "integer"
               },
@@ -177748,7 +177744,6 @@
                 ],
                 "type": "object"
               },
-              "maxItems": 4096,
               "minItems": 0,
               "type": "array"
             },
@@ -178259,7 +178254,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 4096,
           "minItems": 0,
           "type": "array"
         }
@@ -178499,7 +178493,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 4096,
           "minItems": 0,
           "type": "array"
         }
@@ -179759,7 +179752,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 4096,
           "minItems": 0,
           "type": "array"
         }
@@ -180833,7 +180825,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 4096,
           "minItems": 0,
           "type": "array"
         }
@@ -180946,7 +180937,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 4096,
           "minItems": 0,
           "type": "array"
         }
@@ -181062,7 +181052,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 4096,
           "minItems": 0,
           "type": "array"
         }
@@ -181186,7 +181175,6 @@
                 ],
                 "type": "object"
               },
-              "maxItems": 4096,
               "minItems": 0,
               "type": "array"
             },
