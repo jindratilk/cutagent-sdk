@@ -1117,8 +1117,8 @@
     {
       "source": "bridge/contracts/sdk-fusion-timeline-inputs.generated.js",
       "destination": "runtime/bridge/contracts/sdk-fusion-timeline-inputs.generated.js",
-      "sourceSha256": "907d137d7a8f6e19d1b57a410d9607d3c7d0f73ee763f4218545a20f274028ae",
-      "sha256": "907d137d7a8f6e19d1b57a410d9607d3c7d0f73ee763f4218545a20f274028ae",
+      "sourceSha256": "b83be722287f157667bb6aeb41460739adb682f734c0210c2f86cb0de3e2cd66",
+      "sha256": "b83be722287f157667bb6aeb41460739adb682f734c0210c2f86cb0de3e2cd66",
       "transformed": false
     },
     {

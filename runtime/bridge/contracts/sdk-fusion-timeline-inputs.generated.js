@@ -961,7 +961,6 @@ export const SDK_FUSION_TIMELINE_PREPARED_INPUTS = Object.freeze({
           ],
           "type": "object"
         },
-        "maxItems": 512,
         "minItems": 1,
         "type": "array"
       },
@@ -1389,7 +1388,6 @@ export const SDK_FUSION_TIMELINE_PREPARED_INPUTS = Object.freeze({
           ],
           "type": "object"
         },
-        "maxItems": 100,
         "minItems": 1,
         "type": "array"
       },
@@ -2290,7 +2288,6 @@ export const SDK_FUSION_TIMELINE_PREPARED_INPUTS = Object.freeze({
           ],
           "type": "object"
         },
-        "maxItems": 4096,
         "minItems": 3,
         "type": "array"
       },
@@ -2513,7 +2510,6 @@ export const SDK_FUSION_TIMELINE_PREPARED_INPUTS = Object.freeze({
               "type": "string"
             },
             "compositionIndex": {
-              "maximum": 128,
               "minimum": 1,
               "type": "integer"
             },
@@ -2546,7 +2542,6 @@ export const SDK_FUSION_TIMELINE_PREPARED_INPUTS = Object.freeze({
           ],
           "type": "object"
         },
-        "maxItems": 256,
         "minItems": 1,
         "type": "array"
       }
@@ -3558,7 +3553,6 @@ export const SDK_FUSION_TIMELINE_PREPARED_INPUTS = Object.freeze({
           ],
           "type": "object"
         },
-        "maxItems": 256,
         "minItems": 1,
         "type": "array"
       }
@@ -3597,7 +3591,6 @@ export const SDK_FUSION_TIMELINE_PREPARED_INPUTS = Object.freeze({
           "minLength": 1,
           "type": "string"
         },
-        "maxItems": 64,
         "minItems": 0,
         "type": "array"
       },
@@ -3657,7 +3650,6 @@ export const SDK_FUSION_TIMELINE_PREPARED_INPUTS = Object.freeze({
           "minLength": 1,
           "type": "string"
         },
-        "maxItems": 64,
         "minItems": 0,
         "type": "array"
       },
@@ -3684,7 +3676,6 @@ export const SDK_FUSION_TIMELINE_PREPARED_INPUTS = Object.freeze({
           "minLength": 1,
           "type": "string"
         },
-        "maxItems": 64,
         "minItems": 0,
         "type": "array"
       },
@@ -4639,7 +4630,6 @@ export const SDK_FUSION_TIMELINE_PREPARED_INPUTS = Object.freeze({
         "type": "string"
       },
       "limit": {
-        "maximum": 2048,
         "minimum": 1,
         "type": "integer"
       },
@@ -5146,7 +5136,6 @@ export const SDK_FUSION_TIMELINE_PREPARED_INPUTS = Object.freeze({
           ],
           "type": "object"
         },
-        "maxItems": 1000,
         "minItems": 1,
         "type": "array"
       }
@@ -5252,7 +5241,6 @@ export const SDK_FUSION_TIMELINE_PREPARED_INPUTS = Object.freeze({
           ],
           "type": "object"
         },
-        "maxItems": 10000,
         "minItems": 1,
         "type": "array"
       }
