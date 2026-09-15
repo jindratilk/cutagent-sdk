@@ -1545,6 +1545,34 @@ def _fusion_endpoint(native_output: Any) -> dict[str, str] | None:
     return {"node": tool_name, "nodeType": tool_type, "port": output_id}
 
 
+def _fusion_revision_evidence(comp: Any, deadline_at_ms: int | None) -> dict[str, Any]:
+    """Capture authored settings for revision checks, not structural readback.
+
+    CopySettings includes connected modifiers and serialized curves in one native
+    call. Older hosts without it retain the expanded inspection path.
+    """
+    validate_deadline(deadline_at_ms)
+    copy_settings = getattr(comp, "CopySettings", None)
+    if not callable(copy_settings):
+        return _fusion_graph_evidence(comp, deadline_at_ms)
+    try:
+        tools = comp.GetToolList(False) or {}
+        settings = copy_settings(tools)
+    except Exception as exc:
+        raise APICallFailed("DaVinci Resolve could not capture Fusion revision settings.") from exc
+    validate_deadline(deadline_at_ms)
+    if not isinstance(tools, dict) or not isinstance(settings, dict) or not isinstance(settings.get("Tools"), dict):
+        raise APICallFailed("DaVinci Resolve returned invalid Fusion revision settings.")
+    serialized_tools = settings["Tools"]
+    for tool in tools.values():
+        attrs = tool.GetAttrs() or {}
+        name = attrs.get("TOOLS_Name")
+        serialized = serialized_tools.get(name)
+        if not isinstance(serialized, dict) or serialized.get("__ctor") != attrs.get("TOOLS_RegID"):
+            raise APICallFailed("DaVinci Resolve returned incomplete Fusion revision settings.")
+    return {"settings": _fusion_public_value(settings, field="composition settings")}
+
+
 def _fusion_graph_evidence(comp: Any, deadline_at_ms: int | None) -> dict[str, Any]:
     try:
         tools = comp.GetToolList(False) or {}
@@ -1677,7 +1705,7 @@ def inspect_fusion_compositions(conn: Any, *, deadline_at_ms: int | None,
                 if comp is None or not isinstance(attrs, dict):
                     raise APICallFailed("DaVinci Resolve returned an invalid Fusion composition reference.")
                 name = attrs.get("COMPS_Name") or attrs.get("COMPN_Name") or f"Composition {index}"
-                graph = _fusion_graph_evidence(comp, deadline_at_ms)
+                graph = _fusion_revision_evidence(comp, deadline_at_ms)
                 compositions.append({
                     "index": index,
                     "name": str(name)[:1_024],

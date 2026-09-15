@@ -9379,20 +9379,6 @@
       "transformed": false
     },
     {
-      "source": "cutagent-cli/cutagent_cli/core/sdk_fusion_graph.py",
-      "destination": "native/cutagent_cli/core/sdk_fusion_graph.py",
-      "sourceSha256": "8d21dddb4ce99a48c93c0043c546f460ca1a6a92c79302dcecb174b6b3e9dd5f",
-      "sha256": "8d21dddb4ce99a48c93c0043c546f460ca1a6a92c79302dcecb174b6b3e9dd5f",
-      "transformed": false
-    },
-    {
-      "source": "cutagent-cli/cutagent_cli/core/sdk_live_inspection.py",
-      "destination": "native/cutagent_cli/core/sdk_live_inspection.py",
-      "sourceSha256": "f067f4dd2e355facc4ae7c99ae8c29c0317487e69b38064c2f23ee3c485d9461",
-      "sha256": "f067f4dd2e355facc4ae7c99ae8c29c0317487e69b38064c2f23ee3c485d9461",
-      "transformed": false
-    },
-    {
       "source": "cutagent-cli/cutagent_cli/_sdk_prepared_action_contract.py",
       "destination": "native/cutagent_cli/_sdk_prepared_action_contract.py",
       "sourceSha256": "46c9dd821ebadac839e3a59dc510f12e2e32c83a579779366be98a100e681076",
@@ -9446,6 +9432,20 @@
       "destination": "native/cutagent_cli/public_reference/manifest.json",
       "sourceSha256": "a9273c3d819662725ca98746eb1a10e5cb6bb0325761e9783dbf8df785923b77",
       "sha256": "a9273c3d819662725ca98746eb1a10e5cb6bb0325761e9783dbf8df785923b77",
+      "transformed": false
+    },
+    {
+      "source": "cutagent-cli/cutagent_cli/core/sdk_fusion_graph.py",
+      "destination": "native/cutagent_cli/core/sdk_fusion_graph.py",
+      "sourceSha256": "e83e3e0bac820c0e2e06d28bf3918c32caf73e12a0341b6efa532b6fa3fd725e",
+      "sha256": "e83e3e0bac820c0e2e06d28bf3918c32caf73e12a0341b6efa532b6fa3fd725e",
+      "transformed": false
+    },
+    {
+      "source": "cutagent-cli/cutagent_cli/core/sdk_live_inspection.py",
+      "destination": "native/cutagent_cli/core/sdk_live_inspection.py",
+      "sourceSha256": "0fee077a7d8529c66849305720d9b2ca958cedffa21f7d87fb8123b364cda520",
+      "sha256": "0fee077a7d8529c66849305720d9b2ca958cedffa21f7d87fb8123b364cda520",
       "transformed": false
     }
   ]

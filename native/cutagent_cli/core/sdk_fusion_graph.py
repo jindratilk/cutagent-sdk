@@ -11,7 +11,7 @@ from typing import Any
 from ..errors import APICallFailed, SdkMutationStaleRevision, ValidationError
 from . import timeline_ops
 from .sdk_live_inspection import (
-    _fusion_graph_evidence,
+    _fusion_revision_evidence,
     documented_unique_id,
     fusion_graph_digest,
     inspect_fusion_compositions,
@@ -30,7 +30,7 @@ def _assert_expected_graph_digest(native_graph_evidence: Any, expected_digest: A
 
 
 def _assert_locked_graph_precondition(comp: Any, observed_graph: Any, expected_digest: Any) -> None:
-    locked_graph = _fusion_graph_evidence(comp, None)
+    locked_graph = _fusion_revision_evidence(comp, None)
     if locked_graph != observed_graph:
         raise SdkMutationStaleRevision("The exact Fusion composition changed before the undo transaction.")
     _assert_expected_graph_digest(locked_graph, expected_digest)
@@ -384,7 +384,7 @@ def _recover_failed_graph_mutation(
         undo_result = comp.Undo()
         if undo_result is False:
             raise APICallFailed("Fusion rejected recovery of the failed graph mutation.")
-        recovered_graph = _fusion_graph_evidence(comp, None)
+        recovered_graph = _fusion_revision_evidence(comp, None)
     except Exception as exc:
         if isinstance(exc, APICallFailed):
             raise
