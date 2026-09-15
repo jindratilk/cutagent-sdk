@@ -1,0 +1,48 @@
+import assert from 'node:assert/strict';
+import {mkdtemp, readFile, writeFile, realpath} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import {join, resolve} from 'node:path';
+import {execFileSync} from 'node:child_process';
+const root=resolve(import.meta.dirname,'..');
+const directory=await realpath(await mkdtemp(join(tmpdir(),'cutagent-sdk-consumer-')));
+const run=(command,args,cwd=directory)=>execFileSync(command,args,{cwd,encoding:'utf8',env:process.env,stdio:['ignore','pipe','pipe']});
+const packed=JSON.parse(run('npm',['pack','--json','--pack-destination',directory],root))[0];
+await writeFile(join(directory,'package.json'),JSON.stringify({name:'standalone-consumer-smoke',private:true,type:'module'}));
+run('npm',['install','--ignore-scripts','--no-audit','--no-fund',join(directory,packed.filename),'typescript@5.9.3','@types/node@24.13.3']);
+const installed=await realpath(join(directory,'node_modules/cutagent'));
+assert.ok(installed.startsWith(directory+'/'),'Consumer must use an installed tarball, not a workspace symlink.');
+await writeFile(join(directory,'consumer.mjs'),`import assert from 'node:assert/strict';
+import {CutAgent as DaVinciResolve} from 'cutagent';
+assert.equal(typeof DaVinciResolve.connect,'function');
+for(const path of ['actions','schemas','protocol','preview/v0.1'])assert.ok(Object.keys(await import('cutagent/'+path)).length);
+for(const path of ['compatibility.json','compatibility.schema.json','package.json']){
+ const {default:value}=await import('cutagent/'+path,{with:{type:'json'}});
+ assert.ok(value);
+}
+await assert.rejects(import('cutagent/src/client.js'),{code:'ERR_PACKAGE_PATH_NOT_EXPORTED'});
+console.log('All public imports passed; unsupported deep import rejected.');
+`);
+run(process.execPath,['consumer.mjs']);
+await writeFile(join(directory,'consumer.ts'),`import {CutAgent as DaVinciResolve,frames,type ProjectId} from 'cutagent';
+import {ActionIds} from 'cutagent/actions';
+import {ProjectIdSchema} from 'cutagent/schemas';
+import * as protocol from 'cutagent/protocol';
+import * as preview from 'cutagent/preview/v0.1';
+async function inspect(){const client=await DaVinciResolve.connect();try{const project=await client.projects.current();const id:ProjectId=project.id;return {id,project};}finally{await client.close();}}
+void inspect;void frames;void ActionIds;void ProjectIdSchema;void protocol;void preview;
+`);
+run(process.execPath,['node_modules/typescript/bin/tsc','--noEmit','--strict','--module','NodeNext','--moduleResolution','NodeNext','--target','ES2023','consumer.ts']);
+const manifest=JSON.parse(await readFile(join(installed,'sdk/compatibility.json'),'utf8'));
+assert.equal(manifest.packageName,'cutagent');
+assert.equal(run(process.execPath,[join(installed,'bin/cutagent.mjs'),'--version']).trim(),'3.0.0');
+const stateDirectory=join(directory,'state');
+const binDirectory=join(directory,'bin');
+const setup=JSON.parse(run(process.execPath,[join(installed,'bin/cutagent.mjs'),'setup','--skip-python','--state-dir',stateDirectory,'--bin-dir',binDirectory,'--json']));
+assert.equal(setup.ok,true);
+const status=JSON.parse(run(join(binDirectory,'cutagent'),['status','--state-dir',stateDirectory,'--json']));
+assert.equal(status.data.installed,true);
+const uninstall=JSON.parse(run(join(binDirectory,'cutagent'),['uninstall','--state-dir',stateDirectory,'--json']));
+assert.equal(uninstall.ok,true);
+const report={directory,tarball:join(directory,packed.filename),package:packed.name,version:packed.version,integrity:packed.integrity,shasum:packed.shasum,files:packed.files.length,publicImports:true,deepImportRejected:true,strictTypes:true,setup:true,status:true,uninstall:true,nativeConnectionAttempted:false};
+await writeFile(join(directory,'consumer-report.json'),JSON.stringify(report,null,2));
+console.log(JSON.stringify(report,null,2));

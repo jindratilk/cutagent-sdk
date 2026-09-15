@@ -1,0 +1,58 @@
+{
+  "bridge/services/sdk-live-inspection-service.js": [
+    {
+      "before": "}\n\nexport function createSdkLiveInspectionService({ resolveService, identityNamespace }) {\n  if (typeof resolveService?.readSdkLiveInspection !== \"function\") {\n    throw new TypeError(\"SDK live inspection requires the CutAgent CLI-backed resolve service.\");\n",
+      "after": "}\n\nexport function createSdkLiveInspectionService({\n  resolveService,\n  identityNamespace,\n  defaultInternalInspectionTimeoutMs = DEFAULT_INTERNAL_INSPECTION_TIMEOUT_MS,\n}) {\n  if (typeof resolveService?.readSdkLiveInspection !== \"function\") {\n    throw new TypeError(\"SDK live inspection requires the CutAgent CLI-backed resolve service.\");\n"
+    },
+    {
+      "before": "  if (typeof identityNamespace !== \"string\" || !identityNamespace.trim()) {\n    throw new TypeError(\"SDK live inspection requires a stable installation/profile identity namespace.\");\n  }\n  const stableIdentityNamespace = identityNamespace.trim();\n",
+      "after": "  if (typeof identityNamespace !== \"string\" || !identityNamespace.trim()) {\n    throw new TypeError(\"SDK live inspection requires a stable installation/profile identity namespace.\");\n  }\n  if (!Number.isSafeInteger(defaultInternalInspectionTimeoutMs)\n    || defaultInternalInspectionTimeoutMs < 100\n    || defaultInternalInspectionTimeoutMs > 180_000) {\n    throw new TypeError(\"SDK live inspection default deadline is invalid.\");\n  }\n  const stableIdentityNamespace = identityNamespace.trim();\n"
+    },
+    {
+      "before": "? { ...options, deadlineAtMs: Date.now() + DEFAULT_INTERNAL_INSPECTION_TIMEOUT_MS }",
+      "after": "? { ...options, deadlineAtMs: Date.now() + defaultInternalInspectionTimeoutMs }"
+    }
+  ],
+  "cutagent-cli/cutagent_cli/_mutation_impact_registry.py": [
+    {
+      "before": "# This module is compiled into the proprietary CutAgent CLI runtime and must not ship as source.",
+      "after": "# Selected runtime source distributed under AGPL-3.0-only; see PROVENANCE.md."
+    }
+  ],
+  "cutagent-cli/cutagent_cli/_sdk_low_level_runtime.py": [
+    {
+      "before": "Generated proprietary SDK action lowerings and prepared schemas. Do not edit or expose.",
+      "after": "Generated SDK action lowerings and prepared schemas. Regenerate from the inventoried source."
+    }
+  ],
+  "cutagent-cli/cutagent_cli/private_sdk_actions/__init__.py": [
+    {
+      "before": "These modules are compiled into the proprietary CutAgent CLI runtime and are\nnever part of the public npm SDK.",
+      "after": "These selected runtime modules are included in the standalone CutAgent SDK\nsource distribution under AGPL-3.0-only; see PROVENANCE.md."
+    }
+  ],
+  "cutagent-cli/cutagent_cli/private_sdk_actions/visual_prepared_action_production.py": [
+    {
+      "before": "This module is compiled only into the proprietary CutAgent CLI runtime.  It\nkeeps the visual packet partition reviewable without projecting command\nlowering, native routes, filesystem paths, or recovery implementation into the\npublic TypeScript package.",
+      "after": "This runtime module keeps the visual packet partition reviewable. Runtime\nimplementation details remain separate from the public TypeScript API."
+    }
+  ],
+  "bridge/services/mutation-policy/private-impact-registry.generated.js": [
+    {
+      "before": "// This file is proprietary runtime input and must never enter the public npm package.",
+      "after": "// Selected runtime source distributed under AGPL-3.0-only; see PROVENANCE.md."
+    }
+  ],
+  "bridge/contracts/sdk-media-prepared-inputs.generated.js": [
+    {
+      "before": "// Generated proprietary Media prepared input schemas. Do not edit or publish.",
+      "after": "// Generated Media prepared input schemas. Regenerate from the inventoried source."
+    }
+  ],
+  "bridge/contracts/sdk-residual-av-inputs.generated.js": [
+    {
+      "before": "// Generated proprietary residual AV input schemas. Do not edit or publish.",
+      "after": "// Generated residual AV input schemas. Regenerate from the inventoried source."
+    }
+  ]
+}

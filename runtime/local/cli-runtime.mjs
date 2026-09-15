@@ -1,0 +1,28 @@
+import {createHash} from 'node:crypto';
+import {resolve, join} from 'node:path';
+export {CutAgentCliIdentityError, probeCutAgentCliIdentity, isCutAgentCliIdentityCurrent} from './native-identity.mjs';
+const root = resolve(import.meta.dirname, '../..');
+let transport = null;
+export function configureLocalCliRuntime(options) {
+  if (!['studio_external', 'embedded_free'].includes(options.transport)) throw new TypeError('An exact local native transport is required.');
+  transport = options.transport;
+}
+export function resolveCutAgentCliCommand() { return join(root, 'native/cutagent'); }
+export function buildCutAgentCliEnv({args, sessionEnv = {}, extraEnv = {}} = {}) {
+  if (!transport) throw new Error('The standalone native runtime transport is not configured.');
+  const keys = ['PATH','HOME','CFFIXED_USER_HOME','CUTAGENT_RESOLVE_UUID','CUTAGENT_RESOLVE_HOST','CUTAGENT_RESOLVE_PID','USERPROFILE','APPDATA','LOCALAPPDATA','SYSTEMROOT','WINDIR','TMPDIR','TEMP','LANG','RESOLVE_SCRIPT_API','RESOLVE_SCRIPT_LIB','DYLD_LIBRARY_PATH','DAVINCI_RESOLVE_SDK_EMBEDDED_AUTH_PATH','DAVINCI_RESOLVE_SDK_EMBEDDED_PORT'];
+  const env = Object.fromEntries(keys.filter(key => process.env[key] !== undefined).map(key => [key, process.env[key]]));
+  for (const [key,value] of Object.entries({...sessionEnv, ...extraEnv})) {
+    if (/^CUTAGENT_.*AUTH/.test(key)) continue;
+    env[key] = value;
+  }
+  env.PATH = `${join(root, '.venv/bin')}:${env.PATH ?? ''}`;
+  env.PYTHONPATH = join(root, 'native');
+  env.CUTAGENT_RESOLVE_TRANSPORT = transport;
+  if (Array.isArray(args)) {
+    const digest = createHash('sha256').update(JSON.stringify(args)).digest('hex');
+    env.DAVINCI_RESOLVE_SDK_COMMAND_SHA256 = digest;
+    env.DAVINCI_RESOLVE_SDK_PARENT_PID = String(process.pid);
+  }
+  return env;
+}

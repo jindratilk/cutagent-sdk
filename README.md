@@ -1,0 +1,164 @@
+<div align="center">
+
+# 🎬 CutAgent SDK & CLI
+
+### Give your AI agent the keys to DaVinci Resolve.
+
+An open-source connection between your agent and your editing timeline.<br>
+**Works with DaVinci Resolve 21.1+ Free and Studio.**
+
+[![AGPL-3.0 License](https://img.shields.io/badge/license-AGPL--3.0-blue.svg)](LICENSE)
+[![DaVinci Resolve Free](https://img.shields.io/badge/DaVinci_Resolve-Free_%26_Studio-ff5a2b)](#-yes-it-works-with-davinci-resolve-free)
+[![TypeScript](https://img.shields.io/badge/TypeScript-SDK-3178C6)](docs/package/README.md)
+
+[Get started](#-get-started) · [Examples](examples/) · [Documentation](docs/GETTING_STARTED.md) · [CutAgent desktop app](https://cutagent.ai)
+
+</div>
+
+---
+
+## From an idea to an editable timeline
+
+Your agent can write code. Now give it a way to work with your footage.
+
+CutAgent SDK lets agents and scripts organize media, build timelines, edit clips, work with audio, create Fusion graphics, and export videos in DaVinci Resolve. The work stays in your project, where you can inspect it, change it, and keep editing.
+
+Use the TypeScript SDK for editing scripts, or CutAgent CLI when your agent works through a terminal. Bring an agent that can run local code and give it the SDK documentation and examples to work from.
+
+## ✨ What you can create
+
+| Your next project | What the SDK brings |
+| --- | --- |
+| A real estate reel | Arrange shots, adjust framing, shape the pacing, and add titles. |
+| A podcast edit | Organize cameras and audio, work with multicam cuts, and add captions. |
+| A repeatable content workflow | Import files, organize bins, apply edits to multiple clips, and export. |
+| Your own motion graphics | Build editable Fusion text, node graphs, and keyframe animations. |
+| A custom editing assistant | Read the current timeline and let your agent make changes through code. |
+
+Your agent supplies the editing decisions and scripts for these workflows. The SDK connects them to DaVinci Resolve.
+
+## 🆓 Yes, it works with DaVinci Resolve Free
+
+You don't need to buy DaVinci Resolve Studio to get started.
+
+CutAgent SDK includes a local script that connects to the free edition. Install it, open it from **Workspace → Scripts → CutAgentSDK**, and your agent can work with your project.
+
+DaVinci Resolve Studio is supported too. Studio-only features require a DaVinci Resolve Studio license.
+
+**Current platform: macOS.** Windows setup is not available yet. Free and Studio have passed native marker tests on earlier releases; the latest Studio source has also passed a marker create/read/delete test. See [current verification and limitations](RELEASE_STATUS.md) for what has been tested.
+
+## 🛠️ Beyond the scripting API
+
+CutAgent SDK & CLI extends the DaVinci Resolve scripting API with additional editing controls and workflows.
+
+- **Animate directly on the timeline.** Add, inspect, update, and delete clip keyframes, with control over interpolation.
+- **Shape your speed ramps.** Create variable-speed changes with explicit timing and interpolation, beyond a single playback-speed setting.
+- **Go deeper into the Color page.** Adjust primary grades, custom and hue curves, HDR controls, qualifiers, Power Windows, Color Warper pins, and color-space transforms.
+- **Shape your color node graph.** Create serial, parallel, and layer structures, configure layer blending, and connect alpha outputs.
+- **Take control of Fairlight.** Work with track EQ, dynamics, and audio automation beyond the API’s clip-level audio properties.
+- **Shape your audio fades.** Adjust fade-in and fade-out curves independently using their control points.
+- **Make precise timeline edits.** Split and trim existing clips, and remove through edits.
+- **Direct your multicam edit.** Define angle names, order, source offsets, and exact switching points. Restructure angles, replace sources, and create repeatable podcast cutting plans.
+
+## ⚡ Faster and cheaper
+
+Two ways in: write TypeScript with the SDK, or run commands with the CLI.
+
+- **Turn code into a timeline.** Let your agent express an editing workflow as code, using variables, loops, and reusable functions.
+- **Run multi-step editing scripts.** Your agent can combine several editing operations in a single script execution.
+- **Keep more context for the edit.** Use SDK code or CLI commands without loading a large catalog of individual editing tools into your agent’s context.
+- **Spend fewer tokens on orchestration.** Code-driven workflows can reduce model round trips and repeated tool-call overhead, leaving more room for your footage, instructions, and creative decisions.
+- **Use whichever fits.** Reach for the CLI for a quick operation, or the SDK for a reusable editing workflow.
+
+## 🤖 Built for agents. Useful for people.
+
+- **Bring your own agent.** Use a coding agent that can run local commands and TypeScript scripts.
+- **Keep editing in DaVinci Resolve.** Work with timelines, clips, audio, and Fusion compositions in the editor you already use.
+- **Work locally.** Run editing scripts on your computer, directly in DaVinci Resolve.
+
+Bring your own AI model and creative skills. CutAgent SDK supplies the local editing connection. Your agent provider handles its own data policies and billing.
+
+## 🚀 Get started
+
+You'll need macOS, DaVinci Resolve, Node.js 22.12+ or 24.x, and Python 3.12. Install FFmpeg and FFprobe for media inspection and export workflows.
+
+Install the SDK from source:
+
+```sh
+git clone https://github.com/jindratilk/cutagent-sdk.git
+cd cutagent-sdk
+npm ci --ignore-scripts
+npm run build
+npm pack
+mkdir ../my-video-project
+cd ../my-video-project
+npm init -y
+npm install ../cutagent-sdk/cutagent-3.0.0.tgz
+```
+
+**Using DaVinci Resolve Free?**
+
+```sh
+npx cutagent setup --free
+```
+
+Start the local runtime first (it starts the Free broker when needed):
+
+```sh
+cutagent runtime start --transport embedded_free
+```
+
+Keep the runtime running, then open **Workspace → Scripts → CutAgentSDK** in DaVinci Resolve. Confirm the actual connection with `cutagent --json status`: `data.status` must be `connected` and `data.resolve` must be `true`. Runtime readiness alone does not prove a DaVinci Resolve connection.
+
+**Using DaVinci Resolve Studio?** Set external scripting to **Local**, then run:
+
+```sh
+npx cutagent setup
+cutagent runtime start --transport studio_external
+```
+
+Keep that terminal running. It prints the connection-file path; set `CUTAGENT_SDK_DISCOVERY_FILE` to that path in the terminal where your agent or script runs.
+
+[Full setup guide →](docs/GETTING_STARTED.md)
+
+## Teach your agent how to edit
+
+Give your agent the [CutAgent skill](skills/cutagent/SKILL.md). It loads the relevant guidance for each task: building timelines, shaping speed ramps, animating Fusion text, mixing audio, and checking the result. The references include practical SDK examples and work with the local Free or Studio connection.
+
+## Your first connection
+
+```ts
+import { CutAgent } from "cutagent";
+
+const client = await CutAgent.connect();
+
+try {
+  const project = await client.projects.current();
+  const timeline = await project.timelines.current();
+
+  console.log(`Ready to edit ${timeline.name} in ${project.name}`);
+  console.log(await timeline.snapshot());
+} finally {
+  await client.close();
+}
+```
+
+Start with the [examples](examples/), including a marker workflow that creates a temporary marker, reads it back, and removes it again.
+
+## Want the full editing app?
+
+[CutAgent](https://cutagent.ai) brings the editing experience into a desktop app, including its AI transcription, voice generation, and video generation services.
+
+The app includes editing skills that teach the agent how to carry out complete workflows in DaVinci Resolve. General-purpose coding agents often need repeated attempts to get an edit right. These skills give them detailed editing instructions and reusable workflows, reducing trial and error and helping them create a complete video from a single prompt.
+
+## Help make it better
+
+Found a bug? [Open an issue](https://github.com/jindratilk/cutagent-sdk/issues) with your operating system, DaVinci Resolve version and edition, and a small script that reproduces it. Leave out credentials and private footage.
+
+Pull requests are welcome. Run the build, tests, and source checks before submitting a change. If this project is useful to you, a star helps other editors and builders find it. ⭐
+
+## License
+
+[GNU AGPL-3.0](LICENSE). Third-party components keep their [own licenses](THIRD_PARTY_NOTICES/README.md).
+
+DaVinci Resolve is a product of Blackmagic Design Pty Ltd. This project is independent and is not affiliated with or endorsed by Blackmagic Design.
