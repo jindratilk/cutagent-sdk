@@ -630,6 +630,7 @@ export async function createSdkPreparedActionRuntimeClient({
       if (timeoutMs !== null && (!Number.isInteger(timeoutMs) || timeoutMs < 1)) {
         throw new TypeError("Prepared-action exchange deadline is invalid.");
       }
+      const deadlineAtMs = timeoutMs === null ? undefined : Date.now() + timeoutMs;
       const pending = (async () => {
         await channel.write({requestId, method, payload});
         for (;;) {
@@ -645,6 +646,7 @@ export async function createSdkPreparedActionRuntimeClient({
                 if (!request) throw new Error("Prepared-action live target callback lost its exact original request.");
                 value = await resolveLiveTargets(structuredClone(response.payload), {
                   parentMethod: method,
+                  ...(deadlineAtMs === undefined ? {} : {deadlineAtMs}),
                   parentPayload: structuredClone(payload),
                   originalRequest: structuredClone(request),
                 });

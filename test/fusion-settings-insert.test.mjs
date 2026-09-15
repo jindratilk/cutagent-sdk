@@ -129,7 +129,7 @@ test("Fusion setting insertion rejects an empty list before transport", async ()
       precondition: REVISION,
       idempotencyKey: "idempotency_fusion_settings_empty_1234",
     }),
-    /requires 1 through 100 items/,
+    /requires at least one item/,
   );
   assert.equal(target.calls.length, 0);
 });
@@ -150,3 +150,17 @@ for (const explicitUndefined of [false, true]) {
     assert.equal(Object.hasOwn(target.calls[0].input.items[0], "imageArtifactId"), false);
   });
 }
+
+
+test("Fusion setting insertion sends 1019 items in one operation", async () => {
+  const target = runtime();
+  const fusion = createFusionCompositions(target, 1, PROJECT_ID, TIMELINE_ID);
+  const input = Array.from({ length: 1019 }, (_, index) => insertion(index + 1));
+  const handle = await fusion.insertSettings(input, {
+    precondition: REVISION,
+    idempotencyKey: "idempotency_fusion_settings_large_1234",
+  });
+  assert.equal(target.calls.length, 1);
+  assert.equal(target.calls[0].input.items.length, 1019);
+  assert.equal(handle.result.items.length, 1019);
+});

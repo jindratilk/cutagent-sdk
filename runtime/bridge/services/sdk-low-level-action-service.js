@@ -108,12 +108,10 @@ function sanitize(value, publicPathProjection, location = [], depth = 0) {
     return value.slice(0, 65_536);
   }
   if (Array.isArray(value)) {
-    if (value.length > 10_000) throw new Error("CutAgent CLI result collection exceeded the SDK carrier limit.");
     return value.map((entry) => sanitize(entry, publicPathProjection, [...location, ARRAY_LOCATION_SEGMENT], depth + 1));
   }
   if (!value || typeof value !== "object") return String(value);
   const entries = Object.entries(value);
-  if (entries.length > 2_000) throw new Error("CutAgent CLI result object exceeded the SDK carrier limit.");
   return Object.fromEntries(entries.filter(([key]) => !isForbiddenResultKey(key)).map(([key, entry]) => [key, sanitize(entry, publicPathProjection, [...location, key], depth + 1)]));
 }
 

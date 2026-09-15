@@ -892,9 +892,9 @@ export function buildSdkTimelineAudioInsertRequest(intents, {
   executionRevision = null,
   timelineStartFrame = 0,
 }) {
-  if (!Array.isArray(intents) || intents.length < 1 || intents.length > 256
+  if (!Array.isArray(intents) || intents.length < 1
     || !Array.isArray(sourceNativeIds) || sourceNativeIds.length !== intents.length) {
-    throw new TypeError("Plural audio insertion requires matching bounded intent and native-source lists.");
+    throw new TypeError("Plural audio insertion requires matching non-empty intent and native-source lists.");
   }
   const first = intents[0];
   if (intents.some((intent) => intent.action !== "insert" || intent.placement !== "audio"

@@ -451,8 +451,8 @@ export function createProjectRender(runtime: RenderRuntime, generation: number, 
       options: RenderQueueStartOptions,
     ) {
       const jobs = Array.isArray(jobOrJobs) ? [...jobOrJobs] : [jobOrJobs];
-      if (jobs.length < 1 || jobs.length > 100) {
-        throw new RangeError("Render queue start requires from 1 through 100 jobs.");
+      if (jobs.length < 1) {
+        throw new RangeError("Render queue start requires at least one job.");
       }
       IdempotencyKeySchema.parse(options?.idempotencyKey);
       const queueRevision = String(jobs[0]?.queueRevision ?? "");

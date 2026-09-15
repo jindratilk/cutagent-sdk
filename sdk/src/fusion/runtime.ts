@@ -504,8 +504,8 @@ export function createFusionCompositions(
       const insertions = Array.isArray(insertionOrInsertions)
         ? [...insertionOrInsertions]
         : [insertionOrInsertions];
-      if (insertions.length === 0 || insertions.length > 100) {
-        throw new TypeError("Fusion setting insertion requires 1 through 100 items.");
+      if (insertions.length === 0) {
+        throw new TypeError("Fusion setting insertion requires at least one item.");
       }
       const revision = RevisionSchema.parse(options.precondition);
       const idempotencyKey = IdempotencyKeySchema.parse(options.idempotencyKey);

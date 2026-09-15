@@ -63,12 +63,12 @@ def _scan(context: Mapping[str, Any], prepared_input: Mapping[str, Any]) -> tupl
     by_native: dict[str, dict[str, Any]] = {}
     for row in rows:
         native_id = row["meta"].get("timeline_item_id")
-        if native_id not in expected_native:
+        if native_id not in expected_set:
             continue
         if native_id in by_native:
             raise ValidationError("Bulk clip-state native target became ambiguous.")
         by_native[native_id] = row
-    if set(by_native) != set(expected_native):
+    if set(by_native) != expected_set:
         raise ValidationError("Bulk clip-state native target disappeared.")
     ordered = []
     for target, native_id in zip(prepared_input["targets"], expected_native):
@@ -89,6 +89,10 @@ def _scan(context: Mapping[str, Any], prepared_input: Mapping[str, Any]) -> tupl
 
 def _state(context: Mapping[str, Any], value: Mapping[str, Any]) -> dict[str, Any]:
     _conn, rows, protected_digest = _scan(context, value)
+    return _observed_state(value, rows, protected_digest)
+
+
+def _observed_state(value: Mapping[str, Any], rows: list[dict[str, Any]], protected_digest: str) -> dict[str, Any]:
     return {
         "items": [{"timelineItemId": target["id"], "name": target["name"],
                    "enabled": row["meta"]["enabled"]}
@@ -103,7 +107,7 @@ def _impact(context: Mapping[str, Any], action_id: str, value: Mapping[str, Any]
     if not isinstance(base, Mapping):
         raise ValidationError("Bulk clip-state mutation lacks its carrier mutation base.")
     timeline = context.get("timeline", {})
-    targets = [{"kind": "timeline_item", "stableId": target["id"],
+    targets = [{"kind": "clip", "stableId": target["id"],
                 "revision": timeline.get("timelineRevision")} for target in value["targets"]]
     return {**dict(base), "status": "mutation", "effects": [{
         "operation": action_id.removeprefix("cutagent.action."), "kind": "update",
@@ -134,8 +138,8 @@ class BulkClipStateDescriptor:
         } or value.get("failurePolicy") != "stop":
             raise ValidationError("Bulk clip-state input is malformed.")
         targets = value.get("targets")
-        if not isinstance(targets, (list, tuple)) or not 1 <= len(targets) <= 1000:
-            raise ValidationError("Bulk clip-state requires 1 to 1000 targets.")
+        if not isinstance(targets, (list, tuple)) or not targets:
+            raise ValidationError("Bulk clip-state requires at least one target.")
         required = {"snapshotId", "id", "trackType", "trackIndex", "recordStartFrame",
                     "recordEndFrame", "name", "mediaPoolItemId", "linkedItemIds"}
         if any(not isinstance(target, Mapping) or set(target) != required for target in targets):
@@ -148,7 +152,7 @@ class BulkClipStateDescriptor:
     def prepare(self, context: Mapping[str, Any], value: Mapping[str, Any]) -> dict[str, Any]:
         before = _state(context, value)
         timeline_revision = value["timelineRevision"]
-        return {"targets": [{"kind": "timeline_item", "stableId": target["id"], "revision": timeline_revision}
+        return {"targets": [{"kind": "clip", "stableId": target["id"], "revision": timeline_revision}
                             for target in value["targets"]],
                 "preState": before, "impact": _impact(context, self.action_id, value),
                 "lowering": {"input": dict(value), "enabled": self.enabled},
@@ -157,11 +161,17 @@ class BulkClipStateDescriptor:
 
     def resolve_current(self, context: Mapping[str, Any], prepared: Mapping[str, Any]) -> dict[str, Any]:
         value = prepared["lowering"]["input"]
-        return {"targets": prepared["targets"], "preState": _state(context, value)}
+        scan = _scan(context, value)
+        if isinstance(context, dict):
+            # This context exists only for the current host execution. Reuse
+            # its freshly validated native objects, never prepare-time ones.
+            context["_bulkClipStateExecutionScan"] = (prepared, scan)
+        return {"targets": prepared["targets"], "preState": _observed_state(value, scan[1], scan[2])}
 
     def execute(self, context: Mapping[str, Any], prepared: Mapping[str, Any]) -> Any:
         value = prepared["lowering"]["input"]
-        _conn, rows, _protected_digest = _scan(context, value)
+        cached = context.pop("_bulkClipStateExecutionScan", None) if isinstance(context, dict) else None
+        _conn, rows, _protected_digest = cached[1] if cached is not None and cached[0] is prepared else _scan(context, value)
         observations = []
         for target, row in zip(value["targets"], rows):
             item = row["item"]

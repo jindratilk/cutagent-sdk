@@ -98,7 +98,7 @@ const fairlightPlanChangeSchema = z.discriminatedUnion("kind", [
     sdkFairlightLoudnessInputSchema,
 ]);
 export const sdkFairlightPlanInputSchema = fairlightBindingSchema.extend({
-    changes: z.array(fairlightPlanChangeSchema).min(1).max(128),
+    changes: z.array(fairlightPlanChangeSchema).min(1),
     preserveLinkedMedia: z.literal(true),
 }).strict().superRefine((plan, context) => {
     for (const [index, change] of plan.changes.entries()) {
@@ -143,7 +143,7 @@ const fairlightEvidenceIdSchema = z.string().min(12).max(256).regex(/^evidence_[
 const fairlightSha256Schema = z.string().regex(/^sha256:[a-f0-9]{64}$/);
 const fairlightEvidenceCheckSchema = z.object({
     evidenceId: fairlightEvidenceIdSchema,
-    stepIndex: z.number().int().min(0).max(127).nullable(),
+    stepIndex: z.number().int().safe().min(0).nullable(),
     kind: z.enum(["structural_readback", "audio_audition"]),
     status: z.enum(["passed", "failed", "unavailable"]),
     target: fairlightResultTargetSchema.nullable(),
@@ -178,7 +178,7 @@ const fairlightEvidenceCheckSchema = z.object({
     }
 });
 const fairlightStepResultSchema = z.object({
-    stepIndex: z.number().int().min(0).max(127),
+    stepIndex: z.number().int().safe().min(0),
     outcome: z.enum(["succeeded", "no_change", "partial"]),
     target: fairlightResultTargetSchema,
     change: fairlightSemanticChangeSchema,
@@ -243,12 +243,12 @@ export const sdkFairlightSemanticResultSchema = z.object({
     affectedClipIds: z.array(sdkTimelineItemIdSchema).max(4096).refine((ids) => new Set(ids).size === ids.length, "Affected clip identities must be unique"),
     affectedTrackIndexes: z.array(z.number().int().min(1).max(4096)).max(4096).refine((indexes) => new Set(indexes).size === indexes.length, "Affected track indexes must be unique"),
     affectedBuses: z.array(fairlightBusStateSchema).max(4096).refine((buses) => new Set(buses.map((bus) => `${bus.busKind}:${bus.busName}`)).size === buses.length, "Affected bus identities must be unique"),
-    steps: z.array(fairlightStepResultSchema).min(1).max(128).refine((steps) => new Set(steps.map((step) => step.stepIndex)).size === steps.length, "Fairlight result step indexes must be unique"),
+    steps: z.array(fairlightStepResultSchema).min(1).refine((steps) => new Set(steps.map((step) => step.stepIndex)).size === steps.length, "Fairlight result step indexes must be unique"),
     evidence: z.object({
         outcome: z.enum(["passed", "partial", "failed", "manual_review_required"]),
         structuralReadback: z.enum(["passed", "failed", "unavailable"]),
         audition: z.object({ required: z.boolean(), status: z.enum(["not_run", "passed", "failed", "unavailable"]) }).strict(),
-        checks: z.array(fairlightEvidenceCheckSchema).min(1).max(256).refine((checks) => new Set(checks.map((check) => check.evidenceId)).size === checks.length, "Fairlight evidence identities must be unique"),
+        checks: z.array(fairlightEvidenceCheckSchema).min(1).refine((checks) => new Set(checks.map((check) => check.evidenceId)).size === checks.length, "Fairlight evidence identities must be unique"),
         protectedState: z.object({
             evidenceId: fairlightEvidenceIdSchema,
             status: z.enum(["passed", "failed", "unavailable"]),

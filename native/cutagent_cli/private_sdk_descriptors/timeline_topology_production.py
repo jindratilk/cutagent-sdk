@@ -426,7 +426,7 @@ class TimelineTopologyProductionAuthority:
         expected_revisions = {row.get("revision") for row in media}
         if len(expected_digests) != 1 or None in expected_digests or len(expected_revisions) != 1:
             raise ValidationError("Timeline topology Media Pool revision custody is incomplete.")
-        deadline = int(time.time() * 1000) + sdk_live_inspection.SDK_LIVE_INSPECTION_MAX_DEADLINE_WINDOW_MS
+        deadline = int(time.time() * 1000) + sdk_live_inspection.SDK_MUTATION_GUARD_TIMEOUT_MS
         requested_native = {
             row.get("nativeId"): row.get("mediaPoolItemId") for row in media
             if isinstance(row.get("nativeId"), str)

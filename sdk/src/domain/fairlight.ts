@@ -411,7 +411,6 @@ function requireBatch<T>(entries: readonly T[], name: string): readonly T[] {
   if (!Array.isArray(entries) || entries.length === 0) {
     throw new TypeError(`${name} requires at least one exact Fairlight clip.`);
   }
-  if (entries.length > 1_000) throw new TypeError(`${name} may contain at most 1,000 clips.`);
   return entries;
 }
 

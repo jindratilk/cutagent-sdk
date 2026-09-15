@@ -291,7 +291,7 @@ def _validate_plan(value: Any) -> dict[str, Any]:
             "VALIDATION_ERROR", "Fairlight plan safety policy changed."
         )
     changes = value.get("changes")
-    if not isinstance(changes, list) or not 1 <= len(changes) <= 128:
+    if not isinstance(changes, list) or not changes:
         raise FairlightEvaluationError(
             "VALIDATION_ERROR", "Fairlight plan step count is invalid."
         )
@@ -357,6 +357,28 @@ def _semantic_target_keys(plan: Mapping[str, Any]) -> list[tuple[str, Any]]:
                 seen.add(key)
                 keys.append(key)
     return keys
+
+
+def _combined_audio_entries(plan: Mapping[str, Any], locators: Mapping) -> list[dict[str, Any]] | None:
+    kinds = {change["kind"] for change in plan["changes"]}
+    if kinds != {"clip_gain", "clip_fade"}:
+        return None
+    if any(change["kind"] == "clip_gain" and change["gainDb"] > 30.0 for change in plan["changes"]):
+        # The native property API cannot write this gain range. Keep the
+        # existing gain route and native fade route separate rather than
+        # writing legacy DB fade fields that current versions ignore.
+        return None
+    entries: dict[str, dict[str, Any]] = {}
+    for change in plan["changes"]:
+        clip_id = change["target"]["clipId"]
+        native_id = locators[("clip", clip_id)]["nativeId"]
+        entry = entries.setdefault(native_id, {"item_id": native_id})
+        key = "gain_db" if change["kind"] == "clip_gain" else "fade_in_frames" if change["direction"] == "in" else "fade_out_frames"
+        if key in entry:
+            # Preserve explicit sequential edits of the same property.
+            return None
+        entry[key] = change["gainDb"] if key == "gain_db" else change["durationFrames"]
+    return list(entries.values())
 
 
 def _target_kinds(plan: Mapping[str, Any]) -> list[str]:
@@ -1112,6 +1134,7 @@ class FairlightPlanPreparedActionDescriptor:
             "lowering": {
                 "normalizedInput": _canonical(value),
                 "steps": _canonical(lowerings),
+                "audioProcessingEntries": _combined_audio_entries(value, locators),
                 "trackLoudness": _canonical(loudness_bindings),
                 "carrierAdmission": {
                     "actionId": ACTION_ID,
@@ -1165,6 +1188,22 @@ class FairlightPlanPreparedActionDescriptor:
         # This prevents a later fade/gain in the same aggregate plan from
         # invalidating the measured LUFS result.
         index = 0
+        combined_entries = prepared["lowering"].get("audioProcessingEntries")
+        if combined_entries is not None:
+            from .commands import fairlight as commands
+
+            with _HANDLER_LOCK:
+                for handler in ("audio_gain_batch", "fade_in_batch", "fade_out_batch"):
+                    commands.enforce_mutation_policy(
+                        _CAPABILITY_BY_HANDLER[handler], intended_engine="db_workaround", mutating=False
+                    )
+                receipt = commands.fairlight_ops.apply_audio_processing_entries(
+                    commands.get_connection(require_timeline=True), entries=deepcopy(combined_entries)
+                )
+            if not isinstance(receipt, Mapping):
+                raise FairlightEvaluationError("API_CALL_FAILED", "Audio processing returned no structured result.")
+            step_results = [[receipt] for _change in plan["changes"]]
+            index = len(plan["changes"])
         while index < len(plan["changes"]):
             change = plan["changes"][index]
             if change["kind"] == "loudness":
@@ -1299,6 +1338,9 @@ class FairlightPlanPreparedActionDescriptor:
             raise FairlightEvaluationError(
                 "VERIFICATION_FAILED", "Fairlight plan execution is incomplete."
             )
+        # Native receipts stay local for semantic verification and projection.
+        # The bridge reads fresh state from signed targets; sending every batch
+        # receipt once per step would make this callback quadratic in clip count.
         response = _callback(
             self.authority,
             context,
@@ -1306,7 +1348,6 @@ class FairlightPlanPreparedActionDescriptor:
             "verify",
             {
                 "prepared": prepared,
-                "handlerResult": {"stepResults": step_results},
                 "protectedState": prepared.get("preState", {}).get("protectedState"),
             },
             target_kinds=_target_kinds(plan),

@@ -7588,7 +7588,6 @@
           "properties": {
             "impacts": {
               "minItems": 1,
-              "maxItems": 256,
               "type": "array",
               "items": {
                 "type": "object",
@@ -8388,7 +8387,6 @@
               "pattern": "^revision_[A-Za-z0-9][A-Za-z0-9._~-]*$"
             },
             "affectedClips": {
-              "maxItems": 256,
               "type": "array",
               "items": {
                 "type": "object",
@@ -8521,7 +8519,6 @@
           "properties": {
             "results": {
               "minItems": 1,
-              "maxItems": 256,
               "type": "array",
               "items": {
                 "type": "object",
@@ -8539,7 +8536,6 @@
                     "pattern": "^revision_[A-Za-z0-9][A-Za-z0-9._~-]*$"
                   },
                   "affectedClips": {
-                    "maxItems": 256,
                     "type": "array",
                     "items": {
                       "type": "object",
@@ -9431,7 +9427,6 @@
           "properties": {
             "impacts": {
               "minItems": 1,
-              "maxItems": 256,
               "type": "array",
               "items": {
                 "type": "object",
@@ -10199,7 +10194,6 @@
               "pattern": "^revision_[A-Za-z0-9][A-Za-z0-9._~-]*$"
             },
             "affectedClips": {
-              "maxItems": 256,
               "type": "array",
               "items": {
                 "type": "object",
@@ -10332,7 +10326,6 @@
           "properties": {
             "results": {
               "minItems": 1,
-              "maxItems": 256,
               "type": "array",
               "items": {
                 "type": "object",
@@ -10350,7 +10343,6 @@
                     "pattern": "^revision_[A-Za-z0-9][A-Za-z0-9._~-]*$"
                   },
                   "affectedClips": {
-                    "maxItems": 256,
                     "type": "array",
                     "items": {
                       "type": "object",
@@ -11095,7 +11087,6 @@
             },
             "removals": {
               "minItems": 1,
-              "maxItems": 256,
               "type": "array",
               "items": {
                 "type": "object",
@@ -11376,7 +11367,6 @@
             },
             "results": {
               "minItems": 1,
-              "maxItems": 256,
               "type": "array",
               "items": {
                 "type": "object",
@@ -11524,7 +11514,6 @@
             },
             "markerIds": {
               "minItems": 1,
-              "maxItems": 10000,
               "type": "array",
               "items": {
                 "type": "string",
@@ -11680,7 +11669,6 @@
               ]
             },
             "markers": {
-              "maxItems": 10000,
               "type": "array",
               "items": {
                 "type": "object",
@@ -11726,7 +11714,6 @@
               }
             },
             "previousMarkers": {
-              "maxItems": 10000,
               "type": "array",
               "items": {
                 "type": "object",
@@ -11883,7 +11870,6 @@
             },
             "updates": {
               "minItems": 1,
-              "maxItems": 10000,
               "type": "array",
               "items": {
                 "type": "object",
@@ -12085,7 +12071,6 @@
               ]
             },
             "markers": {
-              "maxItems": 10000,
               "type": "array",
               "items": {
                 "type": "object",
@@ -12131,7 +12116,6 @@
               }
             },
             "previousMarkers": {
-              "maxItems": 10000,
               "type": "array",
               "items": {
                 "type": "object",

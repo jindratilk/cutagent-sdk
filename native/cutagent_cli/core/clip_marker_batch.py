@@ -50,8 +50,8 @@ def apply_clip_marker_batch(timeline: Any, *, timeline_id: str, entries: list[di
     """
     if not timeline_id or documented_unique_id(timeline) != timeline_id:
         raise ValidationError("Clip marker batch timeline identity changed.")
-    if not isinstance(entries, list) or not 1 <= len(entries) <= 10000:
-        raise ValidationError("Clip marker batch requires 1 through 10000 entries.")
+    if not isinstance(entries, list) or not entries:
+        raise ValidationError("Clip marker batch requires at least one entry.")
     items = timeline.GetItemListInTrack("video", 1)
     if not isinstance(items, list):
         raise APICallFailed("DaVinci Resolve did not return V1 clips.")

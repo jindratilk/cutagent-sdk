@@ -191,7 +191,7 @@ class TimelineMarkerAddDescriptor:
             if set(value) != {"projectId", "timelineId", "timelineRevision", "markers"}:
                 raise ValueError("Prepared marker input is invalid.")
             markers = value["markers"]
-            if not isinstance(markers, list) or not 1 <= len(markers) <= 10_000:
+            if not isinstance(markers, list) or not markers:
                 raise ValueError("Prepared marker batch size is invalid.")
             for marker in markers:
                 self.validate_input({**{key: value[key] for key in ("projectId", "timelineId", "timelineRevision")}, "marker": marker})
@@ -297,7 +297,7 @@ class TimelineMarkerAddDescriptor:
             if set(value) != {"action", "markers", "previousMarkers", "timelineRevision"} or value.get("previousMarkers") != []:
                 return False
             markers = value["markers"]
-            if not isinstance(markers, list) or not 1 <= len(markers) <= 10_000:
+            if not isinstance(markers, list) or not markers:
                 return False
             if not all(self.validate_public_result({"action": value["action"], "marker": marker, "previousMarker": None, "timelineRevision": value["timelineRevision"]}) for marker in markers):
                 return False

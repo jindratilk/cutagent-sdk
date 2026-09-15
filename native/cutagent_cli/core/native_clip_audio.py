@@ -59,33 +59,55 @@ def _matches(actual: dict, expected: dict) -> bool:
 
 
 def _apply(conn: Any, plans: list[dict], *, fades: bool = False) -> list[dict]:
-    getter, setter = ("GetFades", "SetFades") if fades else ("GetProperties", "SetProperties")
+    # Enumerate each affected track once for the whole transaction.
+    tracks = {}
     for plan in plans:
-        item = _item(conn, plan["ref"])
+        ref = plan["ref"]
+        key = (ref.track_type, ref.track_index)
+        if key not in tracks:
+            rows = conn.timeline.GetItemListInTrack(*key) or []
+            indexed = {str(item.GetUniqueId()): item for item in rows}
+            if len(indexed) != len(rows):
+                raise SdkMutationStaleRevision("Native audio batch contains ambiguous identities.")
+            tracks[key] = indexed
+        plan["fades"] = plan.get("fades", fades)
+
+    def bound_item(plan):
+        ref = plan["ref"]
+        item = tracks[(ref.track_type, ref.track_index)].get(ref.item_id)
+        if item is None or str(item.GetUniqueId()) != ref.item_id or int(item.GetStart()) != ref.start or int(item.GetEnd()) != ref.end:
+            raise SdkMutationStaleRevision("The exact clip changed before its native audio mutation.")
+        return item
+
+    for plan in plans:
+        item = bound_item(plan)
+        getter, setter = ("GetFades", "SetFades") if plan["fades"] else ("GetProperties", "SetProperties")
         if not callable(getattr(item, setter, None)):
             raise APICallFailed(f"DaVinci Resolve 21.1 requires TimelineItem.{setter}.")
-        plan["before"] = _read(item, getter, tuple(plan["expected"]), fades=fades)
+        plan["before"] = _read(item, getter, tuple(plan["expected"]), fades=plan["fades"])
     attempted = []
     try:
         timeline_ops.require_sdk_marker_mutation_guard(conn)
         for plan in plans:
-            item = _item(conn, plan["ref"])
-            if not _matches(_read(item, getter, tuple(plan["before"]), fades=fades), plan["before"]):
+            item = bound_item(plan)
+            getter, setter = ("GetFades", "SetFades") if plan["fades"] else ("GetProperties", "SetProperties")
+            if not _matches(_read(item, getter, tuple(plan["before"]), fades=plan["fades"]), plan["before"]):
                 raise SdkMutationStaleRevision("Clip audio state changed after native preflight.")
             if not _matches(plan["before"], plan["expected"]):
                 attempted.append(plan)
                 if getattr(item, setter)(plan["write"]) is not True:
                     raise APICallFailed(f"TimelineItem.{setter} rejected the clip mutation.")
-            plan["after"] = _read(item, getter, tuple(plan["expected"]), fades=fades)
+            plan["after"] = _read(item, getter, tuple(plan["expected"]), fades=plan["fades"])
             if not _matches(plan["after"], plan["expected"]):
                 raise APICallFailed("Native clip audio readback did not match the requested values.")
     except Exception as exc:
         restored = True
         for plan in reversed(attempted):
             try:
-                item = _item(conn, plan["ref"])
+                item = bound_item(plan)
+                getter, setter = ("GetFades", "SetFades") if plan["fades"] else ("GetProperties", "SetProperties")
                 restored = (getattr(item, setter)(plan["before"]) is True
-                            and _matches(_read(item, getter, tuple(plan["before"]), fades=fades), plan["before"])) and restored
+                            and _matches(_read(item, getter, tuple(plan["before"]), fades=plan["fades"]), plan["before"])) and restored
             except Exception:
                 restored = False
         if not attempted:
@@ -223,3 +245,36 @@ def apply_batch_preview(conn: Any, preview: dict, *, property_key: str | None = 
     return {**preview, 'dry_run': False, 'changed': any(not _matches(p['before'], p['after']) for p in applied),
             'updated_count': len(rows), 'updated_items': rows, 'route': 'api_native',
             'verification': {'status': 'verified', 'checks': [{'name': 'native_audio_batch', 'ok': True}]}}
+
+
+def apply_processing_preview(conn: Any, preview: dict) -> dict:
+    """Apply gain and either fade edge with one rollback scope and shared selection."""
+    from .db_timeline_selection import LiveItemRef
+    live = {}
+    for index in range(1, int(conn.timeline.GetTrackCount("audio")) + 1):
+        for item in conn.timeline.GetItemListInTrack("audio", index) or []:
+            identity = str(item.GetUniqueId())
+            if identity in live:
+                raise SdkMutationStaleRevision("Native audio identity is ambiguous.")
+            live[identity] = (index, item)
+    plans = []
+    for row in preview["updated_items"]:
+        match = live.get(row["item_id"])
+        if match is None:
+            raise SdkMutationStaleRevision("Audio processing target is no longer present.")
+        index, item = match
+        ref = LiveItemRef("audio", index, item.GetName(), int(item.GetStart()), int(item.GetEnd()) - int(item.GetStart()), item_id=row["item_id"])
+        if "resulting_gain_db" in row:
+            before = _read(item, "GetProperties", ("AudioVolume", "AudioVolumeEnabled"))
+            write = {"AudioVolume": row["resulting_gain_db"]}
+            plans.append({"ref": ref, "write": write, "expected": {**before, **write}, "fades": False})
+        write = {native_key: row[key] for key, native_key in (("fade_in_frames", "FadeIn"), ("fade_out_frames", "FadeOut")) if key in row}
+        if write:
+            if any(isinstance(value, bool) or not isinstance(value, int) or not 0 <= value <= ref.duration for value in write.values()):
+                raise ValidationError("Audio processing fade must fit the native clip.")
+            before = _read(item, "GetFades", ("FadeIn", "FadeOut"), fades=True)
+            plans.append({"ref": ref, "write": write, "expected": {**before, **write}, "fades": True})
+    applied = _apply(conn, plans)
+    return {**preview, "dry_run": False, "changed": any(not _matches(p["before"], p["after"]) for p in applied),
+            "updated_count": len(preview["updated_items"]), "route": "api_native",
+            "verification": {"status": "verified", "checks": [{"name": "native_audio_processing_batch", "ok": True}]}}

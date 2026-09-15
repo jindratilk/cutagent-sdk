@@ -416,7 +416,7 @@ const clipColorResultSchema = z.object({
     requestedColor: z.string().nullable(),
     actualColor: z.string().nullable(),
     changed: z.boolean(),
-  }).strict()).min(1).max(1_000),
+  }).strict()).min(1),
   timelineRevision: z.string(),
 }).strict();
 
@@ -442,7 +442,7 @@ const clipMarkerResultSchema = z.object({
     offsetFrames: z.number().int().safe().nonnegative(),
     durationFrames: z.number().int().safe().positive(),
     color: z.string().min(1).max(64), name: z.string().min(1).max(1024), note: z.string().max(8192), reused: z.boolean(),
-  }).strict()).min(1).max(10_000),
+  }).strict()).min(1),
   timelineRevision: RevisionSchema,
 }).strict().transform(({markers, timelineRevision}) => freeze({
   markers: Object.freeze(markers.map(marker => freeze(marker))), timelineRevision,
@@ -542,7 +542,7 @@ export function createTimelineItems(
       const requests: readonly TimelineItemMoveRequest[] = plural
         ? itemOrRequests as readonly TimelineItemMoveRequest[]
         : [{ item: itemOrRequests as ClipSnapshot, destination: destination as TimelineItemMoveDestination }];
-      if (requests.length === 0 || requests.length > 100) throw new TypeError("Timeline item move requires between 1 and 100 requests.");
+      if (requests.length === 0) throw new TypeError("Timeline item move requires at least one request.");
       if (!plural && !destination) throw new TypeError("Timeline item move requires a destination.");
       const resolved = requests.map(({ item, destination: requestedDestination }) => {
         if (item.snapshotRevision !== snapshot.revision || requestedDestination.track.snapshotRevision !== snapshot.revision) {
@@ -674,7 +674,7 @@ export function createTimelineItems(
     async move(impactOrImpacts: TimelineItemMoveImpactPreview | readonly TimelineItemMoveImpactPreview[], options: TimelineItemMoveOptions) {
       const plural = Array.isArray(impactOrImpacts);
       const impacts = plural ? impactOrImpacts as readonly TimelineItemMoveImpactPreview[] : [impactOrImpacts as TimelineItemMoveImpactPreview];
-      if (impacts.length === 0 || impacts.length > 100) throw new TypeError("Timeline item move requires between 1 and 100 previews.");
+      if (impacts.length === 0) throw new TypeError("Timeline item move requires at least one preview.");
       const internals = impacts.map((impact) => {
         const internal = previewInternals.get(impact);
         if (!internal || internal.public !== impact || internal.collection !== collection) {
@@ -747,7 +747,7 @@ export function createTimelineItems(
       return createTypedOperationHandle({ session: () => runtime.sessionAtGeneration(generation) }, event, "cutagent.action.timeline.items.set_duration", resultSchema);
     },
     async addMarkers(changes: readonly TimelineClipMarkerChange[], options: TimelineItemMoveOptions) {
-      if (!Array.isArray(changes) || changes.length === 0 || changes.length > 10_000) throw new TypeError("Clip marker batches require 1 to 10,000 markers.");
+      if (!Array.isArray(changes) || changes.length === 0) throw new TypeError("Clip marker batches require at least one marker.");
       IdempotencyKeySchema.parse(options.idempotencyKey);
       const snapshot = await readSnapshot(options);
       const rows = snapshot.videoTracks.filter(track => track.index === 1).flatMap(track => track.clips.map(clip => ({track, clip})));
@@ -778,8 +778,8 @@ export function createTimelineItems(
     },
     async setColor(change: TimelineClipColorChange | readonly TimelineClipColorChange[], options: TimelineItemMoveOptions) {
       const changes = Array.isArray(change) ? change : [change];
-      if (changes.length === 0 || changes.length > 1_000) {
-        throw new TypeError("Timeline clip-color changes require between 1 and 1,000 clips.");
+      if (changes.length === 0) {
+        throw new TypeError("Timeline clip-color changes require at least one clip.");
       }
       IdempotencyKeySchema.parse(options.idempotencyKey);
       const snapshot = await readSnapshot(options);
@@ -833,8 +833,8 @@ export function createTimelineItems(
     },
     async setProperties(change: TimelineClipPropertyChange | readonly TimelineClipPropertyChange[], options: TimelineClipPropertyOptions) {
       const changes = Array.isArray(change) ? change : [change];
-      if (changes.length === 0 || changes.length > 1_000) {
-        throw new TypeError("Timeline clip property changes require between 1 and 1,000 clips.");
+      if (changes.length === 0) {
+        throw new TypeError("Timeline clip property changes require at least one clip.");
       }
       IdempotencyKeySchema.parse(options.idempotencyKey);
       const snapshot = await readSnapshot(options);

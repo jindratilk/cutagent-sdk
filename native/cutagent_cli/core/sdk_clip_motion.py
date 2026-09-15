@@ -49,8 +49,8 @@ def expected_state_targets() -> list[dict[str, Any]] | None:
             value = json.load(handle)
     except Exception as exc:
         raise ValidationError("SDK clip motion state target list is malformed.") from exc
-    if not isinstance(value, list) or not 1 <= len(value) <= 100:
-        raise ValidationError("SDK clip motion state target list must contain between 1 and 100 exact targets.")
+    if not isinstance(value, list) or not value:
+        raise ValidationError("SDK clip motion state target list must contain at least one exact target.")
     targets = [_validated_target(target) for target in value]
     if len({target["id"] for target in targets}) != len(targets):
         raise ValidationError("SDK clip motion state targets must be unique.")

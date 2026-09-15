@@ -9,8 +9,8 @@ from .fusion_precise_batch import move_prepared_fusion_holders
 
 
 def insert_prepared_settings_batch(conn: Any, *, items: list[dict[str, Any]], api: Any) -> dict[str, Any]:
-    if not isinstance(items, list) or not 1 <= len(items) <= 100:
-        raise ValidationError("Fusion staging batch requires 1 through 100 settings.")
+    if not isinstance(items, list) or not items:
+        raise ValidationError("Fusion staging batch requires at least one setting.")
     for item in items:
         if not Path(str(item.get("path", ""))).is_file():
             raise ValidationError("Prepared Fusion setting file is unavailable.")

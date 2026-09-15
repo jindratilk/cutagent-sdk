@@ -412,20 +412,31 @@ def apply_audio_gain_batch(
     return result
 
 
-def apply_audio_gain_entries(
+def apply_audio_gain_entries(conn, *, entries: list[dict[str, Any]]) -> dict[str, Any]:
+    """Preserve the gain-only command contract while sharing the batch writer."""
+    if not isinstance(entries, list) or not entries or any(
+        not isinstance(entry, dict) or set(entry) != {"item_id", "gain_db"} for entry in entries
+    ):
+        raise ValidationError("Each Fairlight audio gain entry must contain item_id and gain_db.")
+    return apply_audio_processing_entries(conn, entries=entries)
+
+
+def apply_audio_processing_entries(
     conn,
     *,
     entries: list[dict[str, Any]],
 ) -> dict[str, Any]:
-    """Apply exact per-item gains in one native batch or one Disk DB session."""
-    if not isinstance(entries, list) or not 1 <= len(entries) <= 128:
-        raise ValidationError("Fairlight audio gain entries must contain 1 to 128 items.")
+    """Apply exact per-item gain and fade properties in one Disk DB session."""
+    if not isinstance(entries, list) or not entries:
+        raise ValidationError("Fairlight audio gain entries must contain at least one item.")
     normalized_entries: list[dict[str, Any]] = []
     seen: set[str] = set()
     for index, entry in enumerate(entries):
-        if not isinstance(entry, dict) or set(entry) != {"item_id", "gain_db"}:
+        if (not isinstance(entry, dict) or "item_id" not in entry
+                or not set(entry) <= {"item_id", "gain_db", "fade_in_frames", "fade_out_frames"}
+                or len(entry) < 2):
             raise ValidationError(
-                "Each Fairlight audio gain entry must contain item_id and gain_db.",
+                "Each Fairlight audio entry needs item_id and at least one gain or fade property.",
                 details={"index": index},
                 recoverability="not_applicable",
             )
@@ -437,18 +448,25 @@ def apply_audio_gain_entries(
                 recoverability="not_applicable",
             )
         seen.add(item_id)
-        normalized_entries.append({
-            "item_id": item_id,
-            "gain_db": clip_effects_db.validate_audio_gain_db(entry.get("gain_db")),
-        })
+        normalized = {"item_id": item_id}
+        if "gain_db" in entry:
+            normalized["gain_db"] = clip_effects_db.validate_audio_gain_db(entry["gain_db"])
+        for key in ("fade_in_frames", "fade_out_frames"):
+            if key in entry:
+                frames = entry[key]
+                if isinstance(frames, bool) or not isinstance(frames, int) or frames < 0:
+                    raise ValidationError("Audio fade frames must be a non-negative integer.")
+                normalized[key] = frames
+        normalized_entries.append(normalized)
 
+    gain_only = all(set(entry) == {"item_id", "gain_db"} for entry in normalized_entries)
     timeline_name = _timeline_name(conn)
     if not timeline_name:
         raise APICallFailed("No active timeline is available for Fairlight audio gain batch.")
     selectors = normalize_audio_gain_batch_selectors(
         conn, [{"item_id": entry["item_id"]} for entry in normalized_entries]
     )
-    gain_by_item_id = {entry["item_id"]: entry["gain_db"] for entry in normalized_entries}
+    properties_by_id = {entry["item_id"]: entry for entry in normalized_entries}
     timeline_start = _timeline_start_frame(conn)
 
     def resolve_targets(cursor: sqlite3.Cursor) -> tuple[list[dict[str, Any]], list[dict[str, Any]], str]:
@@ -458,11 +476,19 @@ def apply_audio_gain_entries(
             selectors=selectors,
             allow_empty=False,
             allow_multiple=False,
-            gain_db=normalized_entries[0]["gain_db"],
+            gain_db=0,
             timeline_start=timeline_start,
         )
         for target in targets:
-            target["resulting_gain_db"] = gain_by_item_id[target["item_id"]]
+            properties = properties_by_id[target["item_id"]]
+            target.pop("resulting_gain_db", None)
+            if "gain_db" in properties:
+                target["resulting_gain_db"] = properties["gain_db"]
+            for key in ("fade_in_frames", "fade_out_frames"):
+                if key in properties:
+                    if properties[key] > target["duration"]:
+                        raise ValidationError("Audio fade must fit the exact target clip.")
+                    target[key] = properties[key]
         return targets, selector_results, sequence
 
     def writer(connection: sqlite3.Connection, cursor: sqlite3.Cursor, session: db_session.DiskDbMutationSession) -> dict[str, Any]:
@@ -475,14 +501,14 @@ def apply_audio_gain_entries(
             write = clip_effects_db.merge_audio_effect_chains(
                 existing_effect_filters=row["EffectFiltersBA"] if row else None,
                 existing_fields_blob=row["FieldsBlob"] if row else None,
-                gain_db=target["resulting_gain_db"],
+                **{key: value for key, value in properties_by_id[target["item_id"]].items() if key != "item_id"},
             )
             updates: dict[str, object] = {"EffectFiltersBA": write.effect_filters}
             if write.fields_blob is not None:
                 updates["FieldsBlob"] = write.fields_blob
             db_timeline_rows.update_row(cursor, "Sm2TiItem", "Sm2TiItem_id", target["item_id"], updates)
         return {
-            "action": "fairlight.audio_gain.batch",
+            "action": "fairlight.audio_gain.batch" if gain_only else "fairlight.audio_processing.batch",
             "changed": bool(targets),
             "timeline_name": timeline_name,
             "timeline_sequence": sequence,
@@ -500,24 +526,32 @@ def apply_audio_gain_entries(
             cursor = connection.cursor()
             for item in mutation_result.get("updated_items") or []:
                 item_id = item["item_id"]
-                expected = item["resulting_gain_db"]
                 row = cursor.execute(
                     "SELECT EffectFiltersBA FROM Sm2TiItem WHERE Sm2TiItem_id = ?", (item_id,)
                 ).fetchone()
-                actual = clip_effects_db.find_audio_gain_db(row["EffectFiltersBA"] if row else None)
-                checks.append({
-                    "name": f"audio_gain_{item_id}",
-                    "ok": actual is not None and math.isclose(float(actual), float(expected), abs_tol=1e-6),
-                    "item_id": item_id,
-                    "expected_gain_db": float(expected),
-                    "actual_gain_db": actual,
-                })
+                effects = row["EffectFiltersBA"] if row else None
+                readers = {
+                    "gain_db": clip_effects_db.find_audio_gain_db,
+                    "fade_in_frames": clip_effects_db.find_audio_fade_in_frames,
+                    "fade_out_frames": clip_effects_db.find_audio_fade_out_frames,
+                }
+                for key, expected in properties_by_id[item_id].items():
+                    if key == "item_id":
+                        continue
+                    actual = readers[key](effects)
+                    checks.append({
+                        "name": f"audio_{key}_{item_id}",
+                        "ok": actual is not None and math.isclose(float(actual), float(expected), abs_tol=1e-6),
+                        "item_id": item_id,
+                        "expected": expected,
+                        "actual": actual,
+                    })
         finally:
             connection.close()
         return {"status": "verified" if all(check["ok"] for check in checks) else "failed", "checks": checks}
 
     if native_clip_audio.available(
-        conn, gain_db=max(entry["gain_db"] for entry in normalized_entries)
+        conn, gain_db=max((entry.get("gain_db", 0) for entry in normalized_entries))
     ):
         current_database = db_session.resolve_current_disk_project_db(conn)
         connection = sqlite3.connect(str(current_database["project_db_path"]), timeout=5.0)
@@ -527,7 +561,7 @@ def apply_audio_gain_entries(
         finally:
             connection.close()
         preview = {
-            "action": "fairlight.audio_gain.batch",
+            "action": "fairlight.audio_gain.batch" if gain_only else "fairlight.audio_processing.batch",
             "changed": False,
             "dry_run": True,
             "timeline_name": timeline_name,
@@ -538,19 +572,21 @@ def apply_audio_gain_entries(
             "selector_results": selector_results,
             "verification": {"status": "not_requested", "checks": []},
         }
-        return native_clip_audio.apply_batch_preview(
-            conn, preview, property_key="AudioVolume", value=None
-        )
+        if gain_only:
+            return native_clip_audio.apply_batch_preview(
+                conn, preview, property_key="AudioVolume", value=None
+            )
+        return native_clip_audio.apply_processing_preview(conn, preview)
 
     result = db_session.execute_sqlite_disk_db_mutation(
         conn,
-        context="Fairlight per-item audio gain batch",
+        context="Fairlight per-item audio gain batch" if gain_only else "Fairlight per-item audio processing batch",
         writer=writer,
         verifier=verifier,
         allow_project_name_inference=True,
     )
     result["db_session_route"] = result.get("route")
-    result["route"] = "db_workaround_audio_gain_batch"
+    result["route"] = "db_workaround_audio_gain_batch" if gain_only else "db_workaround_audio_processing_batch"
     return result
 
 

@@ -12,8 +12,8 @@ from . import db_session
 
 
 def move_prepared_fusion_holders(conn: Any, *, moves: list[dict[str, Any]], api: Any) -> dict[str, Any]:
-    if not isinstance(moves, list) or not 1 <= len(moves) <= 100:
-        raise ValidationError("Fusion placement batch requires 1 through 100 prepared holders.")
+    if not isinstance(moves, list) or not moves:
+        raise ValidationError("Fusion placement batch requires at least one prepared holder.")
     target = moves[0].get("timeline_name")
     source = moves[0].get("source_timeline_name")
     if not target or not source or target == source:

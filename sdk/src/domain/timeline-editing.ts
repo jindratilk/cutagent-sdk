@@ -440,7 +440,7 @@ export function createTimelineEditor(
     return hydrateImpact(wire as WireImpact & { action: TAction }, rate, runtime, generation);
   };
   const previewMany = async <TAction extends TimelineEditAction>(intents: readonly (SdkTimelineEditIntent & { action: TAction })[], rate: FrameRate): Promise<readonly TimelineEditImpact<TAction>[]> => {
-    if (intents.length < 1 || intents.length > 256) throw new TypeError("Timeline edit plural preview requires between 1 and 256 items.");
+    if (intents.length < 1) throw new TypeError("Timeline edit plural preview requires at least one item.");
     const response = await runtime.readAtGeneration(generation, { operation: "timeline.edit.preview", intents: [...intents] });
     if (response.operation !== "timeline.edit.preview" || !("impacts" in response.data)) throw new TypeError("CutAgent runtime returned the wrong plural timeline edit preview.");
     const wires = z.array(sdkTimelineEditImpactSchema).length(intents.length).parse(response.data.impacts);
@@ -480,7 +480,7 @@ export function createTimelineEditor(
   };
   const placementMany = <TAction extends "insert" | "overwrite">(action: TAction, snapshot: TimelineSnapshot, placements: readonly TimelinePlacementPreview[]): Promise<readonly TimelineEditImpact<TAction>[]> => {
     assertSnapshot(snapshot, projectId, timelineId);
-    if (!Array.isArray(placements) || placements.length < 1 || placements.length > 256) throw new TypeError("Timeline edit plural preview requires between 1 and 256 items.");
+    if (!Array.isArray(placements) || placements.length < 1) throw new TypeError("Timeline edit plural preview requires at least one item.");
     return previewMany(placements.map(({ source, options }) => placementIntent(action, snapshot, source, options)), snapshot.frameRate);
   };
   const registeredImpact = <TAction extends TimelineEditAction>(expected: TAction, impact: TimelineEditImpact<TAction>, options: TimelineEditMutationOptions) => {
@@ -502,7 +502,7 @@ export function createTimelineEditor(
     return createTypedOperationHandle({ session: () => runtime.sessionAtGeneration(generation) }, event, actionId, z.object({}).passthrough().transform((value) => hydrateResult(value, internal.rate, expected)));
   };
   const startMany = async <TAction extends Exclude<TimelineEditAction, "remove">, TActionId extends Exclude<TimelineEditActionId, "cutagent.action.timeline.items.delete">>(actionId: TActionId, expected: TAction, impacts: readonly TimelineEditImpact<TAction>[], options: TimelineEditMutationOptions) => {
-    if (!Array.isArray(impacts) || impacts.length < 1 || impacts.length > 256) throw new TypeError("Timeline edit plural mutation requires between 1 and 256 impacts.");
+    if (!Array.isArray(impacts) || impacts.length < 1) throw new TypeError("Timeline edit plural mutation requires at least one impact.");
     const internals = impacts.map((impact) => registeredImpact(expected, impact, options));
     const first = internals[0]!.wire;
     const seen = new Set<string>();
@@ -576,7 +576,7 @@ export function createTimelineEditor(
     return createTypedOperationHandle({ session: () => runtime.sessionAtGeneration(generation) }, event, "cutagent.action.timeline.items.delete", result);
   };
   const startRemoveMany = async (impacts: readonly TimelineEditImpact<"remove">[], options: TimelineEditMutationOptions) => {
-    if (!Array.isArray(impacts) || impacts.length < 1 || impacts.length > 256) throw new TypeError("Timeline edit plural mutation requires between 1 and 256 impacts.");
+    if (!Array.isArray(impacts) || impacts.length < 1) throw new TypeError("Timeline edit plural mutation requires at least one impact.");
     const removals = impacts.map((impact) => removeInput(impact, options));
     const first = removals[0]!;
     if (new Set(removals.map((removal) => removal.clipId)).size !== removals.length
@@ -624,7 +624,7 @@ export function createTimelineEditor(
   const previewInsertAudio = ((snapshot: TimelineSnapshot, sourceOrPlacements: MediaPoolAssetSnapshot | readonly TimelineAudioPlacementPreview[], options?: TimelineAudioPlacementPreviewOptions) => {
       if (Array.isArray(sourceOrPlacements)) {
         const placements = sourceOrPlacements as readonly TimelineAudioPlacementPreview[];
-        if (placements.length < 1 || placements.length > 256) throw new TypeError("Timeline edit plural preview requires between 1 and 256 items.");
+        if (placements.length < 1) throw new TypeError("Timeline edit plural preview requires at least one item.");
         return previewMany(placements.map(({ source, options: placementOptions }) => audioPlacementIntent(snapshot, source, placementOptions)), snapshot.frameRate);
       }
       return preview(audioPlacementIntent(snapshot, sourceOrPlacements as MediaPoolAssetSnapshot, options as TimelineAudioPlacementPreviewOptions), snapshot.frameRate);

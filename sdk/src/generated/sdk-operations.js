@@ -953,8 +953,7 @@ const markerMutationBase = z.object({
     timelineId: sdkTimelineIdSchema,
     timelineRevision: sdkRevisionSchema,
 }).strict();
-const markerMutationBatchLimit = 10_000;
-const markerMutationValuesSchema = z.array(markerValueSchema).min(1).max(markerMutationBatchLimit);
+const markerMutationValuesSchema = z.array(markerValueSchema).min(1);
 const markerUpdateValueSchema = z.object({ markerId: sdkMarkerIdSchema, marker: markerValueSchema }).strict();
 export const sdkMarkerCreateInputSchema = z.union([
     markerMutationBase.extend({ marker: markerValueSchema }).strict(),
@@ -962,11 +961,11 @@ export const sdkMarkerCreateInputSchema = z.union([
 ]);
 export const sdkMarkerUpdateInputSchema = z.union([
     markerMutationBase.extend({ markerId: sdkMarkerIdSchema, marker: markerValueSchema }).strict(),
-    markerMutationBase.extend({ updates: z.array(markerUpdateValueSchema).min(1).max(markerMutationBatchLimit) }).strict(),
+    markerMutationBase.extend({ updates: z.array(markerUpdateValueSchema).min(1) }).strict(),
 ]);
 export const sdkMarkerDeleteInputSchema = z.union([
     markerMutationBase.extend({ markerId: sdkMarkerIdSchema }).strict(),
-    markerMutationBase.extend({ markerIds: z.array(sdkMarkerIdSchema).min(1).max(markerMutationBatchLimit) }).strict().superRefine((value, context) => {
+    markerMutationBase.extend({ markerIds: z.array(sdkMarkerIdSchema).min(1) }).strict().superRefine((value, context) => {
         if (new Set(value.markerIds).size !== value.markerIds.length) {
             context.addIssue({ code: "custom", path: ["markerIds"], message: "Marker IDs must be unique" });
         }
@@ -980,8 +979,8 @@ const sdkSingleMarkerMutationResultSchema = z.object({
 }).strict();
 const sdkMarkerMutationBatchResultSchema = z.object({
     action: z.enum(["create", "update", "delete"]),
-    markers: z.array(z.object({ id: sdkMarkerIdSchema, ...markerValueSchema.shape }).strict()).max(markerMutationBatchLimit),
-    previousMarkers: z.array(z.object({ id: sdkMarkerIdSchema, ...markerValueSchema.shape }).strict()).max(markerMutationBatchLimit),
+    markers: z.array(z.object({ id: sdkMarkerIdSchema, ...markerValueSchema.shape }).strict()),
+    previousMarkers: z.array(z.object({ id: sdkMarkerIdSchema, ...markerValueSchema.shape }).strict()),
     timelineRevision: sdkRevisionSchema,
 }).strict();
 export const sdkMarkerMutationResultSchema = z.union([
@@ -1058,7 +1057,7 @@ const timelineMoveBindingSchema = z.object({
 }).strict();
 export const sdkTimelineItemMoveSingleInputSchema = timelineMoveBindingSchema.extend({
     target: timelineMoveItemSchema,
-    linkedAudioTargets: z.array(timelineMoveItemSchema).max(256),
+    linkedAudioTargets: z.array(timelineMoveItemSchema),
     destination: z.object({
         trackIndex: z.number().int().min(1).max(4096),
         recordStartFrame: z.number().int().safe().nonnegative(),
@@ -1068,7 +1067,7 @@ export const sdkTimelineItemMoveSingleInputSchema = timelineMoveBindingSchema.ex
 }).strict();
 export const sdkTimelineItemMoveInputSchema = z.union([
     sdkTimelineItemMoveSingleInputSchema,
-    z.object({ moves: z.array(sdkTimelineItemMoveSingleInputSchema).min(1).max(100) }).strict(),
+    z.object({ moves: z.array(sdkTimelineItemMoveSingleInputSchema).min(1) }).strict(),
 ]);
 export const sdkTimelineClipColorBatchInputSchema = z.object({
     projectId: sdkProjectIdSchema,
@@ -1083,7 +1082,7 @@ export const sdkTimelineClipColorBatchInputSchema = z.object({
         recordEndFrame: z.number().int(),
         name: z.string().min(1).max(1024),
         color: z.string().min(1).max(64).nullable(),
-    }).strict()).min(1).max(1_000),
+    }).strict()).min(1),
 }).strict();
 export const sdkTimelineClipMarkerBatchInputSchema = z.object({
     projectId: sdkProjectIdSchema,
@@ -1102,7 +1101,7 @@ export const sdkTimelineClipMarkerBatchInputSchema = z.object({
         color: z.string().min(1).max(64),
         markerName: z.string().min(1).max(1024),
         note: z.string().max(8192),
-    }).strict()).min(1).max(10_000),
+    }).strict()).min(1),
 }).strict();
 const timelineMoveObservedItemSchema = z.object({
     id: sdkTimelineItemIdSchema,
@@ -1125,14 +1124,14 @@ export const sdkTimelineItemMoveSingleResultSchema = z.object({
     actionId: z.literal("cutagent.action.timeline.items.move"),
     target: timelineMoveObservedItemSchema,
     linkedAudio: z.enum(["preserved", "excluded", "not_linked"]),
-    movedItems: z.array(timelineMoveObservedItemSchema).min(1).max(257),
+    movedItems: z.array(timelineMoveObservedItemSchema).min(1),
     timelineRevision: sdkRevisionSchema,
 }).strict();
 export const sdkTimelineItemMoveResultSchema = z.union([
     sdkTimelineItemMoveSingleResultSchema,
     z.object({
         actionId: z.literal("cutagent.action.timeline.items.move"),
-        results: z.array(sdkTimelineItemMoveSingleResultSchema).min(1).max(100),
+        results: z.array(sdkTimelineItemMoveSingleResultSchema).min(1),
         timelineRevision: sdkRevisionSchema,
     }).strict(),
 ]);
@@ -1154,7 +1153,7 @@ export const sdkBulkClipStateInputSchema = z.object({
     projectId: sdkProjectIdSchema,
     timelineId: sdkTimelineIdSchema,
     timelineRevision: sdkRevisionSchema,
-    targets: z.array(sdkBulkClipStateTargetSchema).min(1).max(1000),
+    targets: z.array(sdkBulkClipStateTargetSchema).min(1),
     failurePolicy: z.literal("stop"),
 }).strict().superRefine((value, context) => {
     const seen = new Set();
@@ -1180,7 +1179,7 @@ const sdkBulkClipStateObservationSchema = z.object({
 });
 export const sdkBulkClipStateResultSchema = z.object({
     actionId: z.enum(["cutagent.action.bulk.enable", "cutagent.action.bulk.disable"]),
-    items: z.array(sdkBulkClipStateObservationSchema).min(1).max(1000),
+    items: z.array(sdkBulkClipStateObservationSchema).min(1),
     timelineRevision: sdkRevisionSchema,
 }).strict().superRefine((value, context) => {
     const expected = value.actionId === "cutagent.action.bulk.enable";
@@ -1296,7 +1295,7 @@ const sdkClipTransformEntrySchema = z.object({
     transform: sdkClipTransformValuesSchema,
 }).strict();
 const sdkClipTransformPluralInputSchema = sdkClipMotionContextSchema.extend({
-    transforms: z.array(sdkClipTransformEntrySchema).min(1).max(100),
+    transforms: z.array(sdkClipTransformEntrySchema).min(1),
 }).strict().superRefine((value, context) => {
     const targetIds = new Set();
     value.transforms.forEach((entry, index) => {
@@ -1318,7 +1317,7 @@ export const sdkBulkClipPropertyInputSchema = z.object({
     projectId: sdkProjectIdSchema,
     timelineId: sdkTimelineIdSchema,
     timelineRevision: sdkRevisionSchema,
-    items: z.array(sdkBulkClipPropertyItemSchema).min(1).max(1000),
+    items: z.array(sdkBulkClipPropertyItemSchema).min(1),
     failurePolicy: z.literal("stop"),
 }).strict().superRefine((value, context) => {
     const seen = new Set();
@@ -1381,7 +1380,7 @@ const sdkClipTransformPluralResultSchema = z.object({
     actionId: z.literal("cutagent.action.clip.transform"),
     timelineRevision: sdkRevisionSchema,
     protectedStatePreserved: z.literal(true),
-    results: z.array(sdkClipTransformSingleResultSchema).min(1).max(100),
+    results: z.array(sdkClipTransformSingleResultSchema).min(1),
 }).strict();
 export const sdkClipTransformResultSchema = z.union([
     sdkClipTransformSingleResultSchema,
@@ -1400,7 +1399,7 @@ const sdkBulkClipPropertyObservationSchema = z.object({
 });
 export const sdkBulkClipPropertyResultSchema = z.object({
     actionId: z.literal("cutagent.action.bulk.property_set"),
-    items: z.array(sdkBulkClipPropertyObservationSchema).min(1).max(1000),
+    items: z.array(sdkBulkClipPropertyObservationSchema).min(1),
     timelineRevision: sdkRevisionSchema,
     protectedStatePreserved: z.literal(true),
     stoppedAfterFailure: z.literal(false),
@@ -1843,7 +1842,7 @@ const sdkRenderQueueStartStatusSchema = z.discriminatedUnion("kind", [
 export const sdkRenderQueueStartInputSchema = z.object({
     projectId: sdkProjectIdSchema,
     queueRevision: sdkRevisionSchema,
-    jobIds: z.array(sdkSnapshotRenderJobIdSchema).min(1).max(100),
+    jobIds: z.array(sdkSnapshotRenderJobIdSchema).min(1),
 }).strict().superRefine((value, context) => {
     if (new Set(value.jobIds).size !== value.jobIds.length) {
         context.addIssue({ code: "custom", path: ["jobIds"], message: "Render queue start jobs must be unique" });
@@ -1857,7 +1856,7 @@ export const sdkRenderQueueStartResultSchema = z.object({
         statusSupport: sdkRenderQueueStartSupportSchema,
         status: sdkRenderQueueStartStatusSchema,
         progressPercent: z.number().min(0).max(100).nullable(),
-    }).strict()).min(1).max(100),
+    }).strict()).min(1),
 }).strict().superRefine((value, context) => {
     if (new Set(value.jobs.map((job) => job.id)).size !== value.jobs.length) {
         context.addIssue({ code: "custom", path: ["jobs"], message: "Render queue start results must contain unique jobs" });
@@ -1867,7 +1866,7 @@ export const sdkTimelineEditMutationInputSchema = z.object({
     impact: sdkTimelineEditImpactSchema,
 }).strict();
 export const sdkTimelineEditMutationBatchInputSchema = z.object({
-    impacts: z.array(sdkTimelineEditImpactSchema).min(1).max(256),
+    impacts: z.array(sdkTimelineEditImpactSchema).min(1),
 }).strict().superRefine(({ impacts }, context) => {
     const first = impacts[0];
     const seenImpactIds = new Set();
@@ -1912,7 +1911,7 @@ export const sdkTimelineRemoveMutationInputSchema = z.object({
 }).strict();
 export const sdkTimelineRemoveBatchMutationInputSchema = z.object({
     operation: z.literal("clip_remove_many"),
-    removals: z.array(sdkTimelineRemoveMutationInputSchema).min(1).max(256),
+    removals: z.array(sdkTimelineRemoveMutationInputSchema).min(1),
 }).strict().superRefine(({ removals }, context) => {
     const first = removals[0];
     const seenClipIds = new Set();
@@ -1941,7 +1940,7 @@ export const sdkTimelineRemoveMutationResultSchema = z.object({
 }).strict();
 export const sdkTimelineRemoveBatchMutationResultSchema = z.object({
     operation: z.literal("clip_remove_many"),
-    results: z.array(sdkTimelineRemoveMutationResultSchema).min(1).max(256),
+    results: z.array(sdkTimelineRemoveMutationResultSchema).min(1),
 }).strict();
 export const sdkTimelineRemoveMutationOutputSchema = z.union([
     sdkTimelineRemoveMutationResultSchema,
@@ -1971,12 +1970,12 @@ export const sdkTimelineEditMutationResultSchema = z.object({
     action: z.enum(["insert", "overwrite", "trim"]),
     impactId: z.string().regex(/^impact_[A-Za-z0-9_-]{16,128}$/),
     timelineRevision: sdkRevisionSchema,
-    affectedClips: z.array(sdkTimelineEditMutationClipResultSchema).max(256),
+    affectedClips: z.array(sdkTimelineEditMutationClipResultSchema),
     protectedItemIds: z.array(sdkTimelineItemIdSchema).max(4096),
     protectedStatePreserved: z.literal(true),
 }).strict();
 export const sdkTimelineEditMutationBatchResultSchema = z.object({
-    results: z.array(sdkTimelineEditMutationResultSchema).min(1).max(256),
+    results: z.array(sdkTimelineEditMutationResultSchema).min(1),
 }).strict();
 export const sdkTimelineEditMutationOutputSchema = z.union([
     sdkTimelineEditMutationResultSchema,
@@ -1990,7 +1989,7 @@ export const sdkMulticamAngleSchema = z.object({
     id: sdkMulticamAngleIdSchema,
     label: utf16BoundedTextSchema(256, "Multicam angle label"),
     enabled: z.boolean().nullable(),
-    sources: z.array(sdkMulticamSourceSchema).min(1).max(256),
+    sources: z.array(sdkMulticamSourceSchema).min(1),
 }).strict();
 export const sdkMulticamSnapshotSchema = z.object({
     id: sdkMulticamIdSchema,
@@ -2016,7 +2015,7 @@ export const sdkMulticamCreateInputSchema = z.object({
     mediaPoolRevision: sdkRevisionSchema,
     name: utf16BoundedTextSchema(1024, "Multicam name"),
     timelineName: utf16BoundedTextSchema(1024, "Multicam timeline name").optional(),
-    sources: z.array(multicamSourceInputSchema).min(2).max(256),
+    sources: z.array(multicamSourceInputSchema).min(2),
     syncMode: z.enum(["in", "out", "timecode", "sound", "marker"]),
     createTimeline: z.boolean(),
 }).strict().superRefine((input, context) => {
@@ -2040,7 +2039,7 @@ export const sdkMulticamSwitchInputSchema = z.object({
         atRecordFrame: z.number().int().safe().nonnegative(),
         angleId: sdkMulticamAngleIdSchema,
         scope: z.enum(["linked", "video", "audio"]),
-    }).strict()).min(1).max(10_000),
+    }).strict()).min(1),
     // JSON Schema 2020-12 cannot express a relational comparison between adjacent
     // array items. Keep the portable wire schema aligned with the CLI contract;
     // the authoring workflow enforces strictly increasing record frames before it

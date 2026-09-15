@@ -22,6 +22,7 @@ _AUDIO_BATCH_EXPORTS = (
     'preview_audio_gain_batch',
     'apply_audio_gain_batch',
     'apply_audio_gain_entries',
+    'apply_audio_processing_entries',
     '_audio_pan_item_payload',
     '_resolve_audio_pan_batch_targets',
     '_audio_pan_batch_writer',

@@ -258,7 +258,6 @@ export function createMarkers(
   );
   const makePreviews = async (action: MarkerImpactPreview["action"], entries: readonly { values?: MarkerValues; target?: MarkerSnapshot }[]) => {
     if (entries.length === 0) throw new TypeError("A plural marker preview requires at least one item.");
-    if (entries.length > 10_000) throw new TypeError("A plural marker preview accepts at most 10000 items.");
     const owner = await readSnapshot();
     return Object.freeze(entries.map(({ values, target }) => makePreviewAt(owner, action, values, target)));
   };

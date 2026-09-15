@@ -386,10 +386,11 @@ def resolve_disk_project_db_path(
 
     search_pattern = "*/Projects"
     candidates = sorted(
-        str(projects_dir / normalized_project_name / "Project.db")
+        str(project_db)
         for root in roots
         for projects_dir in root.glob(search_pattern)
-        if (projects_dir / normalized_project_name / "Project.db").is_file()
+        for project_db in projects_dir.rglob("Project.db")
+        if project_db.parent.name == normalized_project_name and project_db.is_file()
     )
     if len(candidates) == 1:
         return {

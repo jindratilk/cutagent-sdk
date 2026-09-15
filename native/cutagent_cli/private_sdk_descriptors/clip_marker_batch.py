@@ -12,8 +12,8 @@ from ..core.clip_marker_batch import apply_clip_marker_batch
 
 
 def lower_updates(updates: list[dict[str, Any]], rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    if not isinstance(updates, list) or not 1 <= len(updates) <= 10000:
-        raise ValueError("SDK clip marker batch requires 1 to 10000 markers.")
+    if not isinstance(updates, list) or not updates:
+        raise ValueError("SDK clip marker batch requires at least one marker.")
     by_id = {row["timelineItemId"]: row for row in rows}
     if len(by_id) != len(rows) or len({row["nativeId"] for row in rows}) != len(rows):
         raise ValueError("SDK clip marker inventory identities are ambiguous.")

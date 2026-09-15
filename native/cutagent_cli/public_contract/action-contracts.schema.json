@@ -35396,7 +35396,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 1000,
           "minItems": 1,
           "type": "array"
         },
@@ -35462,7 +35461,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 1000,
           "minItems": 1,
           "type": "array"
         },
@@ -35567,7 +35565,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 1000,
           "minItems": 1,
           "type": "array"
         },
@@ -35633,7 +35630,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 1000,
           "minItems": 1,
           "type": "array"
         },
@@ -35809,7 +35805,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 1000,
           "minItems": 1,
           "type": "array"
         },
@@ -36005,7 +36000,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 1000,
           "minItems": 1,
           "type": "array"
         },
@@ -86768,7 +86762,6 @@
                 ],
                 "type": "object"
               },
-              "maxItems": 128,
               "minItems": 1,
               "type": "array"
             },
@@ -86928,7 +86921,6 @@
                     ],
                     "type": "object"
                   },
-                  "maxItems": 128,
                   "minItems": 1,
                   "type": "array"
                 },
@@ -174143,7 +174135,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 100,
           "minItems": 1,
           "type": "array"
         },
@@ -174271,7 +174262,6 @@
                 ],
                 "type": "object"
               },
-              "maxItems": 100,
               "minItems": 1,
               "type": "array"
             },
@@ -202974,7 +202964,6 @@
             "pattern": "^media_pool_item_[A-Za-z0-9][A-Za-z0-9._~-]*$",
             "type": "string"
           },
-          "maxItems": 512,
           "type": "array",
           "uniqueItems": true
         },
@@ -202984,7 +202973,6 @@
             "pattern": "^multicam_angle_[A-Za-z0-9][A-Za-z0-9._~-]*$",
             "type": "string"
           },
-          "maxItems": 256,
           "type": "array",
           "uniqueItems": true
         },
@@ -203079,7 +203067,6 @@
             "pattern": "^media_pool_item_[A-Za-z0-9][A-Za-z0-9._~-]*$",
             "type": "string"
           },
-          "maxItems": 512,
           "type": "array",
           "uniqueItems": true
         },
@@ -203089,7 +203076,6 @@
             "pattern": "^multicam_angle_[A-Za-z0-9][A-Za-z0-9._~-]*$",
             "type": "string"
           },
-          "maxItems": 256,
           "type": "array",
           "uniqueItems": true
         },
@@ -203181,7 +203167,6 @@
             "pattern": "^media_pool_item_[A-Za-z0-9][A-Za-z0-9._~-]*$",
             "type": "string"
           },
-          "maxItems": 512,
           "type": "array",
           "uniqueItems": true
         },
@@ -203191,7 +203176,6 @@
             "pattern": "^multicam_angle_[A-Za-z0-9][A-Za-z0-9._~-]*$",
             "type": "string"
           },
-          "maxItems": 256,
           "type": "array",
           "uniqueItems": true
         },
@@ -203252,7 +203236,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 256,
           "minItems": 1,
           "type": "array"
         },
@@ -203306,7 +203289,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 256,
           "minItems": 2,
           "type": "array"
         }
@@ -203508,7 +203490,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 256,
           "minItems": 2,
           "type": "array"
         },
@@ -203846,7 +203827,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 256,
           "minItems": 1,
           "type": "array"
         },
@@ -203878,7 +203858,6 @@
             "pattern": "^media_pool_item_[A-Za-z0-9][A-Za-z0-9._~-]*$",
             "type": "string"
           },
-          "maxItems": 512,
           "type": "array",
           "uniqueItems": true
         },
@@ -203888,7 +203867,6 @@
             "pattern": "^multicam_angle_[A-Za-z0-9][A-Za-z0-9._~-]*$",
             "type": "string"
           },
-          "maxItems": 256,
           "type": "array",
           "uniqueItems": true
         },
@@ -203933,7 +203911,6 @@
             "pattern": "^multicam_angle_[A-Za-z0-9][A-Za-z0-9._~-]*$",
             "type": "string"
           },
-          "maxItems": 256,
           "minItems": 2,
           "type": "array",
           "uniqueItems": true
@@ -203986,7 +203963,6 @@
             "pattern": "^media_pool_item_[A-Za-z0-9][A-Za-z0-9._~-]*$",
             "type": "string"
           },
-          "maxItems": 512,
           "type": "array",
           "uniqueItems": true
         },
@@ -203996,7 +203972,6 @@
             "pattern": "^multicam_angle_[A-Za-z0-9][A-Za-z0-9._~-]*$",
             "type": "string"
           },
-          "maxItems": 256,
           "type": "array",
           "uniqueItems": true
         },
@@ -204080,7 +204055,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 256,
           "minItems": 1,
           "type": "array"
         },
@@ -204114,7 +204088,6 @@
             "pattern": "^media_pool_item_[A-Za-z0-9][A-Za-z0-9._~-]*$",
             "type": "string"
           },
-          "maxItems": 512,
           "type": "array",
           "uniqueItems": true
         },
@@ -204124,7 +204097,6 @@
             "pattern": "^multicam_angle_[A-Za-z0-9][A-Za-z0-9._~-]*$",
             "type": "string"
           },
-          "maxItems": 256,
           "type": "array",
           "uniqueItems": true
         },
@@ -204220,7 +204192,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 256,
           "minItems": 1,
           "type": "array"
         },
@@ -204250,7 +204221,6 @@
             "pattern": "^media_pool_item_[A-Za-z0-9][A-Za-z0-9._~-]*$",
             "type": "string"
           },
-          "maxItems": 512,
           "type": "array",
           "uniqueItems": true
         },
@@ -204260,7 +204230,6 @@
             "pattern": "^multicam_angle_[A-Za-z0-9][A-Za-z0-9._~-]*$",
             "type": "string"
           },
-          "maxItems": 256,
           "type": "array",
           "uniqueItems": true
         },
@@ -204436,7 +204405,6 @@
             "pattern": "^media_pool_item_[A-Za-z0-9][A-Za-z0-9._~-]*$",
             "type": "string"
           },
-          "maxItems": 512,
           "type": "array",
           "uniqueItems": true
         },
@@ -204446,7 +204414,6 @@
             "pattern": "^multicam_angle_[A-Za-z0-9][A-Za-z0-9._~-]*$",
             "type": "string"
           },
-          "maxItems": 256,
           "type": "array",
           "uniqueItems": true
         },
@@ -204538,7 +204505,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 256,
           "minItems": 2,
           "type": "array"
         },
@@ -204587,7 +204553,6 @@
                 "type": "string",
                 "x-cutagent-maxUtf16CodeUnits": 256
               },
-              "maxItems": 256,
               "minItems": 2,
               "type": "array"
             },
@@ -204706,7 +204671,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 256,
           "minItems": 1,
           "type": "array"
         },
@@ -204797,7 +204761,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 256,
           "type": "array",
           "uniqueItems": true
         },
@@ -204960,7 +204923,6 @@
             "pattern": "^media_pool_item_[A-Za-z0-9][A-Za-z0-9._~-]*$",
             "type": "string"
           },
-          "maxItems": 512,
           "type": "array",
           "uniqueItems": true
         },
@@ -204970,7 +204932,6 @@
             "pattern": "^multicam_angle_[A-Za-z0-9][A-Za-z0-9._~-]*$",
             "type": "string"
           },
-          "maxItems": 256,
           "type": "array",
           "uniqueItems": true
         },
@@ -205083,7 +205044,6 @@
             "pattern": "^media_pool_item_[A-Za-z0-9][A-Za-z0-9._~-]*$",
             "type": "string"
           },
-          "maxItems": 512,
           "type": "array",
           "uniqueItems": true
         },
@@ -205093,7 +205053,6 @@
             "pattern": "^multicam_angle_[A-Za-z0-9][A-Za-z0-9._~-]*$",
             "type": "string"
           },
-          "maxItems": 256,
           "type": "array",
           "uniqueItems": true
         },
@@ -205213,7 +205172,6 @@
             "pattern": "^media_pool_item_[A-Za-z0-9][A-Za-z0-9._~-]*$",
             "type": "string"
           },
-          "maxItems": 512,
           "type": "array",
           "uniqueItems": true
         },
@@ -205223,7 +205181,6 @@
             "pattern": "^multicam_angle_[A-Za-z0-9][A-Za-z0-9._~-]*$",
             "type": "string"
           },
-          "maxItems": 256,
           "type": "array",
           "uniqueItems": true
         },
@@ -205317,7 +205274,6 @@
             "pattern": "^media_pool_item_[A-Za-z0-9][A-Za-z0-9._~-]*$",
             "type": "string"
           },
-          "maxItems": 512,
           "type": "array",
           "uniqueItems": true
         },
@@ -205327,7 +205283,6 @@
             "pattern": "^multicam_angle_[A-Za-z0-9][A-Za-z0-9._~-]*$",
             "type": "string"
           },
-          "maxItems": 256,
           "type": "array",
           "uniqueItems": true
         },
@@ -205405,7 +205360,6 @@
             "pattern": "^media_pool_item_[A-Za-z0-9][A-Za-z0-9._~-]*$",
             "type": "string"
           },
-          "maxItems": 512,
           "type": "array",
           "uniqueItems": true
         },
@@ -205415,7 +205369,6 @@
             "pattern": "^multicam_angle_[A-Za-z0-9][A-Za-z0-9._~-]*$",
             "type": "string"
           },
-          "maxItems": 256,
           "type": "array",
           "uniqueItems": true
         },
@@ -205498,7 +205451,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 10000,
           "minItems": 1,
           "type": "array"
         },
@@ -219514,7 +219466,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 1000,
           "minItems": 1,
           "type": "array"
         }
@@ -219585,7 +219536,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 1000,
           "minItems": 1,
           "type": "array"
         },
@@ -219696,7 +219646,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 10000,
           "minItems": 1,
           "type": "array"
         }
@@ -219766,7 +219715,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 10000,
           "minItems": 1,
           "type": "array"
         },
@@ -223664,7 +223612,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 256,
           "type": "array"
         },
         "projectId": {
@@ -223864,7 +223811,6 @@
             ],
             "type": "object"
           },
-          "maxItems": 257,
           "minItems": 1,
           "type": "array"
         },

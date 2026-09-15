@@ -1,2 +1,2 @@
 // Generated from the public SDK runtime and identity contracts. Do not edit.
-export const CUTAGENT_SDK_PROTOCOL_DIGEST = "sha256:0388c13ad61615361d6aae57070faf7b2828d255db45dd4efee1aa8f84607e91";
+export const CUTAGENT_SDK_PROTOCOL_DIGEST = "sha256:81f22505633d6a394e570c9f9a8b6fc7ee5eb1526d92f75df1b6749fca5ac1bd";

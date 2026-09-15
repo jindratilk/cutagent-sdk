@@ -36,7 +36,7 @@ SDK_LIVE_INSPECTION_OPERATIONS = {
     "managed.protected",
     "storage.mattes",
 }
-SDK_LIVE_INSPECTION_MAX_DEADLINE_WINDOW_MS = 180_000
+SDK_MUTATION_GUARD_TIMEOUT_MS = 180_000
 SDK_MEDIA_POOL_MAX_INVENTORY = 1_000_000
 SDK_MEDIA_POOL_SNAPSHOT_MAX_BYTES = 6 * 1024 * 1024
 SDK_MARKER_GUARD_ENV = "CUTAGENT_SDK_MARKER_GUARD"
@@ -191,12 +191,6 @@ def validate_deadline(deadline_at_ms: int | None) -> None:
     if deadline_at_ms is None:
         return
     now_ms = int(time.time() * 1000)
-    if deadline_at_ms > now_ms + SDK_LIVE_INSPECTION_MAX_DEADLINE_WINDOW_MS:
-        raise ValidationError(
-            "SDK live inspection deadline exceeds the maximum control timeout window.",
-            details={"maximum_deadline_window_ms": SDK_LIVE_INSPECTION_MAX_DEADLINE_WINDOW_MS},
-            recoverability="not_applicable",
-        )
     if now_ms >= deadline_at_ms:
         raise SdkLiveInspectionTimeout(
             "SDK live inspection exceeded its absolute deadline.",
@@ -1402,7 +1396,7 @@ def require_media_pool_mutation_guard(conn: Any) -> None:
     identity = _identity_state(conn, include_timelines=False, list_timelines=lambda *_args, **_kwargs: [])
     summary = inspect_media_pool_page(
         conn,
-        deadline_at_ms=int(time.time() * 1000) + SDK_LIVE_INSPECTION_MAX_DEADLINE_WINDOW_MS,
+        deadline_at_ms=int(time.time() * 1000) + SDK_MUTATION_GUARD_TIMEOUT_MS,
         offset=0,
         page_size=1,
         search=None,
@@ -1433,7 +1427,7 @@ def require_marker_mutation_guard(
     inspected = inspect_live_state(
         conn,
         "timeline.structure" if structure_expected is not None else "timeline.snapshot",
-        deadline_at_ms=int(time.time() * 1000) + SDK_LIVE_INSPECTION_MAX_DEADLINE_WINDOW_MS,
+        deadline_at_ms=int(time.time() * 1000) + SDK_MUTATION_GUARD_TIMEOUT_MS,
         list_timelines=list_timelines,
         summarize_timeline=summarize_timeline,
         list_markers=list_markers,
@@ -1466,7 +1460,7 @@ def require_color_mutation_guard(
     inspected = inspect_live_state(
         conn,
         "color.current",
-        deadline_at_ms=int(time.time() * 1000) + SDK_LIVE_INSPECTION_MAX_DEADLINE_WINDOW_MS,
+        deadline_at_ms=int(time.time() * 1000) + SDK_MUTATION_GUARD_TIMEOUT_MS,
         list_timelines=list_timelines,
         summarize_timeline=summarize_timeline,
         list_markers=list_markers,

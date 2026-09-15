@@ -2067,10 +2067,14 @@ def insert_audio_clips_at(
 ) -> dict[str, Any]:
     """Plan and insert several independent audio clips through one native append."""
 
-    if not isinstance(placements, list) or not 1 <= len(placements) <= 256:
-        raise ValidationError("Audio placement list must contain between 1 and 256 items.")
+    if not isinstance(placements, list) or not placements:
+        raise ValidationError("Audio placement list must contain at least one item.")
 
     def build(snapshot: dict[str, Any]) -> list[dict[str, Any]]:
+        root = _call(getattr(conn, "media_pool", None), "GetRootFolder")
+        if root is None:
+            raise ReadinessFailed("DaVinci Resolve Media Pool is unavailable.")
+        media_items = _walk_media_pool(root)
         plans = [
             _build_plan(
                 conn,
@@ -2088,6 +2092,7 @@ def insert_audio_clips_at(
                 expected_timeline_id=expected_timeline_id,
                 expected_revision=expected_revision,
                 snapshot=snapshot,
+                shared_media_items=media_items,
             )
             for item in placements
         ]
@@ -2278,8 +2283,6 @@ def _normalize_insert_requests(
     candidates = [requests] if isinstance(requests, Mapping) else list(requests)
     if not candidates:
         raise ValidationError("Insert requires at least one placement request.")
-    if len(candidates) > 256:
-        raise ValidationError("Insert accepts at most 256 placement requests.")
     normalized: list[dict[str, Any]] = []
     for index, request in enumerate(candidates):
         if not isinstance(request, Mapping):

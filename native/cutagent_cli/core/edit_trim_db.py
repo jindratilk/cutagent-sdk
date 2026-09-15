@@ -1216,8 +1216,8 @@ def trim_video_items(
     dry_run: bool = False,
 ) -> dict[str, Any]:
     """Trim several exact video occurrences in one preflight and DB mutation lifecycle."""
-    if not isinstance(changes, list) or not changes or len(changes) > 256:
-        raise ValidationError("Trim changes must contain between 1 and 256 items.")
+    if not isinstance(changes, list) or not changes:
+        raise ValidationError("Trim changes must contain at least one item.")
     if timeline_name:
         timeline_ops.switch_timeline(conn, name=timeline_name)
     context = _capture_trim_context(conn)

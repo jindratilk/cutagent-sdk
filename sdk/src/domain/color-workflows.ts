@@ -191,7 +191,7 @@ export function applyColorLut(
   const applications = Array.isArray(snapshotOrApplications)
     ? snapshotOrApplications
     : [snapshotOrApplications as ColorLutApplication];
-  if (applications.length === 0 || applications.length > 128) throw new TypeError("LUT application requires between 1 and 128 exact targets.");
+  if (applications.length === 0) throw new TypeError("LUT application requires at least one exact target.");
   const first = applications[0]!;
   const common = target(first.snapshot);
   const seen = new Set<string>();

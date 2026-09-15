@@ -519,12 +519,6 @@ def update_markers(conn, updates: List[Dict[str, Any]]) -> Dict[str, Any]:
             "Marker updates must contain at least one entry.",
             recoverability="not_applicable",
         )
-    if len(updates) > 10_000:
-        raise ValidationError(
-            "Marker updates may contain at most 10000 entries.",
-            details={"update_count": len(updates), "maximum": 10_000},
-            recoverability="not_applicable",
-        )
 
     required = {"targetFrame", "recordFrame", "color", "name", "note", "durationFrames"}
     normalized: List[Dict[str, Any]] = []
@@ -2118,6 +2112,8 @@ def _inspect_sdk_fairlight_state(conn) -> Dict[str, Any]:
     try:
         plan_readback = fairlight_ops.inspect_sdk_fairlight_plan_clip_state(conn)
     except Exception:
+        import logging
+        logging.getLogger(__name__).debug("Private Fairlight plan readback failed", exc_info=True)
         # Public timeline snapshots remain available when private Disk DB
         # readback is unsupported. Aggregate plans fail closed on this status.
         plan_readback = {"status": "unavailable", "clips": []}

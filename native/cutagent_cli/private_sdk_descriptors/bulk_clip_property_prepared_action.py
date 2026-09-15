@@ -176,8 +176,8 @@ class BulkClipPropertyDescriptor:
         } or value.get("failurePolicy") != "stop":
             raise ValidationError("Bulk clip-property input is malformed.")
         items = value.get("items")
-        if not isinstance(items, (list, tuple)) or not 1 <= len(items) <= 1000:
-            raise ValidationError("Bulk clip-property input requires 1 to 1000 items.")
+        if not isinstance(items, (list, tuple)) or not items:
+            raise ValidationError("Bulk clip-property input requires at least one item.")
         target_keys = {"snapshotId", "id", "trackType", "trackIndex", "recordStartFrame",
                        "recordEndFrame", "name", "mediaPoolItemId", "linkedItemIds"}
         ids = []

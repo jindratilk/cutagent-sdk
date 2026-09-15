@@ -1824,6 +1824,7 @@ function buildTimelineEditImpact(intent, snapshot, rawPlan) {
         throw new SdkLiveInspectionError("INVALID_RESPONSE", "Linked trim requires exact reciprocal video/audio topology.");
       }
       if (intent.linkedAudio === "exclude") {
+        protectedItems.push(editItemTarget(linked.candidateClip, linked.candidateTrack, "protected_neighbor"));
         continue;
       } else {
         if (!linked.candidateClip.sourceFrameRate) {
@@ -1878,14 +1879,8 @@ function buildTimelineEditImpact(intent, snapshot, rawPlan) {
     }
   }
   const affectedIds = new Set(affectedItems.map((item) => item.id));
-  const alreadyProtectedIds = new Set(protectedItems.map((item) => item.id));
-  for (const track of snapshot.tracks) {
-    for (const clip of track.clips) {
-      if (clip.id && !affectedIds.has(clip.id) && !alreadyProtectedIds.has(clip.id)) {
-        protectedItems.push(editItemTarget(clip, track, "protected_neighbor"));
-      }
-    }
-  }
+  // The retained snapshot protects every unrelated item during closed-world
+  // readback. Only edit-local neighbors and overlaps belong in each wire impact.
   const clipsById = new Map(snapshot.tracks.flatMap((track) => track.clips.filter((clip) => clip.id).map((clip) => [clip.id, clip])));
   const replacementIndexes = expectedItems.flatMap((item, index) => item.role === "replacement" ? [index] : []);
   const preservedIndexes = expectedItems.flatMap((item, index) => item.role === "preserved_edge" ? [index] : []);
@@ -2846,6 +2841,22 @@ export function createSdkLiveInspectionService({
         && revisionMetadata.structuralRevision !== structuralRevisionByTimelineRevision.get(request.expectedRevision)) {
         throw new SdkLiveInspectionError("STALE_REVISION", "The timeline structure changed after the authoring snapshot.");
       }
+      let privateProjectContext = null;
+      if (options.includeProjectContext === true) {
+        if (JSON.stringify(canonicalize(raw.before)) !== JSON.stringify(canonicalize(raw.after))) {
+          throw new SdkLiveInspectionError("STALE_REVISION", "The Fairlight project context changed during target resolution.");
+        }
+        const context = projectContext(raw.after, stableIdentityNamespace);
+        privateProjectContext = {
+          value: context,
+          privateExecutionIdentity: {
+            projectLibraryId: context.library === null ? null : digest("project_library_", {
+              identityNamespace: stableIdentityNamespace,
+              library: privateProjectLibraryIdentity(raw.after),
+            }),
+          },
+        };
+      }
       rememberStructuralRevision(value.revision, revisionMetadata.structuralRevision);
       const inspectorByNativeId = new Map(raw.summary.tracks.flatMap((track) => (track.items ?? [])
         .filter((item) => typeof item.inspector_state_digest === "string" && /^[a-f0-9]{64}$/.test(item.inspector_state_digest))
@@ -2868,6 +2879,7 @@ export function createSdkLiveInspectionService({
         privateTimelineItemNativeIdByPublicId,
         privateTimelineItemSourcePathByPublicId,
         privateFairlightPlanReadback,
+        privateProjectContext,
         privateInspectorStateDigestByPublicId,
         nativeTimelineId: before.timelineNativeId,
       };
@@ -3429,9 +3441,9 @@ export function createSdkLiveInspectionService({
   };
 
   const prepareTimelineAudioInserts = async (intents, options) => {
-    if (!Array.isArray(intents) || intents.length < 1 || intents.length > 256
+    if (!Array.isArray(intents) || intents.length < 1
       || intents.some((intent) => intent.action !== "insert" || intent.placement !== "audio")) {
-      throw new SdkLiveInspectionError("INVALID_REQUEST", "Plural audio preview requires between 1 and 256 audio-only insert intents.");
+      throw new SdkLiveInspectionError("INVALID_REQUEST", "Plural audio preview requires at least one audio-only insert intent.");
     }
     if (typeof resolveService?.previewSdkTimelineAudioInsert !== "function"
       || typeof resolveService?.readSdkCapability !== "function") {
@@ -3462,12 +3474,9 @@ export function createSdkLiveInspectionService({
     const projectNativeId = text(snapshotRead.privateExecutionIdentity?.nativeProjectId);
     const timelineNativeId = text(snapshotRead.privateExecutionIdentity?.nativeTimelineId);
     if (!projectNativeId || !timelineNativeId) return malformed("CutAgent CLI omitted exact native execution identity from the bracketed timeline snapshot.");
-    const sourceNativeIds = await Promise.all(intents.map((intent) => resolveMediaPoolNativeIdentity(
-      intent.projectId,
-      intent.source.id,
-      intent.source.snapshotRevision,
-      options,
-    )));
+    const sourceNativeIds = await resolveMediaPoolNativeIdentities(
+      first.projectId, intents.map((intent) => intent.source), options,
+    );
     const context = {
       projectNativeId,
       timelineNativeId,
@@ -3529,7 +3538,6 @@ export function createSdkLiveInspectionService({
       throw new TypeError("Fairlight live-target callback omitted a signed target.");
     }
 
-    const projectBefore = await inspect({operation: "project.context"});
     const assertProjectBinding = (projectContext) => {
       const observed = projectContext.value;
       if (projectContext.privateExecutionIdentity?.projectLibraryId !== identities.projectLibraryId
@@ -3540,17 +3548,17 @@ export function createSdkLiveInspectionService({
         throw new SdkLiveInspectionError("STALE_REVISION", "The signed Fairlight project-library or project revision changed before target resolution.");
       }
     };
-    assertProjectBinding(projectBefore);
+    // Snapshot inspection already brackets the complete project identity. Reuse
+    // that fresh bracket instead of starting two more native context processes.
     const inspected = await inspect({
       operation: "timeline.snapshot",
       projectId: identities.projectId,
       timelineId: identities.timelineId,
+    }, {
+      includeProjectContext: true,
+      ...(exchangeContext.deadlineAtMs === undefined ? {} : {deadlineAtMs: exchangeContext.deadlineAtMs}),
     });
-    const projectAfter = await inspect({operation: "project.context"});
-    assertProjectBinding(projectAfter);
-    if (projectAfter.value.projectRevision.revision !== projectBefore.value.projectRevision.revision) {
-      throw new SdkLiveInspectionError("STALE_REVISION", "The Fairlight project context changed during target resolution.");
-    }
+    assertProjectBinding(inspected.privateProjectContext);
     const snapshot = inspected.value;
     const preMutationPhase = new Set(["prepare", "current"]).has(phase);
     const privateTargets = exchangeContext?.privateFairlightBinding?.targets;
@@ -4826,7 +4834,7 @@ export function createSdkLiveInspectionService({
     },
     async resolveRenderJobSelections({ projectId, queueRevision, jobIds }, options = {}) {
       if (typeof projectId !== "string" || !projectId || typeof queueRevision !== "string" || !queueRevision
-        || !Array.isArray(jobIds) || jobIds.length < 1 || jobIds.length > 100
+        || !Array.isArray(jobIds) || jobIds.length < 1
         || jobIds.some((jobId) => typeof jobId !== "string" || !jobId)
         || new Set(jobIds).size !== jobIds.length) {
         throw new TypeError("Render job selection requires one exact project, queue revision, and unique job identities.");

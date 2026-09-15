@@ -1257,7 +1257,7 @@ export const sdkRuntimeReadRequestSchema = z.discriminatedUnion("operation", [
         deadlineAtMs: sdkRuntimeReadDeadlineSchema,
         operation: z.literal("timeline.edit.preview"),
         intent: sdkTimelineEditIntentSchema.optional(),
-        intents: z.array(sdkTimelineEditIntentSchema).min(1).max(256).optional(),
+        intents: z.array(sdkTimelineEditIntentSchema).min(1).optional(),
     }).strict().superRefine((request, context) => {
         if ((request.intent === undefined) === (request.intents === undefined)) {
             context.addIssue({ code: "custom", message: "Timeline edit preview requires exactly one of intent or intents" });
@@ -1360,7 +1360,7 @@ export const sdkRuntimeReadSuccessSchema = z.discriminatedUnion("operation", [
         operation: z.literal("timeline.edit.preview"),
         data: z.union([
             sdkTimelineEditImpactSchema,
-            z.object({ impacts: z.array(sdkTimelineEditImpactSchema).min(1).max(256) }).strict(),
+            z.object({ impacts: z.array(sdkTimelineEditImpactSchema).min(1) }).strict(),
         ]),
     }).strict(),
     z.object({
