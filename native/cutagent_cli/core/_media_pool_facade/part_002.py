@@ -305,20 +305,21 @@ def validate_clip_moves(conn, moves: list[dict[str, str]]) -> list[dict[str, Any
 
     normalized: list[dict[str, str]] = []
     for index, item in enumerate(moves):
-        if not isinstance(item, dict) or set(item) != {"name", "target"}:
+        if not isinstance(item, dict) or set(item) not in ({"name", "target"}, {"path", "target"}, {"media_id", "target"}):
             raise ValidationError(
-                "Each media move item requires exactly name and target.",
+                "Each media move item requires target and exactly one of name, path, or media_id.",
                 details={"index": index},
             )
-        name = item.get("name")
+        selector = next(key for key in ("name", "path", "media_id") if key in item)
+        name = item[selector]
         target = item.get("target")
         if not isinstance(name, str) or not name.strip() or not isinstance(target, str) or not target.strip():
             raise ValidationError(
                 "Each media move item requires non-empty name and target strings.",
                 details={"index": index},
             )
-        normalized.append({"name": name.strip(), "target": target.strip()})
-    names = [item["name"] for item in normalized]
+        normalized.append({selector: name.strip(), "target": target.strip()})
+    names = [tuple(sorted(item.items())) for item in normalized]
     if len(set(names)) != len(names):
         raise ValidationError("Media move contains duplicate clip names.", details={"names": names})
 
@@ -337,21 +338,25 @@ def validate_clip_moves(conn, moves: list[dict[str, str]]) -> list[dict[str, Any
     folder_index = _clip_move_folder_index(root)
     contexts: list[dict[str, Any]] = []
     for item in normalized:
-        matches = by_name.get(item["name"], [])
-        preferred = [row for row in matches if id(row["clip"]) in current_clips]
-        if preferred:
-            match = preferred[0]
-        elif len(matches) == 1:
+        if "media_id" in item or "path" in item:
+            matches = [row for row in rows if (
+                row.get("media_id") == item["media_id"] if "media_id" in item
+                else _source_path_matches(row.get("source_path"), item["path"])
+            )]
+            if len(matches) != 1:
+                raise ValidationError("Media move identity must match exactly one item.", details={"selector": item, "matches": len(matches)})
             match = matches[0]
-        elif not matches:
-            raise APICallFailed(f"Clip '{item['name']}' not found.")
         else:
-            raise ValidationError(
-                "Clip name is ambiguous in Media Pool.",
-                details={"clip": item["name"], "candidates": [
-                    {"name": row["name"], "folder": row["folder"]} for row in matches
-                ]},
-            )
+            matches = by_name.get(item["name"], [])
+            preferred = [row for row in matches if id(row["clip"]) in current_clips]
+            if len(preferred) == 1:
+                match = preferred[0]
+            elif len(matches) == 1:
+                match = matches[0]
+            elif not matches:
+                raise APICallFailed(f"Clip '{item['name']}' not found.")
+            else:
+                raise ValidationError("Clip name is ambiguous in Media Pool.", details={"clip": item["name"]})
 
         segments = _split_folder_path(root, item["target"])
         root_name = root.GetName() if hasattr(root, "GetName") else ""
@@ -373,13 +378,16 @@ def validate_clip_moves(conn, moves: list[dict[str, str]]) -> list[dict[str, Any
             )
         contexts.append({
             "clip": match["clip"],
-            "name": item["name"],
+            "name": match["name"],
+            "location_key": match["name"] if len(by_name.get(match["name"], [])) == 1 else (match.get("media_id") or str(id(match["clip"]))),
             "media_id": match.get("media_id"),
             "source_folder": match.get("folder") or current_path,
             "source_folder_object": folder_index.get(match.get("folder") or current_path),
             "target_folder": target_folder,
             "destination_folder": destination_path,
         })
+    if len({row["location_key"] for row in contexts}) != len(contexts):
+        raise ValidationError("Media move contains duplicate source identities.")
     return contexts
 
 
@@ -403,7 +411,7 @@ def move_clips(conn, moves: list[dict[str, str]]) -> dict[str, Any]:
                 candidates = [row for row in rows if row["clip"] is context["clip"]]
                 if not candidates:
                     candidates = [row for row in rows if row["name"] == context["name"]]
-            locations[context["name"]] = [row["folder"] for row in candidates]
+            locations[context["location_key"]] = [row["folder"] for row in candidates]
         return rows, locations
 
     def rollback_observed_moves(locations: dict[str, list[str]]) -> tuple[bool, dict[str, list[str]]]:
@@ -411,7 +419,7 @@ def move_clips(conn, moves: list[dict[str, str]]) -> dict[str, Any]:
         for context in contexts:
             if context["source_folder"] == context["destination_folder"]:
                 continue
-            if locations.get(context["name"]) != [context["destination_folder"]]:
+            if locations.get(context["location_key"]) != [context["destination_folder"]]:
                 continue
             source_folder = context.get("source_folder_object")
             if source_folder is None:
@@ -427,7 +435,7 @@ def move_clips(conn, moves: list[dict[str, str]]) -> dict[str, Any]:
                 rollback_accepted = False
         _rows, final_locations = read_locations()
         restored = rollback_accepted and all(
-            final_locations.get(context["name"]) == [context["source_folder"]]
+            final_locations.get(context["location_key"]) == [context["source_folder"]]
             for context in contexts
         )
         return restored, final_locations
@@ -449,7 +457,7 @@ def move_clips(conn, moves: list[dict[str, str]]) -> dict[str, Any]:
             observed_moved = [
                 context["name"] for context in contexts
                 if context["source_folder"] != context["destination_folder"]
-                and locations.get(context["name"]) == [context["destination_folder"]]
+                and locations.get(context["location_key"]) == [context["destination_folder"]]
             ]
             rolled_back, final_locations = rollback_observed_moves(locations)
             raise APICallFailed(
@@ -467,11 +475,11 @@ def move_clips(conn, moves: list[dict[str, str]]) -> dict[str, Any]:
     _after_rows, locations = read_locations()
     failures = []
     for context in contexts:
-        if locations.get(context["name"]) != [context["destination_folder"]]:
+        if locations.get(context["location_key"]) != [context["destination_folder"]]:
             failures.append({
                 "name": context["name"],
                 "target": context["destination_folder"],
-                "observed": locations.get(context["name"], []),
+                "observed": locations.get(context["location_key"], []),
             })
     if failures:
         rolled_back, final_locations = rollback_observed_moves(locations)

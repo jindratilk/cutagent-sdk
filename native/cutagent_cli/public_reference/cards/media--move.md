@@ -29,7 +29,7 @@ Use exact search to capture source folders, source paths, and uniqueness, then u
 
 - `NAME` (optional) — Clip name
 - `TARGET` (optional) — Target folder path
-- `--moves` (optional) — JSON array of {name, target} move items
+- `--moves` (optional) — JSON array of {name, target}, {path, target}, or {media_id, target} move items
 
 ## Boundaries and gotchas
 

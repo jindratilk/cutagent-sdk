@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdtemp,rm} from 'node:fs/promises';
+import {mkdtemp,rm,readFile} from 'node:fs/promises';
 import {join} from 'node:path';
 import {tmpdir} from 'node:os';
 import {execFile} from 'node:child_process';
@@ -48,6 +48,7 @@ test('existing native domain factories compose with original wrappers and local 
     assert.equal(env.DAVINCI_RESOLVE_SDK_PARENT_PID,String(process.pid));
     // Imports the complete original Python command graph, without native access.
     const {stdout} = await execute(resolveCutAgentCliCommand(), ['--version'], {env,timeout:30000});
-    assert.match(stdout,/3\.0\.0/);
+    const {version} = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'));
+    assert.equal(stdout.trim(), `cutagent ${version}`);
   } finally {await owner.close();}
 });

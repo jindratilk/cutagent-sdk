@@ -27,7 +27,7 @@ test("setup preserves an existing canonical launcher and returns a structured co
   assert.equal(envelope.ok, false);
   assert.equal(envelope.error.code, "CUTAGENT_COMMAND_COLLISION");
   assert.equal(await readFile(launcher, "utf8"), "valuable existing launcher\n");
-  await assert.rejects(access(join(state, "versions", "3.0.1")));
+  await assert.rejects(access(join(state, "versions", "3.0.2")));
 });
 
 test("the installed command binds exact local command identity without forwarding account secrets", async () => {
@@ -38,7 +38,7 @@ test("the installed command binds exact local command identity without forwardin
   const fakePython = join(directory, "fake-python");
   await mkdir(join(installed, "native"), {recursive: true});
   await mkdir(state, {recursive: true});
-  await writeFile(join(state, "installation.json"), `${JSON.stringify({formatVersion: 1, version: "3.0.1", installRoot: installed, launcher: join(directory, "cutagent"), defaultTransport: "embedded_free"})}\n`);
+  await writeFile(join(state, "installation.json"), `${JSON.stringify({formatVersion: 1, version: "3.0.2", installRoot: installed, launcher: join(directory, "cutagent"), defaultTransport: "embedded_free"})}\n`);
   await writeFile(fakePython, `#!/usr/bin/env node\nprocess.stdout.write(JSON.stringify({args:process.argv.slice(2),env:{transport:process.env.CUTAGENT_RESOLVE_TRANSPORT,commandDigest:process.env.DAVINCI_RESOLVE_SDK_COMMAND_SHA256,parent:process.env.DAVINCI_RESOLVE_SDK_PARENT_PID,accountSecret:process.env.CUTAGENT_CLI_AUTH_TOKEN,brokerSecret:process.env.CUTAGENT_CLI_BROKER_TOKEN}}));\n`, {mode: 0o755});
   const args = ["--json", "project", "create", "Owned test project", "--state-dir", state, "--python", fakePython];
   const result = spawnSync(process.execPath, [entry, ...args], {
@@ -86,6 +86,6 @@ test("custom-state launcher preserves its installation without caller environmen
   assert.equal(result.status,0,result.stderr);
   const actual=JSON.parse(result.stdout).data;
   assert.equal(actual.installed,true);
-  assert.equal(actual.installation.installRoot,join(state,'versions','3.0.1'));
+  assert.equal(actual.installation.installRoot,join(state,'versions','3.0.2'));
   assert.equal(actual.installation.defaultTransport,'embedded_free');
 });

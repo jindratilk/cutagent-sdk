@@ -2268,7 +2268,7 @@
     },
     {
       "path": "cards/media--move.md",
-      "sha256": "adee1b3e0a862d2d55b77ac95e42334c4a2dadca158419a06645628602d73ac4"
+      "sha256": "0acf882cb7252ae8334e7d3fcd0d27bf6310b363381414e3445d931ca3fa964d"
     },
     {
       "path": "cards/media--property_set.md",
@@ -3331,6 +3331,6 @@
       "sha256": "8947660032b6216c5447a16f6874cab6067d87641e8443f9681711f95e11526d"
     }
   ],
-  "product_version": "3.0.1",
+  "product_version": "3.0.2",
   "schema_version": 1
 }

@@ -1,4 +1,4 @@
-# CutAgent SDK 3.0.1 — source release status
+# CutAgent SDK 3.0.2 — source release status
 
 The source includes the reviewed native SDK repairs integrated into CutAgent 3.0 on 2026-09-15. The standalone package uses AGPL-3.0-only; desktop application and private Creator Skills are not included.
 
@@ -15,6 +15,27 @@ The earlier Free handoff covers import, marker create/read/delete, transforms an
 ## Platforms
 
 Current standalone setup supports macOS. Windows setup and live qualification remain outstanding. Studio-only features require DaVinci Resolve Studio. Hosted AI services and private Creator Skills belong to the separate CutAgent desktop application.
+
+## 3.0.2 focused patch
+
+Media Pool inspection now accepts unavailable metadata for file-less native
+generators, while retaining validation for file-backed media. Media moves can
+select an exact source path or native media identity instead of relying on a
+globally unique display name. Ambiguous selectors fail before mutation.
+
+The upstream fixes were exercised in a real macOS DaVinci Resolve project:
+existing generators were preserved, five original sources were imported into
+audio/video bins, an exact-path move was verified, and legitimate duplicate
+Media Pool entries after audio import were retained. A separate first-stage
+podcast run verified native multicam timing and original sample-addressed audio.
+Its multi-instance test launcher was subsequently found not to enforce its
+intended instance, so these observations are not evidence of instance isolation.
+No new full podcast, Windows, or hosted-transcription acceptance is claimed.
+
+This is a source-only patch. It does not update the desktop app or add hosted
+transcription to the standalone runtime; that service requires the authenticated
+CutAgent desktop runtime. Private workflow import/resume fixes ship separately
+in the private skill, not in this public repository.
 
 ## 3.0.1 focused patch
 

@@ -375,7 +375,7 @@ def test_media_pool_page_is_bounded_sorted_and_carries_curated_metadata():
     assert conn.refresh_count == 2
 
 
-@pytest.mark.parametrize("media_type", ["Fusion Title", "Fusion Composition"])
+@pytest.mark.parametrize("media_type", ["Fusion Title", "Fusion Composition", "Generator"])
 def test_media_pool_generated_fusion_assets_report_metadata_unavailable(media_type):
     asset = Asset("Generated", "generated-id", media_type=media_type)
     asset.GetClipProperty = lambda: {"Type": media_type, "File Path": ""}
@@ -389,7 +389,7 @@ def test_media_pool_generated_fusion_assets_report_metadata_unavailable(media_ty
 
 @pytest.mark.parametrize(
     ("media_type", "source_path"),
-    [("Video", ""), ("Fusion Title", "/media/generated.setting"), ("Generator", ""),
+    [("Video", ""), ("Fusion Title", "/media/generated.setting"), ("Generator", "/media/file.mov"),
      ("Fusion Title", 0), ("Fusion Title", False), ("Fusion Title", []), ({}, "")],
 )
 def test_media_pool_unqualified_null_metadata_stays_fail_closed(media_type, source_path):

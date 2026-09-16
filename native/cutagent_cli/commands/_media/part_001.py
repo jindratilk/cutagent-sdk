@@ -966,7 +966,7 @@ def delete_clip(
 def move_clip(
     name: Optional[str] = typer.Argument(None, help="Clip name"),
     target: Optional[str] = typer.Argument(None, help="Target folder path"),
-    moves: Optional[str] = typer.Option(None, "--moves", help="JSON array of {name, target} move items"),
+    moves: Optional[str] = typer.Option(None, "--moves", help="JSON array of {name, target}, {path, target}, or {media_id, target} move items"),
 ):
     """Move one clip or a JSON array of clips to Media Pool folders."""
     if isinstance(moves, typer.models.OptionInfo):

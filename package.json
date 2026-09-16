@@ -1,6 +1,6 @@
 {
   "name": "cutagent",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "CutAgent SDK and local CutAgent CLI runtime for DaVinci Resolve",
   "type": "module",
   "scripts": {

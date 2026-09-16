@@ -350,7 +350,7 @@ def _required_mapping_call(native_object: Any, method: str) -> dict[str, Any]:
 
 
 def _media_metadata_call(clip: Any, properties: dict[str, Any]) -> tuple[bool, dict[str, Any]]:
-    """Read metadata while preserving native unavailability for generated Fusion assets."""
+    """Read metadata while preserving native unavailability for generated assets."""
 
     getter = getattr(clip, "GetMetadata", None)
     if not callable(getter):
@@ -365,7 +365,7 @@ def _media_metadata_call(clip: Any, properties: dict[str, Any]) -> tuple[bool, d
     if (
         value is None
         and isinstance(native_type, str)
-        and native_type in {"Fusion Title", "Fusion Composition"}
+        and native_type in {"Fusion Title", "Fusion Composition", "Generator"}
         and all(properties.get(key) is None or properties.get(key) == "" for key in ("File Path", "FilePath"))
     ):
         return False, {}
