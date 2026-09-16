@@ -86,6 +86,8 @@ def _append_clip_info_from_plan(plan: dict[str, object]) -> dict[str, object]:
         "trackIndex": int(plan["track_index"]),
         "trackType": str(plan["track_type"]),
     }
+    if str(plan["track_type"]) == "audio":
+        clip_info["mediaType"] = 2
     if plan.get("source_start_frame") is not None:
         clip_info["startFrame"] = int(plan["source_start_frame"])
     if plan.get("source_end_frame") is not None:

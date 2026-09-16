@@ -395,7 +395,7 @@ const mediaVerificationSchema = z.object({
     evidence: z.array(z.object({
         kind: z.enum(["command_read", "structural_readback", "manual_review"]),
         summary: mediaSafeIdentifierSchema(500),
-    }).strict()).min(1).max(32),
+    }).strict()).min(1),
     protectedState: z.enum(["preserved", "not_applicable", "not_proven", "partial"]),
 }).strict();
 const mediaReadPayload = (data) => z.object({
@@ -437,45 +437,45 @@ const mediaResultPayloadSchemas = new Map();
 for (const actionId of ["cutagent.action.media.list", "cutagent.action.media.search", "cutagent.action.media.selected.list"]) {
     mediaResultPayloadSchemas.set(actionId, mediaReadPayload(z.object({
         outcome: mediaOutcome(actionId.slice("cutagent.action.media.".length)), scope: mediaIdentityOfKind("media_folder"),
-        items: z.array(mediaIdentityOfKind("media_asset")).max(1024),
+        items: z.array(mediaIdentityOfKind("media_asset")),
     }).strict()));
 }
 mediaResultPayloadSchemas.set("cutagent.action.media.folders.list", mediaReadPayload(z.object({
     outcome: mediaOutcome("folders.list"), scope: mediaIdentityOfKind("media_folder"),
-    folders: z.array(mediaIdentityOfKind("media_folder")).max(1024),
+    folders: z.array(mediaIdentityOfKind("media_folder")),
 }).strict()));
 mediaResultPayloadSchemas.set("cutagent.action.media.folders.tree", mediaReadPayload(z.object({
     outcome: mediaOutcome("folders.tree"), root: mediaIdentityOfKind("media_folder"),
-    folders: z.array(mediaIdentityOfKind("media_folder")).min(1).max(1024),
+    folders: z.array(mediaIdentityOfKind("media_folder")).min(1),
 }).strict()));
 mediaResultPayloadSchemas.set("cutagent.action.media.info", mediaReadPayload(z.object({
-    outcome: mediaOutcome("info"), item: mediaIdentityOfKind("media_asset"), properties: z.array(mediaKeyValueSchema).max(512),
+    outcome: mediaOutcome("info"), item: mediaIdentityOfKind("media_asset"), properties: z.array(mediaKeyValueSchema),
 }).strict()));
 mediaResultPayloadSchemas.set("cutagent.action.media.audio_mapping", mediaReadPayload(z.object({
-    outcome: mediaOutcome("audio_mapping"), item: mediaIdentityOfKind("media_asset"), mapping: z.array(mediaKeyValueSchema).max(256),
+    outcome: mediaOutcome("audio_mapping"), item: mediaIdentityOfKind("media_asset"), mapping: z.array(mediaKeyValueSchema),
 }).strict()));
 mediaResultPayloadSchemas.set("cutagent.action.media.mark.get", mediaReadPayload(z.object({
     outcome: mediaOutcome("mark.get"), item: mediaIdentityOfKind("media_asset"),
-    marks: z.array(z.object({ kind: mediaSafeUserTextSchema(64), inFrame: z.number().int().safe().nullable(), outFrame: z.number().int().safe().nullable() }).strict()).max(32),
+    marks: z.array(z.object({ kind: mediaSafeUserTextSchema(64), inFrame: z.number().int().safe().nullable(), outFrame: z.number().int().safe().nullable() }).strict()),
 }).strict()));
 mediaResultPayloadSchemas.set("cutagent.action.media.marker.list", mediaReadPayload(z.object({
     outcome: mediaOutcome("marker.list"), item: mediaIdentityOfKind("media_asset"),
-    markers: z.array(z.object({ frame: z.number().int().safe(), color: mediaSafeUserTextSchema(64).nullable(), name: mediaSafeUserTextSchema(512).nullable(), note: mediaSafeUserTextSchema(512).nullable(), durationFrames: z.number().int().safe().nonnegative().nullable() }).strict()).max(1024),
+    markers: z.array(z.object({ frame: z.number().int().safe(), color: mediaSafeUserTextSchema(64).nullable(), name: mediaSafeUserTextSchema(512).nullable(), note: mediaSafeUserTextSchema(512).nullable(), durationFrames: z.number().int().safe().nonnegative().nullable() }).strict()),
 }).strict()));
 mediaResultPayloadSchemas.set("cutagent.action.media.matte.list", mediaReadPayload(z.object({
     outcome: mediaOutcome("matte.list"), item: mediaIdentityOfKind("media_asset"), matteCount: z.number().int().nonnegative(),
 }).strict()));
 mediaResultPayloadSchemas.set("cutagent.action.media.third_party_metadata.get", mediaReadPayload(z.object({
-    outcome: mediaOutcome("third_party_metadata.get"), item: mediaIdentityOfKind("media_asset"), metadata: z.array(mediaKeyValueSchema).max(512),
+    outcome: mediaOutcome("third_party_metadata.get"), item: mediaIdentityOfKind("media_asset"), metadata: z.array(mediaKeyValueSchema),
 }).strict()));
 mediaResultPayloadSchemas.set("cutagent.action.media.timeline_matte.list", mediaReadPayload(z.object({
     outcome: mediaOutcome("timeline_matte.list"), folder: mediaIdentityOfKind("media_folder"), matteCount: z.number().int().nonnegative(),
 }).strict()));
 mediaResultPayloadSchemas.set("cutagent.action.media.import", mediaMutationPayload(z.object({
-    outcome: mediaOutcome("import"), importedItems: z.array(mediaIdentityOfKind("media_asset")).max(1024),
+    outcome: mediaOutcome("import"), importedItems: z.array(mediaIdentityOfKind("media_asset")),
 }).strict()));
 mediaResultPayloadSchemas.set("cutagent.action.media.create_timeline", mediaMutationPayload(z.object({
-    outcome: mediaOutcome("create_timeline"), targetIds: z.array(mediaSafeIdentifierSchema(256)).max(1024),
+    outcome: mediaOutcome("create_timeline"), targetIds: z.array(mediaSafeIdentifierSchema(256)),
 }).strict()));
 for (const actionId of [
     "cutagent.action.media.folders.open",
@@ -484,7 +484,7 @@ for (const actionId of [
 ]) {
     mediaResultPayloadSchemas.set(actionId, mediaMutationPayload(z.object({
         outcome: mediaOutcome(actionId.slice("cutagent.action.media.".length)),
-        targetIds: z.array(mediaSafeIdentifierSchema(256)).max(1024),
+        targetIds: z.array(mediaSafeIdentifierSchema(256)),
     }).strict()));
 }
 for (const actionId of ["cutagent.action.media.folders.create", "cutagent.action.media.folders.delete"]) {
@@ -495,7 +495,7 @@ for (const actionId of ["cutagent.action.media.folders.create", "cutagent.action
 for (const actionId of ["cutagent.action.media.metadata", "cutagent.action.media.property_set", "cutagent.action.media.third_party_metadata.set"]) {
     mediaResultPayloadSchemas.set(actionId, mediaMutationPayload(z.object({
         outcome: mediaOutcome(actionId.slice("cutagent.action.media.".length)), item: mediaIdentityOfKind("media_asset"),
-        metadata: z.array(mediaKeyValueSchema).max(512),
+        metadata: z.array(mediaKeyValueSchema),
     }).strict()));
 }
 const unsupportedMediaPayloadSchema = z.object({
@@ -1900,12 +1900,12 @@ export const sdkTimelineRemoveMutationInputSchema = z.object({
     projectId: sdkProjectIdSchema,
     timelineId: sdkTimelineIdSchema,
     timelineRevision: sdkRevisionSchema,
-    affectedTracks: z.array(z.object({ type: z.enum(["video", "audio", "subtitle"]), index: z.number().int().min(1).max(4096) }).strict()).max(12_288),
-    affectedItemIds: z.array(sdkTimelineItemIdSchema).min(1).max(4096),
-    protectedItemIds: z.array(sdkTimelineItemIdSchema).max(4096),
+    affectedTracks: z.array(z.object({ type: z.enum(["video", "audio", "subtitle"]), index: z.number().int().min(1).max(4096) }).strict()),
+    affectedItemIds: z.array(sdkTimelineItemIdSchema).min(1),
+    protectedItemIds: z.array(sdkTimelineItemIdSchema),
     clipId: sdkTimelineItemIdSchema,
     track: z.object({ type: z.enum(["video", "audio", "subtitle"]), index: z.number().int().min(1).max(4096) }).strict(),
-    expectedLinkTransitions: z.array(z.object({ itemId: sdkTimelineItemIdSchema, beforeLinkedItemIds: z.array(sdkTimelineItemIdSchema).max(4096), afterLinkedItemIds: z.array(sdkTimelineItemIdSchema).max(4096) }).strict()).max(4096).default([]),
+    expectedLinkTransitions: z.array(z.object({ itemId: sdkTimelineItemIdSchema, beforeLinkedItemIds: z.array(sdkTimelineItemIdSchema), afterLinkedItemIds: z.array(sdkTimelineItemIdSchema) }).strict()).default([]),
     range: z.object({ start: z.number().int().safe(), endExclusive: z.number().int().safe() }).strict().refine((value) => value.endExclusive > value.start),
     name: z.string().min(1).max(4096),
 }).strict();
@@ -1932,10 +1932,10 @@ export const sdkTimelineRemoveMutationRequestSchema = z.union([
 export const sdkTimelineRemoveMutationResultSchema = z.object({
     operation: z.literal("clip_remove"),
     timelineRevision: sdkRevisionSchema,
-    affectedTracks: z.array(z.object({ type: z.enum(["video", "audio", "subtitle"]), index: z.number().int().min(1).max(4096) }).strict()).max(12_288),
-    affectedItemIds: z.array(sdkTimelineItemIdSchema).max(4096),
-    protectedItemIds: z.array(sdkTimelineItemIdSchema).max(4096),
-    outputItemIds: z.array(sdkTimelineItemIdSchema).max(4096),
+    affectedTracks: z.array(z.object({ type: z.enum(["video", "audio", "subtitle"]), index: z.number().int().min(1).max(4096) }).strict()),
+    affectedItemIds: z.array(sdkTimelineItemIdSchema),
+    protectedItemIds: z.array(sdkTimelineItemIdSchema),
+    outputItemIds: z.array(sdkTimelineItemIdSchema),
     protectedStatePreserved: z.literal(true),
 }).strict();
 export const sdkTimelineRemoveBatchMutationResultSchema = z.object({

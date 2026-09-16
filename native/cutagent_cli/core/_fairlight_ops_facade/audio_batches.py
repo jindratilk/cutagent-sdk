@@ -1915,6 +1915,32 @@ def apply_audio_crossfade_batch(
     return result
 
 
+def _native_audio_fade_bounds(conn, targets: list[dict[str, Any]]) -> None:
+    """Use the same frame bounds as native fade execution, without moving media.
+
+    A sample-addressed clip may store Duration as 1 + 0.999999999 frames while
+    its native frame span is 2. Truncating the SQLite cell's integer component
+    falsely skips its one-frame fade. Keep the raw cell for diagnostics.
+    """
+    tracks: dict[int, dict[str, Any]] = {}
+    for target in targets:
+        index = int(target["track_index"])
+        if index not in tracks:
+            items = conn.timeline.GetItemListInTrack("audio", index) or []
+            tracks[index] = {str(item.GetUniqueId()): item for item in items}
+            if len(tracks[index]) != len(items):
+                raise ValidationError("Native audio fade targets have ambiguous identities.")
+        item = tracks[index].get(str(target["item_id"]))
+        if item is None:
+            raise APICallFailed("Native audio fade target disappeared during planning.")
+        start, end = item.GetStart(), item.GetEnd()
+        if any(isinstance(value, bool) or not isinstance(value, (int, float))
+               or not math.isfinite(value) for value in (start, end)) or end < start:
+            raise APICallFailed("Native audio fade bounds are invalid.")
+        target["start"] = int(start)
+        target["duration_frames"] = int(end) - int(start)
+
+
 def _preview_audio_fade_batch(
     conn,
     *,
@@ -1949,6 +1975,8 @@ def _preview_audio_fade_batch(
             timeline_start=_timeline_start_frame(conn),
             edge=edge,
         )
+        if native_clip_audio.available(conn):
+            _native_audio_fade_bounds(conn, targets)
         updated_items, skipped_items = _plan_audio_fade_batch(
             targets,
             edge=edge,

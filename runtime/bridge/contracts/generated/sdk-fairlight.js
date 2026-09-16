@@ -373,8 +373,13 @@ function fairlightRequestedStateMatches(change, requested, outcome) {
         return (observed === "after" ? change.after : change.before) === requested.pan;
     if (change.kind === "clip_fade_curve" && requested.kind === "clip_fade_curve")
         return change.direction === requested.direction && JSON.stringify(change[observed]) === JSON.stringify(requested.curve);
-    if (change.kind === "clip_fade" && requested.kind === "clip_fade")
-        return change.direction === requested.direction && (observed === "after" ? change.afterFrames : change.beforeFrames) === requested.durationFrames;
+    if (change.kind === "clip_fade" && requested.kind === "clip_fade") {
+        const frames = observed === "after" ? change.afterFrames : change.beforeFrames;
+        // Native compound-frame subtraction can lose a few floating-point bits.
+        // Keep the real readback; accept no meaningful duration change.
+        return change.direction === requested.direction && typeof frames === "number" && Number.isFinite(frames)
+            && Math.abs(frames - requested.durationFrames) <= 1e-8;
+    }
     if (change.kind === "track_mix" && requested.kind === "track_mix")
         return JSON.stringify(observed === "after" ? change.after : change.before) === JSON.stringify({ levelDb: requested.levelDb, pan: requested.pan });
     if (change.kind === "routing" && requested.kind === "routing")

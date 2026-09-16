@@ -522,6 +522,9 @@ class ResidualAvProductionAuthority(ResidualAvHandlerExecutionAuthority):
         payload = {
             "projectId": context["project"]["projectId"],
             "timelineId": timeline["timelineId"],
+            # Post-mutation and recovery inspection must bypass the bridge's
+            # execution-scoped pre-mutation snapshot cache.
+            "phase": "verify" if phase in {"after", "recovery"} else "current",
         }
         if action_id in {
             "cutagent.action.edit.ripple_delete",

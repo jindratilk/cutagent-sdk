@@ -815,13 +815,26 @@ def _native_multicam_create_via_db(
     db_create_result: dict[str, Any] | None = None
     try:
         explicit_offsets = [int(value) for value in source_start_offsets_frames] if source_start_offsets_frames is not None else None
+        # An authored per-angle offset for a single source is already a complete
+        # timing policy. Do not replace it with automatically synthesized in-sync
+        # item ranges: that loses the offset and also rejects an explicit shorter
+        # program/container duration. Explicit sparse/multi-item timing retains
+        # its separate extent-preservation contract.
+        authored_single_source_offsets = (
+            explicit_offsets is not None
+            and normalized_sync == "in"
+            and effective_source_layout == "contiguous"
+            and len({item.label for item in resolved_angles}) == len(resolved_angles)
+            and all(item.record_start_frame is None and item.source_in_frame is None
+                    and item.item_duration_frames is None for item in resolved_angles)
+        )
         db_create_result = native_multicam_db.create_multicam_clip(
             project_db_path=project_db_path,
             multicam_name=multicam_name,
             source_rows=source_rows,
             source_angle_labels=[item.label for item in resolved_angles],
             angle_names=angle_names,
-            source_item_timing=synchronized_timing,
+            source_item_timing=None if authored_single_source_offsets else synchronized_timing,
             source_layout=effective_source_layout,
             sync_mode=normalized_sync,
             source_start_offsets_frames=explicit_offsets,

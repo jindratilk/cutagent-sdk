@@ -34,7 +34,7 @@ void inspect;void frames;void ActionIds;void ProjectIdSchema;void protocol;void 
 run(process.execPath,['node_modules/typescript/bin/tsc','--noEmit','--strict','--module','NodeNext','--moduleResolution','NodeNext','--target','ES2023','consumer.ts']);
 const manifest=JSON.parse(await readFile(join(installed,'sdk/compatibility.json'),'utf8'));
 assert.equal(manifest.packageName,'cutagent');
-assert.equal(run(process.execPath,[join(installed,'bin/cutagent.mjs'),'--version']).trim(),'3.0.0');
+assert.equal(run(process.execPath,[join(installed,'bin/cutagent.mjs'),'--version']).trim(),JSON.parse(await readFile(join(root,'package.json'),'utf8')).version);
 const stateDirectory=join(directory,'state');
 const binDirectory=join(directory,'bin');
 const setup=JSON.parse(run(process.execPath,[join(installed,'bin/cutagent.mjs'),'setup','--skip-python','--state-dir',stateDirectory,'--bin-dir',binDirectory,'--json']));

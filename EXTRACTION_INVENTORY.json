@@ -179,8 +179,8 @@
     {
       "source": "sdk/src/domain/fairlight.ts",
       "destination": "sdk/src/domain/fairlight.ts",
-      "sourceSha256": "f231293bcaeacf29dfdd53c6ae37b722bfa37b3a67c629770115be08c9cf451c",
-      "sha256": "f231293bcaeacf29dfdd53c6ae37b722bfa37b3a67c629770115be08c9cf451c",
+      "sourceSha256": "3afa798fd7d59800a1d332be53e8b90f3fdf04320fd2f04380295933a5090dd8",
+      "sha256": "3afa798fd7d59800a1d332be53e8b90f3fdf04320fd2f04380295933a5090dd8",
       "transformed": false
     },
     {
@@ -354,8 +354,8 @@
     {
       "source": "sdk/src/generated/sdk-fairlight.js",
       "destination": "sdk/src/generated/sdk-fairlight.js",
-      "sourceSha256": "958231092abd75256aeb947a0763fa7ebcca46f36a5819ad2555c0515691116e",
-      "sha256": "958231092abd75256aeb947a0763fa7ebcca46f36a5819ad2555c0515691116e",
+      "sourceSha256": "32f82bb22085a60ae99cc41b0d9dad6b54360f5a22736e3c1d5d59753c9987db",
+      "sha256": "32f82bb22085a60ae99cc41b0d9dad6b54360f5a22736e3c1d5d59753c9987db",
       "transformed": false
     },
     {
@@ -417,15 +417,15 @@
     {
       "source": "sdk/src/generated/sdk-operation-actions.d.ts",
       "destination": "sdk/src/generated/sdk-operation-actions.d.ts",
-      "sourceSha256": "1c58c7efd80a58873016031dcd387fab5cee37a075b238c3020e11fec9386623",
-      "sha256": "1c58c7efd80a58873016031dcd387fab5cee37a075b238c3020e11fec9386623",
+      "sourceSha256": "31bf86e8180725af092e59886e72a722e118878b18b01a737f43e64b0d2a586f",
+      "sha256": "31bf86e8180725af092e59886e72a722e118878b18b01a737f43e64b0d2a586f",
       "transformed": false
     },
     {
       "source": "sdk/src/generated/sdk-operation-actions.js",
       "destination": "sdk/src/generated/sdk-operation-actions.js",
-      "sourceSha256": "d22f7cef862e4bd4d86757c0b799c88be191613e176609011bfe35866f632fe0",
-      "sha256": "d22f7cef862e4bd4d86757c0b799c88be191613e176609011bfe35866f632fe0",
+      "sourceSha256": "32b07187a05abdab0d8c4ccc7d14cf0f401fa9ba2438a97dc44965d4e42a1158",
+      "sha256": "32b07187a05abdab0d8c4ccc7d14cf0f401fa9ba2438a97dc44965d4e42a1158",
       "transformed": false
     },
     {
@@ -445,22 +445,22 @@
     {
       "source": "sdk/src/generated/sdk-plugin-runtime-protocol.d.ts",
       "destination": "sdk/src/generated/sdk-plugin-runtime-protocol.d.ts",
-      "sourceSha256": "379d38f9fcd20223832c2c2044d524916db3cdd427814b6274a688572bb279e3",
-      "sha256": "379d38f9fcd20223832c2c2044d524916db3cdd427814b6274a688572bb279e3",
+      "sourceSha256": "a1c0fe0191402a4c7dc32585e266ae0827f06500a81991b9b6834db2e3c938fb",
+      "sha256": "a1c0fe0191402a4c7dc32585e266ae0827f06500a81991b9b6834db2e3c938fb",
       "transformed": false
     },
     {
       "source": "sdk/src/generated/sdk-plugin-runtime-protocol.js",
       "destination": "sdk/src/generated/sdk-plugin-runtime-protocol.js",
-      "sourceSha256": "f44b220839a706412f2a01444f26c829bfe323d559435dcf307b5b010241a5d3",
-      "sha256": "f44b220839a706412f2a01444f26c829bfe323d559435dcf307b5b010241a5d3",
+      "sourceSha256": "ba5d4b7c086e2f767aeabd7e771def8f4f1bb47b0441cd322aeabd141b9d6ab2",
+      "sha256": "ba5d4b7c086e2f767aeabd7e771def8f4f1bb47b0441cd322aeabd141b9d6ab2",
       "transformed": false
     },
     {
       "source": "sdk/src/generated/sdk-plugin-runtime.d.ts",
       "destination": "sdk/src/generated/sdk-plugin-runtime.d.ts",
-      "sourceSha256": "7adeea392ac9c3d11fb67f27a9f8fd37686e88a59aa0aaaa1f6a791b1c670dfe",
-      "sha256": "5477772a1d911a38652a70c8f00e553353853686b9ee496b44fae1faa90c924e",
+      "sourceSha256": "40752c82a9a8b0216925510c9c2eda2d2d435856cd66f573b6df0cca06b0837c",
+      "sha256": "958fa30adc623d48bbef5ce3555f16873e86609debc36691e6684be6309523f7",
       "transformed": true
     },
     {
@@ -473,15 +473,15 @@
     {
       "source": "sdk/src/generated/sdk-prepared-action.d.ts",
       "destination": "sdk/src/generated/sdk-prepared-action.d.ts",
-      "sourceSha256": "31db9c3a22cf35405af1ff4230179f7ef59ced82ea9833237ea4297e03f13fd2",
-      "sha256": "31db9c3a22cf35405af1ff4230179f7ef59ced82ea9833237ea4297e03f13fd2",
+      "sourceSha256": "7963d3a1e2b5c6c499455f2cc8659392f924a0c38f5ea4962845176b4815b913",
+      "sha256": "7963d3a1e2b5c6c499455f2cc8659392f924a0c38f5ea4962845176b4815b913",
       "transformed": false
     },
     {
       "source": "sdk/src/generated/sdk-prepared-action.js",
       "destination": "sdk/src/generated/sdk-prepared-action.js",
-      "sourceSha256": "aba5d936a0144e63912583f79c5a7018279ce589595f14212e34b77d8a5ec063",
-      "sha256": "aba5d936a0144e63912583f79c5a7018279ce589595f14212e34b77d8a5ec063",
+      "sourceSha256": "fc74df35fc916dace8305a7bef71a298cd78e5655c4978288767f0a748a8f5d8",
+      "sha256": "fc74df35fc916dace8305a7bef71a298cd78e5655c4978288767f0a748a8f5d8",
       "transformed": false
     },
     {
@@ -515,22 +515,22 @@
     {
       "source": "sdk/src/generated/sdk-runtime-protocol.d.ts",
       "destination": "sdk/src/generated/sdk-runtime-protocol.d.ts",
-      "sourceSha256": "ef59d9231ba8f420eb3136246cf97830b75e503e7e36b50d6249c15173d4a932",
-      "sha256": "ef59d9231ba8f420eb3136246cf97830b75e503e7e36b50d6249c15173d4a932",
+      "sourceSha256": "24bcf5d721e6a24aa64370105caeb4b5ad03fba24eb46facc1f144e301a0a897",
+      "sha256": "24bcf5d721e6a24aa64370105caeb4b5ad03fba24eb46facc1f144e301a0a897",
       "transformed": false
     },
     {
       "source": "sdk/src/generated/sdk-runtime-protocol.js",
       "destination": "sdk/src/generated/sdk-runtime-protocol.js",
-      "sourceSha256": "c084b00c652d1db3a4129233394d0aa64f97ecd80251fdbe3541ef36f276d807",
-      "sha256": "c084b00c652d1db3a4129233394d0aa64f97ecd80251fdbe3541ef36f276d807",
+      "sourceSha256": "0ecb1b6bc7d15505457fe18dc74d66e45a73ac394ce25c85855e0382b01650bd",
+      "sha256": "0ecb1b6bc7d15505457fe18dc74d66e45a73ac394ce25c85855e0382b01650bd",
       "transformed": false
     },
     {
       "source": "sdk/src/generated/sdk-runtime.d.ts",
       "destination": "sdk/src/generated/sdk-runtime.d.ts",
-      "sourceSha256": "5008716e3fd6ca23ef960a748341158043635d4a223f7f8ff37a87273f24da4e",
-      "sha256": "bae57378d6195de0d13d7036aa670f2ce9bce5ce73e21679682b92923bcb4d0a",
+      "sourceSha256": "82f4be0c2bf4df664fd8a72c95c82748481c87fa195e637bf69c1d5834574b0b",
+      "sha256": "117dbae308b7923f0cb3e9981e30c9d2d6aadbc5b5c4fbe731f846a7b3d71e65",
       "transformed": true
     },
     {
@@ -809,22 +809,22 @@
     {
       "source": "bridge/contracts/generated/sdk-prepared-action.js",
       "destination": "runtime/bridge/contracts/generated/sdk-prepared-action.js",
-      "sourceSha256": "eeeb1c8e4318f39042aa3cc16884f46ea19904f846680ff336c8354d238f7631",
-      "sha256": "eeeb1c8e4318f39042aa3cc16884f46ea19904f846680ff336c8354d238f7631",
+      "sourceSha256": "fc74df35fc916dace8305a7bef71a298cd78e5655c4978288767f0a748a8f5d8",
+      "sha256": "fc74df35fc916dace8305a7bef71a298cd78e5655c4978288767f0a748a8f5d8",
       "transformed": false
     },
     {
       "source": "bridge/contracts/generated/sdk-operations.js",
       "destination": "runtime/bridge/contracts/generated/sdk-operations.js",
-      "sourceSha256": "8877126eb128a54a7f414c6306a99422644c0d0b56641ac81c8c1a29491047bc",
-      "sha256": "8877126eb128a54a7f414c6306a99422644c0d0b56641ac81c8c1a29491047bc",
+      "sourceSha256": "ec1c0a6bf637596de417a99f9671334a0c927b90cebca8fcdc11e3bfd62ca84b",
+      "sha256": "ec1c0a6bf637596de417a99f9671334a0c927b90cebca8fcdc11e3bfd62ca84b",
       "transformed": false
     },
     {
       "source": "bridge/contracts/generated/sdk-project-media.js",
       "destination": "runtime/bridge/contracts/generated/sdk-project-media.js",
-      "sourceSha256": "6ef30f684d73183f2164d8d829781e813e6f70bb2159f1d1c5ee63463b80cab3",
-      "sha256": "6ef30f684d73183f2164d8d829781e813e6f70bb2159f1d1c5ee63463b80cab3",
+      "sourceSha256": "4d54fc16950b2c5bd5469ee6ef24d775a25006a31c4ff2b7540101c9dd49733c",
+      "sha256": "4d54fc16950b2c5bd5469ee6ef24d775a25006a31c4ff2b7540101c9dd49733c",
       "transformed": false
     },
     {
@@ -851,8 +851,8 @@
     {
       "source": "bridge/contracts/generated/sdk-fairlight.js",
       "destination": "runtime/bridge/contracts/generated/sdk-fairlight.js",
-      "sourceSha256": "958231092abd75256aeb947a0763fa7ebcca46f36a5819ad2555c0515691116e",
-      "sha256": "958231092abd75256aeb947a0763fa7ebcca46f36a5819ad2555c0515691116e",
+      "sourceSha256": "32f82bb22085a60ae99cc41b0d9dad6b54360f5a22736e3c1d5d59753c9987db",
+      "sha256": "32f82bb22085a60ae99cc41b0d9dad6b54360f5a22736e3c1d5d59753c9987db",
       "transformed": false
     },
     {
@@ -865,8 +865,8 @@
     {
       "source": "bridge/contracts/generated/sdk-operation-actions.js",
       "destination": "runtime/bridge/contracts/generated/sdk-operation-actions.js",
-      "sourceSha256": "3a32e49e66410b0817df808ea9255233025e46e883c2167348c226ca9be2b9f4",
-      "sha256": "3a32e49e66410b0817df808ea9255233025e46e883c2167348c226ca9be2b9f4",
+      "sourceSha256": "32b07187a05abdab0d8c4ccc7d14cf0f401fa9ba2438a97dc44965d4e42a1158",
+      "sha256": "32b07187a05abdab0d8c4ccc7d14cf0f401fa9ba2438a97dc44965d4e42a1158",
       "transformed": false
     },
     {
@@ -879,8 +879,8 @@
     {
       "source": "bridge/contracts/generated/sdk-timeline-editing.js",
       "destination": "runtime/bridge/contracts/generated/sdk-timeline-editing.js",
-      "sourceSha256": "eed5abe7f6761fa3a689c2e68fdd3224d6bf4d0caf2d1b2a9ead0e315b20025d",
-      "sha256": "eed5abe7f6761fa3a689c2e68fdd3224d6bf4d0caf2d1b2a9ead0e315b20025d",
+      "sourceSha256": "8b6a06ca1331719bf3ee634f61fc488ed4fffbbc306106294bf7c7683f1f85f1",
+      "sha256": "8b6a06ca1331719bf3ee634f61fc488ed4fffbbc306106294bf7c7683f1f85f1",
       "transformed": false
     },
     {
@@ -970,8 +970,8 @@
     {
       "source": "bridge/contracts/generated/sdk-runtime-protocol.js",
       "destination": "runtime/bridge/contracts/generated/sdk-runtime-protocol.js",
-      "sourceSha256": "e37c5c7fc6ac0ec9d9374064680c892b672233e82ab9a54d0874fae8212961a7",
-      "sha256": "e37c5c7fc6ac0ec9d9374064680c892b672233e82ab9a54d0874fae8212961a7",
+      "sourceSha256": "0ecb1b6bc7d15505457fe18dc74d66e45a73ac394ce25c85855e0382b01650bd",
+      "sha256": "0ecb1b6bc7d15505457fe18dc74d66e45a73ac394ce25c85855e0382b01650bd",
       "transformed": false
     },
     {
@@ -1145,8 +1145,8 @@
     {
       "source": "bridge/contracts/generated/sdk-plugin-runtime-protocol.js",
       "destination": "runtime/bridge/contracts/generated/sdk-plugin-runtime-protocol.js",
-      "sourceSha256": "d1178a9c6beb631a03fd8f00f8dca9bf093b354798874fe6b2ba6b925a440ff9",
-      "sha256": "d1178a9c6beb631a03fd8f00f8dca9bf093b354798874fe6b2ba6b925a440ff9",
+      "sourceSha256": "ba5d4b7c086e2f767aeabd7e771def8f4f1bb47b0441cd322aeabd141b9d6ab2",
+      "sha256": "ba5d4b7c086e2f767aeabd7e771def8f4f1bb47b0441cd322aeabd141b9d6ab2",
       "transformed": false
     },
     {

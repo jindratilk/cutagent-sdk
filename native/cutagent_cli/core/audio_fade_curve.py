@@ -297,6 +297,88 @@ def set_curve(conn, item_id, direction, point):
     return result
 
 
+def set_curves(conn, entries):
+    """Apply independent explicit curve points with one save/reopen transaction.
+
+    Entries are generic item/direction/point intents. Duplicate edges are rejected
+    so a caller with sequential edits keeps the sequential command route.
+    """
+    if not isinstance(entries, list) or not entries:
+        raise ValidationError("Fade curve batch requires nonempty entries.")
+    refs = db_timeline_selection._read_live_items(conn, track_type="audio")
+    by_id = {ref.item_id: ref for ref in refs}
+    if len(by_id) != len(refs):
+        raise ValidationError("Fade curve batch has ambiguous native identities.")
+    tracks, before, normalized, seen = {}, {}, [], set()
+    for entry in entries:
+        if not isinstance(entry, dict) or set(entry) != {"item_id", "direction", "point"}:
+            raise ValidationError("Fade curve entry requires item_id, direction and point.")
+        identity, direction = entry["item_id"], entry["direction"]
+        _parameter(direction)
+        point = validate_point(entry["point"])
+        key = (identity, direction)
+        if key in seen or identity not in by_id:
+            raise ValidationError("Fade curve batch needs distinct existing item edges.")
+        seen.add(key)
+        ref = by_id[identity]
+        if ref.track_index not in tracks:
+            tracks[ref.track_index] = {item.GetUniqueId(): item for item in conn.timeline.GetItemListInTrack("audio", ref.track_index) or []}
+        item = tracks[ref.track_index].get(identity)
+        if item is None:
+            raise ValidationError("Fade curve target identity is unavailable.")
+        before.setdefault(identity, {"fades": item.GetFades(), "properties": item.GetProperties()})
+        edge = "FadeIn" if direction == "in" else "FadeOut"
+        fades = before[identity]["fades"]
+        if not isinstance(fades, dict) or not isinstance(fades.get(edge), (int, float)) or fades[edge] <= 0:
+            raise ValidationError("Set a positive fade duration before changing its curve.",
+                                  details={"item_id": identity, "direction": direction,
+                                           "track_index": ref.track_index, "observed_fades": fades})
+        normalized.append({"item_id": identity, "direction": direction, "point": point})
+    name, project_id, timeline_id = conn.timeline.GetName(), conn.project.GetUniqueId(), conn.timeline.GetUniqueId()
+    if not conn.project_manager.SaveProject():
+        raise APICallFailed("Could not save the current audio fade state.")
+
+    def writer(db, cur, session):
+        items, results = {}, []
+        for entry in normalized:
+            identity, direction, point = entry["item_id"], entry["direction"], entry["point"]
+            if identity not in items:
+                row = _row(cur, by_id[identity], name)
+                items[identity] = {"db_item_id": row["Sm2TiItem_id"], "blob": row.get("EffectFiltersBA")}
+            item = items[identity]
+            blob = item["blob"]
+            item["blob"] = patch_curve(blob, direction, point)
+            results.append({"item_id": identity, "direction": direction, "before": read_curve(blob, direction), "after": point, "changed": item["blob"] != blob})
+        for item in items.values():
+            db_timeline_rows.update_row(cur, "Sm2TiItem", "Sm2TiItem_id", item["db_item_id"], {"EffectFiltersBA": item["blob"]})
+        return {"items": results, "changed": any(row["changed"] for row in results),
+                "expected": [{"db_item_id": item["db_item_id"], "blob": bytes(item["blob"]).hex()} for item in items.values()]}
+
+    def verifier(fresh, result, session):
+        if fresh.project.GetUniqueId() != project_id or fresh.timeline.GetUniqueId() != timeline_id:
+            raise APICallFailed("DaVinci Resolve did not restore the fade curve targets.")
+        for index in tracks:
+            live = {item.GetUniqueId(): item for item in fresh.timeline.GetItemListInTrack("audio", index) or []}
+            for identity, expected in before.items():
+                if by_id[identity].track_index != index:
+                    continue
+                item = live.get(identity)
+                if item is None or item.GetFades() != expected["fades"] or item.GetProperties() != expected["properties"]:
+                    raise APICallFailed("Fade curve batch changed protected clip processing.")
+        if not fresh.project_manager.SaveProject():
+            raise APICallFailed("Could not save the reopened fade curve state.")
+        with sqlite3.connect(session.project_db_path) as db:
+            for expected in result["expected"]:
+                row = db.execute("SELECT EffectFiltersBA FROM Sm2TiItem WHERE Sm2TiItem_id=?", (expected["db_item_id"],)).fetchone()
+                if row is None or bytes(row[0]).hex() != expected["blob"]:
+                    raise APICallFailed("DaVinci Resolve did not preserve the requested curves and effects.")
+        return {"status": "verified", "checks": [{"name": "curves_and_processing_preserved_after_reopen", "ok": True}]}
+
+    result = db_session.execute_sqlite_disk_db_mutation(conn, context="Audio fade curve batch", writer=writer, verifier=verifier, require_verified=True)
+    result.pop("expected", None)
+    return result
+
+
 def observe_curve(blob, direction):
     try:
         return {"controlPoint": read_curve(blob, direction)}

@@ -120,7 +120,7 @@ export const sdkMediaPoolDeleteInputSchema = mediaMutationBinding.extend({
 });
 export const sdkMediaPoolSyncAudioInputSchema = mediaMutationBinding.extend({
     videoAssetId: sdkMediaPoolItemIdSchema,
-    audioAssetIds: z.array(sdkMediaPoolItemIdSchema).min(1).max(64),
+    audioAssetIds: z.array(sdkMediaPoolItemIdSchema).min(1),
     method: z.enum(["waveform", "timecode"]),
     appendTracks: z.boolean(),
 }).strict().superRefine((input, issue) => {
@@ -182,7 +182,7 @@ export const sdkMediaPoolDeleteResultSchema = z.object({
 export const sdkMediaPoolSyncAudioResultSchema = z.object({
     projectId: sdkProjectIdSchema,
     videoAssetId: sdkMediaPoolItemIdSchema,
-    audioAssetIds: z.array(sdkMediaPoolItemIdSchema).min(1).max(64),
+    audioAssetIds: z.array(sdkMediaPoolItemIdSchema).min(1),
     syncedAsset: mediaIdentity.nullable(),
     revision: sdkRevisionSchema,
 }).strict().superRefine((result, issue) => {

@@ -385,6 +385,26 @@ def _target_kinds(plan: Mapping[str, Any]) -> list[str]:
     return [kind for kind, _identity in _semantic_target_keys(plan)]
 
 
+def _invoke_curve_batch(steps):
+    from .commands import fairlight as commands
+    from .core import audio_fade_curve
+
+    entries = []
+    with _HANDLER_LOCK:
+        for step in steps:
+            handler, kwargs = step[0]
+            if len(step) != 1 or handler != "fade_curve":
+                raise FairlightEvaluationError("VALIDATION_ERROR", "Fade curve lowering changed.")
+            direction = kwargs["direction"]
+            commands.enforce_mutation_policy(
+                "fairlight.fade_in_batch" if direction == "in" else "fairlight.fade_out_batch",
+                intended_engine="db_workaround", mutating=False,
+            )
+            entries.append({"item_id": kwargs["item_id"], "direction": direction,
+                            "point": None if kwargs["linear"] else {"x": kwargs["x"], "y": kwargs["y"]}})
+        return audio_fade_curve.set_curves(commands.get_connection(require_timeline=True), entries)
+
+
 def _locator_by_key(
     plan: Mapping[str, Any], resolved: list[Mapping[str, Any]]
 ) -> dict[tuple[str, Any], Mapping[str, Any]]:
@@ -1206,6 +1226,21 @@ class FairlightPlanPreparedActionDescriptor:
             index = len(plan["changes"])
         while index < len(plan["changes"]):
             change = plan["changes"][index]
+            if change["kind"] == "clip_fade_curve":
+                end, seen = index, set()
+                while end < len(plan["changes"]) and plan["changes"][end]["kind"] == "clip_fade_curve":
+                    row = plan["changes"][end]
+                    key = (row["target"]["clipId"], row["direction"])
+                    if key in seen:
+                        break
+                    seen.add(key)
+                    end += 1
+                if end - index > 1:
+                    receipt = _invoke_curve_batch(prepared["lowering"]["steps"][index:end])
+                    for position in range(index, end):
+                        step_results[position] = [receipt]
+                    index = end
+                    continue
             if change["kind"] == "loudness":
                 index += 1
                 continue
@@ -1480,7 +1515,18 @@ class FairlightPlanPreparedActionDescriptor:
                 expected = True
             elif change.get("kind") == "loudness":
                 expected = observed
-            if observed != expected:
+            # Native compound frame values can lose a few floating-point bits
+            # when the timeline origin is subtracted. Preserve the readback,
+            # but do not reject an otherwise exact fade for that cancellation.
+            matches = observed == expected
+            if change.get("kind") == "clip_fade":
+                matches = (
+                    isinstance(observed, (int, float))
+                    and not isinstance(observed, bool)
+                    and math.isfinite(observed)
+                    and math.isclose(observed, expected, rel_tol=0.0, abs_tol=1e-8)
+                )
+            if not matches:
                 raise FairlightEvaluationError(
                     "VERIFICATION_FAILED",
                     "Fresh Fairlight plan readback did not match the requested state.",

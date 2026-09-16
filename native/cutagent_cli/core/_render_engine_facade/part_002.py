@@ -515,6 +515,26 @@ def _canonical_render_preset_xml(path: Path) -> tuple[bytes, Dict[str, Any]]:
     return canonical, _render_preset_restore_settings(root)
 
 
+def _render_preset_changed_fields(expected: bytes, observed: bytes) -> list[str]:
+    """Name differing native fields without exposing their paths or values."""
+    def fields(raw: bytes) -> dict:
+        result = {}
+        for index, element in enumerate(ET.fromstring(raw).iter()):
+            key = f"{index}:{element.tag}"
+            result[key] = (element.text or "", tuple(sorted(element.attrib.items())))
+            if element.tag == "FieldsBlob" and element.text:
+                from .fairlight_ops import _decode_bmd_fields_blob_entries
+
+                version, entries = _decode_bmd_fields_blob_entries(bytes.fromhex(element.text))
+                result[key] = version
+                for entry in entries:
+                    result[f"{key}.{entry['key']}"] = (entry["value_type"], entry["value_raw"])
+        return result
+
+    before, after = fields(expected), fields(observed)
+    return sorted(key for key in before.keys() | after.keys() if before.get(key) != after.get(key))
+
+
 def _delete_owned_render_preset(conn, name: str) -> None:
     delete_render_preset(conn, name)
     if name in _render_preset_catalog_names(conn):
@@ -880,6 +900,7 @@ def _restore_render_context_from_preset(
                 details={
                     "expected_sha256": snapshot["canonical_xml_sha256"],
                     "observed_sha256": hashlib.sha256(retained_canonical).hexdigest(),
+                    "changed_fields": _render_preset_changed_fields(expected, retained_canonical),
                 },
             )
         page_context = (
@@ -960,10 +981,14 @@ def _restore_render_context_from_preset(
                     details={
                         "expected_sha256": snapshot["canonical_xml_sha256"],
                         "observed_sha256": hashlib.sha256(canonical).hexdigest(),
+                        "changed_fields": _render_preset_changed_fields(expected, canonical),
                     },
                 )
     except Exception as exc:
-        failures.append({"phase": "restore_and_verify", "error": str(exc)})
+        failures.append({
+            "phase": "restore_and_verify", "error": str(exc),
+            "details": dict(getattr(exc, "details", {}) or {}),
+        })
     finally:
         for owned_name in reversed(owned_names):
             try:
@@ -1003,10 +1028,17 @@ def _restore_render_context_from_preset(
                         "observed_sha256": observed_snapshot[
                             "canonical_xml_sha256"
                         ],
+                        "changed_fields": _render_preset_changed_fields(
+                            snapshot["canonical_xml"].encode("utf-8"),
+                            observed_snapshot["canonical_xml"].encode("utf-8"),
+                        ),
                     },
                 )
         except Exception as exc:
-            failures.append({"phase": "verify_after_cleanup", "error": str(exc)})
+            failures.append({
+                "phase": "verify_after_cleanup", "error": str(exc),
+                "details": dict(getattr(exc, "details", {}) or {}),
+            })
         finally:
             if observed_snapshot is not None:
                 try:

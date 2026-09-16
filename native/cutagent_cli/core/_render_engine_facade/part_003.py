@@ -1074,19 +1074,25 @@ def render_transcript_audio(
             _abort_render_job(conn, job_id=job_id)
         elif job_id:
             _delete_render_job_quietly(conn, job_id)
-        _restore_render_context(conn, snapshot)
+        # The custody snapshot predates the uniquely imported transcript preset.
+        # Remove that owned preset before restoring: the preset-based fallback
+        # deliberately rejects any unexplained catalog delta. Restore-first both
+        # rejected our own preset and skipped its cleanup when restoration raised.
         if runtime_preset is not None and runtime_preset_imported:
             try:
                 delete_render_preset(conn, runtime_preset["name"])
             except Exception:
                 pass
-        if runtime_preset is not None:
-            try:
-                temp_dir = Path(str(runtime_preset.get("temp_dir") or ""))
-                if temp_dir.name.startswith("cutagent-transcript-preset-"):
-                    shutil.rmtree(temp_dir, ignore_errors=True)
-            except Exception:
-                pass
+        try:
+            _restore_render_context(conn, snapshot)
+        finally:
+            if runtime_preset is not None:
+                try:
+                    temp_dir = Path(str(runtime_preset.get("temp_dir") or ""))
+                    if temp_dir.name.startswith("cutagent-transcript-preset-"):
+                        shutil.rmtree(temp_dir, ignore_errors=True)
+                except Exception:
+                    pass
 
 
 def import_burnin_preset(conn, path: str) -> Dict[str, Any]:
