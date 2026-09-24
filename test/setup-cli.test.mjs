@@ -8,6 +8,7 @@ import test from "node:test";
 
 const root = resolve(import.meta.dirname, "..");
 const entry = join(root, "bin", "cutagent.mjs");
+const packageVersion = JSON.parse(await readFile(join(root, "package.json"), "utf8")).version;
 
 test("setup preserves an existing canonical launcher and returns a structured collision", async () => {
   if (process.platform === "win32") return;
@@ -27,7 +28,7 @@ test("setup preserves an existing canonical launcher and returns a structured co
   assert.equal(envelope.ok, false);
   assert.equal(envelope.error.code, "CUTAGENT_COMMAND_COLLISION");
   assert.equal(await readFile(launcher, "utf8"), "valuable existing launcher\n");
-  await assert.rejects(access(join(state, "versions", "3.0.3")));
+  await assert.rejects(access(join(state, "versions", packageVersion)));
 });
 
 test("the installed command binds exact local command identity without forwarding account secrets", async () => {
@@ -86,6 +87,6 @@ test("custom-state launcher preserves its installation without caller environmen
   assert.equal(result.status,0,result.stderr);
   const actual=JSON.parse(result.stdout).data;
   assert.equal(actual.installed,true);
-  assert.equal(actual.installation.installRoot,join(state,'versions','3.0.3'));
+  assert.equal(actual.installation.installRoot,join(state,'versions',packageVersion));
   assert.equal(actual.installation.defaultTransport,'embedded_free');
 });

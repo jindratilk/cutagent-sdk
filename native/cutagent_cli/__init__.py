@@ -1,2 +1,2 @@
 """CutAgent CLI - contract-aware automation for DaVinci Resolve."""
-__version__ = "3.0.3"
+__version__ = "3.0.4"

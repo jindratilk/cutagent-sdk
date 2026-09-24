@@ -28,7 +28,7 @@ npm pack --json
 Install the resulting tarball in a clean consumer project:
 
 ```sh
-npm install /absolute/path/to/cutagent-3.0.3.tgz
+npm install /absolute/path/to/cutagent-3.0.4.tgz
 npx cutagent setup
 ```
 

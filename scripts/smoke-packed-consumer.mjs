@@ -7,6 +7,7 @@ const root=resolve(import.meta.dirname,'..');
 const directory=await realpath(await mkdtemp(join(tmpdir(),'cutagent-sdk-consumer-')));
 const run=(command,args,cwd=directory)=>execFileSync(command,args,{cwd,encoding:'utf8',env:process.env,stdio:['ignore','pipe','pipe']});
 const packed=JSON.parse(run('npm',['pack','--json','--pack-destination',directory],root))[0];
+assert.ok(!packed.files.some(({path}) => /^(skills|agent-knowledge)\//.test(path) || /(^|\/)(CUTAGENT|SKILL)\.md$/.test(path)), 'Private agent instructions must not be published');
 run('python3',[join(root,'scripts/verify-public-privacy.py'),join(directory,packed.filename)],root);
 await writeFile(join(directory,'package.json'),JSON.stringify({name:'standalone-consumer-smoke',private:true,type:'module'}));
 run('npm',['install','--ignore-scripts','--no-audit','--no-fund',join(directory,packed.filename),'typescript@5.9.3','@types/node@24.13.3']);

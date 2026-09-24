@@ -50,6 +50,8 @@ def inspect_file(name, data):
                        'docs/FREE_21_1_ACCEPTANCE_2026-09-08.json',
                        'docs/STUDIO_PUBLIC_SOURCE_ACCEPTANCE_2026-09-08.json'}:
         raise ValueError('Internal publication document in ' + name)
+    if source_name.startswith(('skills/', 'agent-knowledge/')) or Path(source_name).name in {'CUTAGENT.md', 'SKILL.md'}:
+        raise ValueError('Private agent instructions in ' + name)
     inspect_bytes(data, name)
     if '/fixtures/' not in name:
         return

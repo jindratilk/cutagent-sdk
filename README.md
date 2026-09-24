@@ -93,7 +93,7 @@ npm pack
 mkdir ../my-video-project
 cd ../my-video-project
 npm init -y
-npm install ../cutagent-sdk/cutagent-3.0.3.tgz
+npm install ../cutagent-sdk/cutagent-3.0.4.tgz
 ```
 
 **Using DaVinci Resolve Free?**
@@ -120,10 +120,6 @@ cutagent runtime start --transport studio_external
 Keep that terminal running. It prints the connection-file path; set `CUTAGENT_SDK_DISCOVERY_FILE` to that path in the terminal where your agent or script runs.
 
 [Full setup guide →](docs/GETTING_STARTED.md)
-
-## Teach your agent how to edit
-
-Give your agent the [CutAgent skill](skills/cutagent/SKILL.md). It loads the relevant guidance for each task: building timelines, shaping speed ramps, animating Fusion text, mixing audio, and checking the result. The references include practical SDK examples and work with the local Free or Studio connection.
 
 ## Your first connection
 

@@ -1,6 +1,6 @@
 # CutAgent SDK release status
 
-The standalone package contains the TypeScript SDK, local CutAgent CLI runtime, and public Agent Knowledge under AGPL-3.0-only. Install from source using the README. npm registry publication is not part of this source release.
+The standalone package contains the TypeScript SDK and local CutAgent CLI runtime under AGPL-3.0-only. Install from source using the README. npm registry publication is not part of this source release.
 
 ## Platforms and verification
 
@@ -17,3 +17,5 @@ Source inventory, build, strict TypeScript checks, runtime tests, and installed-
 - Hosted AI transcription, voice generation, and video generation require the separate CutAgent desktop app. They are not hosted services supplied by this standalone package.
 
 No new full end-to-end, Windows, or live DaVinci Resolve acceptance is claimed by documentation or fixture maintenance.
+
+Agent Knowledge and creative skills are not included in this release or its package. Earlier published versions are unchanged.
