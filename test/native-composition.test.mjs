@@ -48,7 +48,10 @@ test('existing native domain factories compose with original wrappers and local 
     assert.equal(env.DAVINCI_RESOLVE_SDK_PARENT_PID,String(process.pid));
     // Imports the complete original Python command graph, without native access.
     const {stdout} = await execute(resolveCutAgentCliCommand(), ['--version'], {env,timeout:30000});
-    const {version} = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'));
-    assert.equal(stdout.trim(), `cutagent ${version}`);
+    // The source package and bundled native CLI are independent version axes.
+    const nativeSource = await readFile(new URL('../native/cutagent_cli/__init__.py', import.meta.url), 'utf8');
+    const nativeVersion = nativeSource.match(/^__version__ = "([^"]+)"$/m)?.[1];
+    assert.ok(nativeVersion);
+    assert.equal(stdout.trim(), `cutagent ${nativeVersion}`);
   } finally {await owner.close();}
 });

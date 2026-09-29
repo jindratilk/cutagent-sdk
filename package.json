@@ -1,15 +1,16 @@
 {
   "name": "cutagent",
-  "version": "3.0.4",
+  "version": "3.1.0",
   "description": "CutAgent SDK and local CutAgent CLI runtime for DaVinci Resolve",
   "type": "module",
   "scripts": {
     "build": "npm --prefix sdk run build",
     "test": "node --test test/*.test.mjs",
     "test:types": "tsc --noEmit --module NodeNext --moduleResolution NodeNext --target ES2023 --strict test/type-smoke.ts",
+    "verify:skills": "node scripts/verify-skills.mjs",
     "verify:source": "node scripts/verify-source.mjs",
     "test:pack": "node scripts/smoke-packed-consumer.mjs",
-    "prepack": "npm run build"
+    "prepack": "npm run build && node scripts/verify-skills.mjs --quiet"
   },
   "bin": {
     "cutagent": "bin/cutagent.mjs"
@@ -47,6 +48,7 @@
     "!native/**/__pycache__/**",
     "!native/**/*.pyc",
     "runtime/",
+    "skills/",
     "sdk/dist/",
     "sdk/.types/",
     "sdk/compatibility.json",

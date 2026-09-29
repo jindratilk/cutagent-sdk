@@ -1,0 +1,60 @@
+-- CutAgent text-behind-object foreground ellipse mask.
+-- Purpose: apply to a duplicated foreground clip above the text layer.
+-- Edit Mask_Foreground.Center/Width/Height/SoftEdge and Transform_SourceFit.Size.
+
+{
+    Tools = ordered() {
+        MediaIn1 = MediaIn {
+            Inputs = { GlobalOut = Input { Value = 119, }, },
+            ViewInfo = OperatorInfo { Pos = { 0, 50 } },
+        },
+        Transform_SourceFit = Transform {
+            Inputs = {
+                Input = Input { SourceOp = "MediaIn1", Source = "Output", },
+                Size = Input { Value = 1.0, },
+                Center = Input { Value = { 0.5, 0.5 }, },
+            },
+            ViewInfo = OperatorInfo { Pos = { 220, 50 } },
+        },
+        Mask_Foreground = EllipseMask {
+            Inputs = {
+                MaskWidth = Input { Value = 1920, },
+                MaskHeight = Input { Value = 1080, },
+                PixelAspect = Input { Value = { 1, 1 }, },
+                Center = Input { Value = { 0.5, 0.5 }, },
+                Width = Input { Value = 0.25, },
+                Height = Input { Value = 0.35, },
+                SoftEdge = Input { Value = 0.015, },
+            },
+            ViewInfo = OperatorInfo { Pos = { 440, 170 } },
+        },
+        BG_Transparent = Background {
+            Inputs = {
+                GlobalOut = Input { Value = 119, },
+                Width = Input { Value = 1920, },
+                Height = Input { Value = 1080, },
+                UseFrameFormatSettings = Input { Value = 1, },
+                TopLeftAlpha = Input { Value = 0, },
+                TopRightAlpha = Input { Value = 0, },
+                BottomLeftAlpha = Input { Value = 0, },
+                BottomRightAlpha = Input { Value = 0, },
+            },
+            ViewInfo = OperatorInfo { Pos = { 660, 170 } },
+        },
+        Merge_Foreground = Merge {
+            Inputs = {
+                Background = Input { SourceOp = "BG_Transparent", Source = "Output", },
+                Foreground = Input { SourceOp = "Transform_SourceFit", Source = "Output", },
+                EffectMask = Input { SourceOp = "Mask_Foreground", Source = "Mask", },
+            },
+            ViewInfo = OperatorInfo { Pos = { 880, 80 } },
+        },
+        MediaOut1 = MediaOut {
+            Inputs = {
+                Index = Input { Value = "0", },
+                Input = Input { SourceOp = "Merge_Foreground", Source = "Output", },
+            },
+            ViewInfo = OperatorInfo { Pos = { 1100, 80 } },
+        },
+    },
+}

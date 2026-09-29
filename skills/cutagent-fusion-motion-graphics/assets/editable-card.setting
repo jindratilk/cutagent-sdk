@@ -1,0 +1,104 @@
+{
+    Tools = ordered() {
+        Canvas = Background {
+            Inputs = {
+                GlobalOut = Input { Value = 119, },
+                Width = Input { Value = 1920, },
+                Height = Input { Value = 1080, },
+                TopLeftRed = Input { Value = 0.02, },
+                TopLeftGreen = Input { Value = 0.03, },
+                TopLeftBlue = Input { Value = 0.05, },
+                TopLeftAlpha = Input { Value = 1, },
+            },
+            ViewInfo = OperatorInfo { Pos = { 0, 0 } },
+        },
+        CardMask = RectangleMask {
+            Inputs = {
+                MaskWidth = Input { Value = 1920, },
+                MaskHeight = Input { Value = 1080, },
+                PixelAspect = Input { Value = { 1, 1 }, },
+                Center = Input { Value = { 0.5, 0.5 }, },
+                Width = Input { Value = 0.68, },
+                Height = Input { Value = 0.42, },
+                CornerRadius = Input { Value = 0.04, },
+            },
+            ViewInfo = OperatorInfo { Pos = { 0, 150 } },
+        },
+        CardFill = Background {
+            Inputs = {
+                GlobalOut = Input { Value = 119, },
+                Width = Input { Value = 1920, },
+                Height = Input { Value = 1080, },
+                TopLeftRed = Input { Value = 0.06, },
+                TopLeftGreen = Input { Value = 0.16, },
+                TopLeftBlue = Input { Value = 0.23, },
+                TopLeftAlpha = Input { Value = 1, },
+                EffectMask = Input { SourceOp = "CardMask", Source = "Mask", },
+            },
+            ViewInfo = OperatorInfo { Pos = { 220, 150 } },
+        },
+        Title = TextPlus {
+            Inputs = {
+                GlobalOut = Input { Value = 119, },
+                Width = Input { Value = 1920, },
+                Height = Input { Value = 1080, },
+                StyledText = Input { Value = "A clear idea", },
+                Font = Input { Value = "Arial", },
+                Style = Input { Value = "Bold", },
+                Size = Input { Value = 0.07, },
+                Center = Input { Value = { 0.5, 0.5 }, },
+                Red1 = Input { Value = 0.95, },
+                Green1 = Input { Value = 0.98, },
+                Blue1 = Input { Value = 1, },
+                Alpha1 = Input { Value = 1, },
+                HorizontalJustificationNew = Input { Value = 3, },
+                VerticalJustificationNew = Input { Value = 3, },
+            },
+            ViewInfo = OperatorInfo { Pos = { 220, 300 } },
+        },
+        CardContent = Merge {
+            Inputs = {
+                Background = Input { SourceOp = "CardFill", Source = "Output", },
+                Foreground = Input { SourceOp = "Title", Source = "Output", },
+            },
+            ViewInfo = OperatorInfo { Pos = { 440, 150 } },
+        },
+        CardMotion = Transform {
+            Inputs = {
+                Input = Input { SourceOp = "CardContent", Source = "Output", },
+                Size = Input { SourceOp = "CardScale", Source = "Value", },
+            },
+            ViewInfo = OperatorInfo { Pos = { 660, 150 } },
+        },
+        Composite = Merge {
+            Inputs = {
+                Background = Input { SourceOp = "Canvas", Source = "Output", },
+                Foreground = Input { SourceOp = "CardMotion", Source = "Output", },
+                Blend = Input { SourceOp = "CardFade", Source = "Value", },
+            },
+            ViewInfo = OperatorInfo { Pos = { 880, 0 } },
+        },
+        MediaOut1 = MediaOut {
+            Inputs = {
+                Index = Input { Value = "0", },
+                Input = Input { SourceOp = "Composite", Source = "Output", },
+            },
+            ViewInfo = OperatorInfo { Pos = { 1100, 0 } },
+        },
+        CardScale = BezierSpline {
+            KeyFrames = {
+                [0] = { 0.88, RH = { 8, 0.88 } },
+                [24] = { 1, LH = { 16, 1 }, RH = { 52, 1 } },
+                [108] = { 1, LH = { 80, 1 } },
+            },
+        },
+        CardFade = BezierSpline {
+            KeyFrames = {
+                [0] = { 0, RH = { 4, 0 } },
+                [12] = { 1, LH = { 8, 1 }, RH = { 38, 1 } },
+                [90] = { 1, LH = { 64, 1 }, RH = { 96, 1 } },
+                [108] = { 0, LH = { 102, 0 } },
+            },
+        },
+    },
+}

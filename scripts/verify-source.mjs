@@ -43,4 +43,5 @@ for (const entry of reference.files) {
   }
 }
 console.log(`Verified ${inventory.files.length} extracted source hashes and exact SDK/runtime source inventories.`);
+execFileSync(process.execPath, [join(root, 'scripts/verify-skills.mjs')], {cwd: root, stdio: 'inherit'});
 execFileSync('python3', [join(root, 'scripts/verify-public-privacy.py')], {cwd: root, stdio: 'inherit'});
