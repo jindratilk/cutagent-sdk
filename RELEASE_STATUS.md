@@ -1,6 +1,6 @@
 # CutAgent SDK release status
 
-The standalone package contains the TypeScript SDK and local CutAgent CLI runtime under AGPL-3.0-only. Install from source using the README. npm registry publication is not part of this source release.
+The standalone source candidate contains the TypeScript SDK, local CutAgent CLI runtime, and 35 public Agent Skills under AGPL-3.0-only. Install from source using the README. npm registry publication is not part of this source release.
 
 ## Platforms and verification
 
@@ -18,4 +18,6 @@ Source inventory, build, strict TypeScript checks, runtime tests, and installed-
 
 No new full end-to-end, Windows, or live DaVinci Resolve acceptance is claimed by documentation or fixture maintenance.
 
-Agent Knowledge and creative skills are not included in this release or its package. Earlier published versions are unchanged.
+This candidate adds a public, locally executable Agent Skills suite. Its 13 technical skills and 22 adapted creative skills use the standalone SDK/CLI, live DaVinci Resolve capabilities, and user supplied or locally licensed assets. `voice-generation` becomes `cutagent-voiceover` for supplied recordings because this package has no local synthetic voice engine. The skills contain no account pairing, private asset catalog, subscription, or hosted service workflow. See [the creative skill review](docs/CREATIVE_SKILLS_REVIEW.md).
+
+Skill packaging and agent installation checks are separate from native editing acceptance. No new full end-to-end, Windows, or live DaVinci Resolve qualification is claimed for this source candidate. Earlier published versions are unchanged.

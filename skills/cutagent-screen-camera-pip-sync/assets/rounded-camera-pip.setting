@@ -1,0 +1,88 @@
+-- CutAgent rounded camera PiP template.
+-- Purpose: apply rounded corners to a camera/webcam/facecam clip while keeping
+-- the area outside the rounded mask transparent. Copy or export this asset into
+-- the session workspace before editing or applying it.
+--
+-- Safe edits for agents:
+-- - GlobalOut: set to the camera clip's last local frame when known.
+-- - Width/Height and MaskWidth/MaskHeight: set to the source or timeline format.
+-- - Transform_SourceCrop.Size: 1.00-1.08. Increase slightly if black source
+--   edge pixels show inside the rounded mask.
+-- - Mask_Camera.CornerRadius: 0.08-0.18 for normal rounded PiP corners.
+-- - Mask_Camera.SoftEdge: keep tiny, usually 0.001-0.003.
+--
+-- Do not remove the explicit TopLeftAlpha/TopRightAlpha/BottomLeftAlpha/
+-- BottomRightAlpha values. They are the guardrail against black corners.
+
+{
+    Tools = ordered() {
+        MediaIn1 = MediaIn {
+            Inputs = {
+                GlobalOut = Input { Value = 143, },
+            },
+            ViewInfo = OperatorInfo { Pos = { 0, 50 } },
+        },
+        Transform_SourceCrop = Transform {
+            Inputs = {
+                Input = Input { SourceOp = "MediaIn1", Source = "Output", },
+                Size = Input { Value = 1.04, },
+                Center = Input { Value = { 0.5, 0.5 }, },
+            },
+            ViewInfo = OperatorInfo { Pos = { 220, 50 } },
+        },
+        Mask_Camera = RectangleMask {
+            Inputs = {
+                MaskWidth = Input { Value = 1920, },
+                MaskHeight = Input { Value = 1080, },
+                PixelAspect = Input { Value = { 1, 1 }, },
+                Center = Input { Value = { 0.5, 0.5 }, },
+                Width = Input { Value = 1.0, },
+                Height = Input { Value = 1.0, },
+                CornerRadius = Input { Value = 0.12, },
+                SoftEdge = Input { Value = 0.001, },
+            },
+            ViewInfo = OperatorInfo { Pos = { 220, 180 } },
+        },
+        BG_Transparent = Background {
+            Inputs = {
+                GlobalOut = Input { Value = 143, },
+                Width = Input { Value = 1920, },
+                Height = Input { Value = 1080, },
+                UseFrameFormatSettings = Input { Value = 1, },
+                TopLeftRed = Input { Value = 0, },
+                TopLeftGreen = Input { Value = 0, },
+                TopLeftBlue = Input { Value = 0, },
+                TopLeftAlpha = Input { Value = 0, },
+                TopRightRed = Input { Value = 0, },
+                TopRightGreen = Input { Value = 0, },
+                TopRightBlue = Input { Value = 0, },
+                TopRightAlpha = Input { Value = 0, },
+                BottomLeftRed = Input { Value = 0, },
+                BottomLeftGreen = Input { Value = 0, },
+                BottomLeftBlue = Input { Value = 0, },
+                BottomLeftAlpha = Input { Value = 0, },
+                BottomRightRed = Input { Value = 0, },
+                BottomRightGreen = Input { Value = 0, },
+                BottomRightBlue = Input { Value = 0, },
+                BottomRightAlpha = Input { Value = 0, },
+            },
+            ViewInfo = OperatorInfo { Pos = { 440, 180 } },
+        },
+        Merge_RoundedCamera = Merge {
+            Inputs = {
+                Background = Input { SourceOp = "BG_Transparent", Source = "Output", },
+                Foreground = Input { SourceOp = "Transform_SourceCrop", Source = "Output", },
+                EffectMask = Input { SourceOp = "Mask_Camera", Source = "Mask", },
+                Blend = Input { Value = 1, },
+            },
+            ViewInfo = OperatorInfo { Pos = { 660, 80 } },
+        },
+        MediaOut1 = MediaOut {
+            Inputs = {
+                Index = Input { Value = "0", },
+                Input = Input { SourceOp = "Merge_RoundedCamera", Source = "Output", },
+            },
+            ViewInfo = OperatorInfo { Pos = { 880, 80 } },
+        },
+    },
+}

@@ -1,0 +1,241 @@
+{
+  "schemaVersion": 1,
+  "files": [
+    {
+      "path": "cutagent-apple-motion-graphics/SKILL.md",
+      "sha256": "34b56d7601df750110cfa9bc74e65cc9635e8f203ebfbd6e30f1ef6fb213b26a"
+    },
+    {
+      "path": "cutagent-audio/SKILL.md",
+      "sha256": "bb264e6049f5308f479ac21d9e2aeaedff26a9e6b29d471b9611fcb14c5b6f21"
+    },
+    {
+      "path": "cutagent-b-roll/SKILL.md",
+      "sha256": "6dbfe06d92574554ddf0dc767d96eed5d2d24d923e24efc582baac7797cd4559"
+    },
+    {
+      "path": "cutagent-background-music/SKILL.md",
+      "sha256": "a8cfd85b6ce0e51e0c5ef468b55b6c76ff0a4ad68d625c0eac31a3bfe134b11d"
+    },
+    {
+      "path": "cutagent-background-music/references/asset-selection.md",
+      "sha256": "03f78864708513af7b765af5ce93d02e72ba8b6ca4cbc45cb8adcd63ae77579c"
+    },
+    {
+      "path": "cutagent-beat-editing/SKILL.md",
+      "sha256": "23b4b5e75bd1bcb65e0abe6f1161103aa0049afddeea93f650941e83a1b467a4"
+    },
+    {
+      "path": "cutagent-captions/SKILL.md",
+      "sha256": "4b6ac3367cd3f2cf804e83021b5f3e09fd9871c1d855a0cee799fcb7bd43166b"
+    },
+    {
+      "path": "cutagent-cli/SKILL.md",
+      "sha256": "8ea6573c551f976d776e1674f76bd5462d75ceea066527d0c2656229ee1f4843"
+    },
+    {
+      "path": "cutagent-clipping/SKILL.md",
+      "sha256": "f304aaecb6b1645e0c6e51a399e7a10bb6e19bf1ddda44454c58134289771991"
+    },
+    {
+      "path": "cutagent-color-grading/SKILL.md",
+      "sha256": "57501764012a88aa871131c16532f9dd734dc9fe502b426ef608516bd9d3d82d"
+    },
+    {
+      "path": "cutagent-color-grading/references/asset-selection.md",
+      "sha256": "dd6ea7c0b886b5005c28495d15ab36a5c46c89d71a1d452a5faec6b53e535d68"
+    },
+    {
+      "path": "cutagent-color-grading/references/professional-workflow.md",
+      "sha256": "242d60d284c4aa0ee6be608002e2cd8cd5fcc48d6b33379e03a0a6c8e4e0a82a"
+    },
+    {
+      "path": "cutagent-color/SKILL.md",
+      "sha256": "21dabe87238fdec587beda9cacd4f6b5a29114f91ec3b86aaa658faa7344a300"
+    },
+    {
+      "path": "cutagent-edit-style-learning/SKILL.md",
+      "sha256": "c3fb1528cc4588b3e490d80e3e262864616d90a35ba8a1816d80af285326ce5f"
+    },
+    {
+      "path": "cutagent-edit-style-learning/references/adobe-premiere-project.md",
+      "sha256": "252a94f62f02a30803e9864dc58b324154af9f54f6d9a7da2f30b694a25dffb5"
+    },
+    {
+      "path": "cutagent-edit-style-learning/references/davinci-resolve-project.md",
+      "sha256": "5588acbdc61dad13da6a95c4b2a8b63ae99411c225d668d34aa5f87683da3bb9"
+    },
+    {
+      "path": "cutagent-edit-style-learning/references/finished-video.md",
+      "sha256": "8b1e911a833dbb8b0512c66d83a452e22356fa30aac3f1ccc3a460a4cba83c4a"
+    },
+    {
+      "path": "cutagent-edit-style-learning/references/pattern-schema.md",
+      "sha256": "b086293348d4a56e13ab3e9d939988b4db92a8339e36117977bc3513b2213241"
+    },
+    {
+      "path": "cutagent-editing/SKILL.md",
+      "sha256": "5375a5fb97d51e1a3f2128198ea794e8dcd08ca06a9a6afddf7695e21e2af74f"
+    },
+    {
+      "path": "cutagent-fusion-motion-graphics/SKILL.md",
+      "sha256": "d413f0436c236914c15cb6d209b33a3972acd742559d5143995f4e13cb93975e"
+    },
+    {
+      "path": "cutagent-fusion-motion-graphics/assets/editable-card.setting",
+      "sha256": "1c513b307b598a8faeeea3a75b8f72adcd5645813f0cbba14d052ce4c625a12a"
+    },
+    {
+      "path": "cutagent-fusion-motion-graphics/references/animation-and-timing.md",
+      "sha256": "5bd4a31dd54aff225f9b471cda2d35e9c54242569399add76c57dd720b9db2b8"
+    },
+    {
+      "path": "cutagent-fusion-motion-graphics/references/compositing-and-depth.md",
+      "sha256": "cbfff28c6993b2e1546ce3e29814d2479da2c4c61828d72a118f8a818fd84691"
+    },
+    {
+      "path": "cutagent-fusion-motion-graphics/references/design-and-layout.md",
+      "sha256": "bd427d522d94c635f20e4ddca2384db0dd6065d90a9fc748875d448744961cad"
+    },
+    {
+      "path": "cutagent-fusion/SKILL.md",
+      "sha256": "e8ce49fd0d076672ca1be4616aed504f611174f5d736f56859b70862166d1542"
+    },
+    {
+      "path": "cutagent-graphic-accents/SKILL.md",
+      "sha256": "330ceeed79a95482627a6a2d1a531233714145524eb8696d531692de385f2031"
+    },
+    {
+      "path": "cutagent-graphic-accents/references/construction-recipes.md",
+      "sha256": "3da5220a8d88ef7070a5d8bee2e8a331cb0d22e235747e39350be9d0be39b2a8"
+    },
+    {
+      "path": "cutagent-interface-cursor-animation/SKILL.md",
+      "sha256": "76b5431f837e9f9c18e3c793ca652b3ed0315263bc6e2d3bb35ef8d7222e7bf7"
+    },
+    {
+      "path": "cutagent-motion-text/SKILL.md",
+      "sha256": "055a3151feb17132f595de527b27b3aa944cb8d516bd91e322b8cccac1d9c524"
+    },
+    {
+      "path": "cutagent-motion-text/references/construction-recipes.md",
+      "sha256": "d8c4a8d2fa97f2b34ce8de64d087897ea3c899cfe126e313b38496fc8ce425f9"
+    },
+    {
+      "path": "cutagent-motion-transitions/SKILL.md",
+      "sha256": "f6b841fb3b9cf410c2adca1a005b27a6767cb6a86b4554c77fca7614ac9acc2d"
+    },
+    {
+      "path": "cutagent-motion-transitions/references/construction-recipes.md",
+      "sha256": "984d4f00f774fab9bbfff7c23a48f027e5235c18904e9f8dcf17a3fd2c28137d"
+    },
+    {
+      "path": "cutagent-multicam/SKILL.md",
+      "sha256": "553ec114d5ca7c8d0f6ff2add71484b60406557925b79e873d4a729b24eee3fd"
+    },
+    {
+      "path": "cutagent-object-animation/SKILL.md",
+      "sha256": "3c8b5d5921cfd2cde9e0e633c4269d65c2b8de7f5c31b608ee4475da8b7ae57f"
+    },
+    {
+      "path": "cutagent-object-animation/references/construction-recipes.md",
+      "sha256": "296b643207f9f250b21a148c4c1b166d69b43a168e22a8286f6dd9f9800f4ea0"
+    },
+    {
+      "path": "cutagent-opening-hooks/SKILL.md",
+      "sha256": "7ba18e84e9de091b3d2b34935944509add0af57f9f0c24b470e6e272c792b557"
+    },
+    {
+      "path": "cutagent-podcast/SKILL.md",
+      "sha256": "3391fc8770cedd6dc1790815a4a41468bab97a2c525b0a07da8eb0a6ce7ff6a7"
+    },
+    {
+      "path": "cutagent-podcast/references/calibration-and-planning.md",
+      "sha256": "c1de38ebb41cee492ffe9a975aad66d29904e06d3b41aab1ecdc878113246f81"
+    },
+    {
+      "path": "cutagent-podcast/references/program-audio-and-verification.md",
+      "sha256": "9b4031dea49324e8d100d8104bd357d72cc6d95ac3746bd11ff5502d6905f238"
+    },
+    {
+      "path": "cutagent-podcast/references/visual-sync-method.md",
+      "sha256": "a782322121a538ec4cf9e094a398cc9041063065281126bbc0d3a0b34a06af35"
+    },
+    {
+      "path": "cutagent-projects/SKILL.md",
+      "sha256": "37a36986c69a51ce112c4f46fc2614b443b985f6b714dc17958d143e0ad57c6e"
+    },
+    {
+      "path": "cutagent-real-estate-reel/SKILL.md",
+      "sha256": "ed880491dde358bc2b84661ab5451bc46a1dda3ad18ea66ace9716a3dd9241d3"
+    },
+    {
+      "path": "cutagent-rendering/SKILL.md",
+      "sha256": "9707b96dbbce1662343ad4d57009147dd82518d88f77f805276f7bbb2b640da3"
+    },
+    {
+      "path": "cutagent-screen-camera-pip-sync/SKILL.md",
+      "sha256": "9855659beed97a8229fb59bb9eb8b0f4eea886e4e11739ac37d8082d79040566"
+    },
+    {
+      "path": "cutagent-screen-camera-pip-sync/assets/rounded-camera-pip.setting",
+      "sha256": "299dbd08d345f9a1bbe06ab8ba683d6d28811f921f63f11e6467fa697b662e06"
+    },
+    {
+      "path": "cutagent-sdk/SKILL.md",
+      "sha256": "cd4b451ed4c1429722268f3329fca360255d3a71aa95227b785e5236fd3f59df"
+    },
+    {
+      "path": "cutagent-setup/SKILL.md",
+      "sha256": "e20966df16a913d845162bafdd8681425168cad74c89f530f3783bed9d2b3dd6"
+    },
+    {
+      "path": "cutagent-sound-design/SKILL.md",
+      "sha256": "9f099dc7e00b40796aac1ade2439917c4ef199ccdf598c5bc5a0e5e4d69ec0e0"
+    },
+    {
+      "path": "cutagent-sound-design/references/supplied-assets.md",
+      "sha256": "d38f0f4598a13e79944e80725a20110418b0360ed1d69c66fa9a7cbce8347c1a"
+    },
+    {
+      "path": "cutagent-speech-cleanup/SKILL.md",
+      "sha256": "aabefc3132136ccdd433047d27ea2db083c2b470408a8c55a0ed9fd466320242"
+    },
+    {
+      "path": "cutagent-text-behind-object/SKILL.md",
+      "sha256": "4e792ec5096ff39d588bdbc7d7e8b5d5a3b6efecfe350663a2531ea0e7509227"
+    },
+    {
+      "path": "cutagent-text-behind-object/assets/foreground-ellipse-mask.setting",
+      "sha256": "26445cea93d8e560a3c83b01942e6a04769fc7f2ce283f3fe2ebd2dc43856091"
+    },
+    {
+      "path": "cutagent-text-behind-object/assets/foreground-rounded-rect-mask.setting",
+      "sha256": "c74af14faa44f3fff0fd0e6105634945c21ce3c154271c445c430a406786fa3c"
+    },
+    {
+      "path": "cutagent-text-behind-object/references/tutorial-analysis.md",
+      "sha256": "ddfac33ca8f7eea87925b20a7e7f84a1adb605646a55aa475b7b0b0d04fbc640"
+    },
+    {
+      "path": "cutagent-transcript-captions/SKILL.md",
+      "sha256": "de777e502c3b97ad4c89762d460773f239706400910f5a2861cdb0e233df956e"
+    },
+    {
+      "path": "cutagent-transcript-captions/assets/text-plus-caption-clean.setting",
+      "sha256": "a95c4c020f9debc5d6533c4bd2c7bb3b51ef5b9edbe226bf1ba7f37719fdf519"
+    },
+    {
+      "path": "cutagent-verification/SKILL.md",
+      "sha256": "d83096f74570a606e3b5e2818b91e4451de46d2b583ca0f7a9ec89c39e5bf8e6"
+    },
+    {
+      "path": "cutagent-voiceover/SKILL.md",
+      "sha256": "d454f78683977234a223eab85a8069797a64a8365506be5bd99d9c0f654cf8b4"
+    },
+    {
+      "path": "cutagent/SKILL.md",
+      "sha256": "3beb1e1de93fb7383128eba30c4e2d28d662a0c4d5902f6c2d7dd2cca5b7a9e0"
+    }
+  ]
+}

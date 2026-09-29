@@ -5,13 +5,13 @@
 ### Give your AI agent the keys to DaVinci Resolve.
 
 An open-source connection between your agent and your editing timeline.<br>
-**Works with DaVinci Resolve 21.1+ Free and Studio.**
+**Supports DaVinci Resolve 20+ Free and Studio on the currently qualified macOS setup; some operations require 21.1+.**
 
 [![AGPL-3.0 License](https://img.shields.io/badge/license-AGPL--3.0-blue.svg)](LICENSE)
 [![DaVinci Resolve Free](https://img.shields.io/badge/DaVinci_Resolve-Free_%26_Studio-ff5a2b)](#-yes-it-works-with-davinci-resolve-free)
 [![TypeScript](https://img.shields.io/badge/TypeScript-SDK-3178C6)](sdk/README.md)
 
-[Get started](#-get-started) · [Examples](examples/) · [Documentation](docs/GETTING_STARTED.md) · [CutAgent desktop app](https://cutagent.ai)
+[Get started](#-get-started) · [Agent Skills](#-agent-skills) · [Examples](examples/) · [Documentation](docs/GETTING_STARTED.md)
 
 </div>
 
@@ -76,7 +76,19 @@ Two ways in: write TypeScript with the SDK, or run commands with the CLI.
 - **Keep editing in DaVinci Resolve.** Work with timelines, clips, audio, and Fusion compositions in the editor you already use.
 - **Work locally.** Run editing scripts on your computer, directly in DaVinci Resolve.
 
-Bring your own AI model and creative skills. CutAgent SDK supplies the local editing connection. Your agent provider handles its own data policies and billing.
+Bring your own AI model. CutAgent SDK supplies the local editing connection, and the optional skills below help the agent use it. Your agent provider handles its own data policies and billing.
+
+## 🧠 Agent Skills
+
+The [35 public Agent Skills](skills/) help coding agents plan and verify local DaVinci Resolve work. `cutagent` routes to focused SDK, CutAgent CLI, editing, Fusion, audio, captions, color, multicam, rendering, and creative skills. Each skill follows the standard `SKILL.md` format with optional on-demand references and assets. The [creative skill review](docs/CREATIVE_SKILLS_REVIEW.md) records how all 22 original workflow concepts were adapted for standalone use.
+
+Install the skills in a supported coding agent with:
+
+```sh
+npx skills add jindratilk/cutagent-sdk
+```
+
+This installs instructions, not the CutAgent runtime. Build and install the package below, then connect it to DaVinci Resolve. The public skills use local SDK/CLI operations and supplied or locally licensed media; they do not require a CutAgent account or hosted service. For exact API and command syntax, agents should inspect the installed package and live capabilities.
 
 ## 🚀 Get started
 
@@ -93,7 +105,7 @@ npm pack
 mkdir ../my-video-project
 cd ../my-video-project
 npm init -y
-npm install ../cutagent-sdk/cutagent-3.0.4.tgz
+npm install ../cutagent-sdk/cutagent-3.1.0.tgz
 ```
 
 **Using DaVinci Resolve Free?**
@@ -141,11 +153,7 @@ try {
 
 Start with the [examples](examples/), including a marker workflow that creates a temporary marker, reads it back, and removes it again.
 
-## Want the full editing app?
-
-[CutAgent](https://cutagent.ai) brings the editing experience into a desktop app, including its AI transcription, voice generation, and video generation services.
-
-The app includes editing skills that teach the agent how to carry out complete workflows in DaVinci Resolve. General-purpose coding agents often need repeated attempts to get an edit right. These skills give them detailed editing instructions and reusable workflows, reducing trial and error and helping them create a complete video from a single prompt.
+The standalone package and skills above are sufficient for local agent workflows; no CutAgent desktop app is required.
 
 ## Help make it better
 

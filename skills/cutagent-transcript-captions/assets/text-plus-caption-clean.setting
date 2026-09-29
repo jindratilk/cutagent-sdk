@@ -1,0 +1,63 @@
+-- CutAgent Text+ caption clean template.
+-- Purpose: minimal burned-in caption base for transcript-driven Text+ captions.
+-- This asset should stay intentionally plain so agents can copy or render it
+-- and then make user-specific style changes without fighting an opinionated base.
+--
+-- Required: the Text input placeholder below is replaced with the caption text.
+-- Optional styling note: per-word styling, such as bold emphasis from markdown,
+-- needs a separate StyledTextCLS/CharacterLevelStyling template variant. This
+-- clean base intentionally omits that node so the simplest caption path stays
+-- robust and easy to debug.
+--
+-- Safe edits for agents: Font, Style, Size, Center, Red1/Green1/Blue1/Alpha1,
+-- LineSpacing, and CharacterSpacing. Keep UseFrameFormatSettings enabled.
+-- Prefer copying this clean template before adding shadows, boxes, or animation.
+
+{
+    Tools = ordered() {
+        Template = TextPlus {
+            CtrlWZoom = false,
+            Inputs = {
+                GlobalOut = Input { Value = 239, },
+                Width = Input { Value = 1920, },
+                Height = Input { Value = 1080, },
+                UseFrameFormatSettings = Input { Value = 1, },
+
+                -- Lower-center caption position. Raise or lower with the second value.
+                Center = Input { Value = { 0.5, 0.15 }, },
+
+                StyledText = Input { Value = "{{TEXT_PLACEHOLDER}}", },
+
+                -- Basic fallback font. Agents may switch to a brand font if available.
+                Font = Input { Value = "Arial", },
+                Style = Input { Value = "Regular", },
+                Size = Input { Value = 0.045, },
+
+                -- Plain white text. Keep this base clean; build style variants separately.
+                Red1 = Input { Value = 1, },
+                Green1 = Input { Value = 1, },
+                Blue1 = Input { Value = 1, },
+                Alpha1 = Input { Value = 1, },
+
+                LineSpacing = Input { Value = 1.0, },
+                CharacterSpacing = Input { Value = 1.0, },
+                VerticalJustificationNew = Input { Value = 3, },
+                HorizontalLeftCenterRight = Input { Value = 0, },
+                HorizontalJustificationNew = Input { Value = 3, },
+                TabSpacing = Input { Value = 1, },
+                AdvancedFontControls = Input { Value = 1, }
+            },
+            ViewInfo = OperatorInfo { Pos = { 220, 50 } },
+        },
+        MediaOut1 = MediaOut {
+            Inputs = {
+                Index = Input { Value = "0", },
+                Input = Input {
+                    SourceOp = "Template",
+                    Source = "Output",
+                }
+            },
+            ViewInfo = OperatorInfo { Pos = { 440, 50 } },
+        }
+    }
+}

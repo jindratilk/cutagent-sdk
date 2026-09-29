@@ -28,7 +28,7 @@ npm pack --json
 Install the resulting tarball in a clean consumer project:
 
 ```sh
-npm install /absolute/path/to/cutagent-3.0.4.tgz
+npm install /absolute/path/to/cutagent-3.1.0.tgz
 npx cutagent setup
 ```
 
@@ -37,6 +37,8 @@ npx cutagent setup
 ```sh
 npx cutagent setup --bin-dir "$HOME/.local/cutagent-sdk-bin"
 ```
+
+Install the optional [Agent Skills](../skills/) separately for your coding agent with `npx skills add jindratilk/cutagent-sdk`. Skills provide local editing guidance; this command does not install or start the CutAgent runtime.
 
 For DaVinci Resolve Free, install the independent embedded script during setup:
 
